@@ -1,12 +1,13 @@
 import { RefObject, useEffect } from "react";
 
 export const useDetectClickOutside = (
-  dropdownRef: RefObject<HTMLElement>,
-  action: () => void
+  action: () => void,
+  dropdownRef?: RefObject<HTMLElement>
 ) => {
   useEffect(() => {
     const handleMouseDown = (event: Event) => {
       if (
+        dropdownRef &&
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {

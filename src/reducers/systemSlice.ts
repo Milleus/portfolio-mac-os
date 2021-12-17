@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "reducers/store";
 
-export enum MenuBarItemId {
+export enum MenuItemId {
   NONE = "none",
   APPLE = "apple",
   FINDER = "finder",
@@ -13,7 +13,7 @@ export enum MenuBarItemId {
 }
 
 interface SystemState {
-  activeMenuBarItemId: MenuBarItemId;
+  activeMenuItemId: MenuItemId;
   isWifiOn: boolean;
   isBluetoothOn: boolean;
   isAirDropOn: boolean;
@@ -22,7 +22,7 @@ interface SystemState {
 }
 
 const initialState: SystemState = {
-  activeMenuBarItemId: MenuBarItemId.NONE,
+  activeMenuItemId: MenuItemId.NONE,
   isWifiOn: true,
   isBluetoothOn: true,
   isAirDropOn: true,

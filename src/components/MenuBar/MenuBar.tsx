@@ -1,21 +1,21 @@
-import { BsApple, BsBatteryFull, BsToggles } from "react-icons/bs";
+import { BsApple, BsBatteryFull } from "react-icons/bs";
 import { FC, MouseEvent, useEffect, useRef, useState } from "react";
-import { MdSearch, MdWifi, MdWifiOff } from "react-icons/md";
+import { MdSearch } from "react-icons/md";
 import format from "date-fns/format";
 
-import { MenuBarItemId, updateSystem } from "reducers/systemSlice";
+import { MenuItemId, updateSystem } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector, useDetectClickOutside } from "hooks";
-import MenuBarItem from "base-components/MenuBarItem";
+import Button, { ButtonAppearance } from "base-components/Button";
 import MenuWifi from "components/MenuWifi";
 import MenuControlCenter from "components/MenuControlCenter";
 
 const MenuBar: FC<Record<string, never>> = () => {
   const systemState = useAppSelector((state) => state.system);
-  const { activeMenuBarItemId, isWifiOn } = systemState;
+  const { activeMenuItemId } = systemState;
   const dispatch = useAppDispatch();
   const [date, setDate] = useState<Date>(new Date());
-  const wifiDropdownRef = useRef<HTMLDivElement>(null);
-  const controlCenterDropdownRef = useRef<HTMLDivElement>(null);
+  const menuWifiRef = useRef<HTMLDivElement>(null);
+  const menuControlCenterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -27,86 +27,86 @@ const MenuBar: FC<Record<string, never>> = () => {
     };
   }, []);
 
-  const handleMenuBarItemClick = (event: MouseEvent) => {
+  const handleButtonClick = (event: MouseEvent) => {
     const { id } = event.currentTarget;
     const newId =
-      id === activeMenuBarItemId ? MenuBarItemId.NONE : (id as MenuBarItemId);
+      id === activeMenuItemId ? MenuItemId.NONE : (id as MenuItemId);
 
-    dispatch(updateSystem({ activeMenuBarItemId: newId }));
+    dispatch(updateSystem({ activeMenuItemId: newId }));
   };
 
   const handleClickOutside = () => {
-    dispatch(updateSystem({ activeMenuBarItemId: MenuBarItemId.NONE }));
+    dispatch(updateSystem({ activeMenuItemId: MenuItemId.NONE }));
   };
 
-  useDetectClickOutside(wifiDropdownRef, handleClickOutside);
-  useDetectClickOutside(controlCenterDropdownRef, handleClickOutside);
+  let ref;
+
+  switch (activeMenuItemId) {
+    case MenuItemId.WIFI:
+      ref = menuWifiRef;
+      break;
+    case MenuItemId.CONTROL_CENTER:
+      ref = menuControlCenterRef;
+      break;
+  }
+
+  useDetectClickOutside(handleClickOutside, ref);
 
   return (
     <div className="w-full h-6 fixed top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-2.5">
       <div className="flex">
-        <MenuBarItem
-          id={MenuBarItemId.APPLE}
+        <Button
+          id={MenuItemId.APPLE}
+          appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
-          onClick={handleMenuBarItemClick}
+          onClick={handleButtonClick}
         >
           <BsApple size={16} className="drop-shadow" />
-        </MenuBarItem>
+        </Button>
 
-        <MenuBarItem id={MenuBarItemId.FINDER} isActive={false}>
+        <Button
+          id={MenuItemId.FINDER}
+          appearance={ButtonAppearance.MENU_ITEM}
+          isActive={false}
+        >
           <span className="font-bold drop-shadow px-1">Finder</span>
-        </MenuBarItem>
+        </Button>
       </div>
 
       <div className="flex">
-        <MenuBarItem
-          id={MenuBarItemId.BATTERY}
+        <Button
+          id={MenuItemId.BATTERY}
+          appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
-          onClick={handleMenuBarItemClick}
+          onClick={handleButtonClick}
         >
           <span className="text-xs mr-1">100%</span>
           <BsBatteryFull size={22} className="drop-shadow mr-1" />
-        </MenuBarItem>
+        </Button>
 
-        <div className="flex relative" ref={wifiDropdownRef}>
-          <MenuBarItem
-            id={MenuBarItemId.WIFI}
-            isActive={activeMenuBarItemId === MenuBarItemId.WIFI}
-            onClick={handleMenuBarItemClick}
-          >
-            {isWifiOn ? (
-              <MdWifi size={18} className="drop-shadow" />
-            ) : (
-              <MdWifiOff size={18} className="drop-shadow" />
-            )}
-          </MenuBarItem>
-          {activeMenuBarItemId === MenuBarItemId.WIFI && <MenuWifi />}
-        </div>
+        <MenuWifi ref={menuWifiRef} onButtonClick={handleButtonClick} />
 
-        <MenuBarItem
-          id={MenuBarItemId.SPOTLIGHT}
+        <Button
+          id={MenuItemId.SPOTLIGHT}
+          appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
-          onClick={handleMenuBarItemClick}
+          onClick={handleButtonClick}
         >
           <MdSearch size={18} className="drop-shadow" />
-        </MenuBarItem>
+        </Button>
 
-        <div className="flex" ref={controlCenterDropdownRef}>
-          <MenuBarItem
-            id={MenuBarItemId.CONTROL_CENTER}
-            isActive={false}
-            onClick={handleMenuBarItemClick}
-          >
-            <BsToggles size={15} className="drop-shadow" />
-          </MenuBarItem>
-          {activeMenuBarItemId === MenuBarItemId.CONTROL_CENTER && (
-            <MenuControlCenter />
-          )}
-        </div>
+        <MenuControlCenter
+          ref={menuControlCenterRef}
+          onButtonClick={handleButtonClick}
+        />
 
-        <MenuBarItem id={MenuBarItemId.NOTIFICATION_CENTER} isActive={false}>
+        <Button
+          id={MenuItemId.NOTIFICATION_CENTER}
+          appearance={ButtonAppearance.MENU_ITEM}
+          isActive={false}
+        >
           <span>{format(date, "eee d MMM h:mm aa")}</span>
-        </MenuBarItem>
+        </Button>
       </div>
     </div>
   );
