@@ -1,25 +1,19 @@
 import { BsApple, BsBatteryFull, BsToggles } from "react-icons/bs";
-import { MdSearch, MdWifi } from "react-icons/md";
-import { FC, MouseEvent, useEffect, useState } from "react";
+import { FC, MouseEvent, useEffect, useRef, useState } from "react";
+import { MdSearch, MdWifi, MdWifiOff } from "react-icons/md";
 import format from "date-fns/format";
 
+import { MenuBarItemId, updateSystem } from "reducers/systemSlice";
+import { useAppDispatch, useAppSelector, useDetectClickOutside } from "hooks";
 import MenuBarItem from "components/MenuBarItem";
 import MenuWifi from "components/MenuWifi";
 
-export enum MenuBarItemId {
-  NONE = "none",
-  APPLE = "apple",
-  FINDER = "finder",
-  BATTERY = "battery",
-  WIFI = "wifi",
-  SPOTLIGHT = "spotlight",
-  CONTROL_CENTER = "controlCenter",
-  DATE_TIME = "dateTime",
-}
-
 const MenuBar: FC<Record<string, never>> = () => {
+  const systemState = useAppSelector((state) => state.system);
+  const { activeMenuBarItemId, isWifiOn } = systemState;
+  const dispatch = useAppDispatch();
   const [date, setDate] = useState<Date>(new Date());
-  const [menuOpenId, setMenuOpenId] = useState<string>(MenuBarItemId.NONE);
+  const wifiDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -33,10 +27,21 @@ const MenuBar: FC<Record<string, never>> = () => {
 
   const handleMenuBarItemClick = (event: MouseEvent) => {
     const { id } = event.currentTarget;
-    const newId = id === menuOpenId ? MenuBarItemId.NONE : id;
+    const newId =
+      id === activeMenuBarItemId ? MenuBarItemId.NONE : (id as MenuBarItemId);
 
-    setMenuOpenId(newId);
+    dispatch(updateSystem({ activeMenuBarItemId: newId }));
   };
+
+  const handleWifiChange = () => {
+    dispatch(updateSystem({ isWifiOn: !isWifiOn }));
+  };
+
+  const handleClickOutside = () => {
+    dispatch(updateSystem({ activeMenuBarItemId: MenuBarItemId.NONE }));
+  };
+
+  useDetectClickOutside(wifiDropdownRef, handleClickOutside);
 
   return (
     <div className="w-full h-6 fixed top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-2.5">
@@ -64,15 +69,21 @@ const MenuBar: FC<Record<string, never>> = () => {
           <BsBatteryFull size={22} className="drop-shadow mr-1" />
         </MenuBarItem>
 
-        <div className="flex relative">
+        <div className="flex relative" ref={wifiDropdownRef}>
           <MenuBarItem
             id={MenuBarItemId.WIFI}
-            isActive={menuOpenId === MenuBarItemId.WIFI}
+            isActive={activeMenuBarItemId === MenuBarItemId.WIFI}
             onClick={handleMenuBarItemClick}
           >
-            <MdWifi size={18} className="drop-shadow" />
+            {isWifiOn ? (
+              <MdWifi size={18} className="drop-shadow" />
+            ) : (
+              <MdWifiOff size={18} className="drop-shadow" />
+            )}
           </MenuBarItem>
-          {menuOpenId === MenuBarItemId.WIFI && <MenuWifi />}
+          {activeMenuBarItemId === MenuBarItemId.WIFI && (
+            <MenuWifi isWifiOn={isWifiOn} onChange={handleWifiChange} />
+          )}
         </div>
 
         <MenuBarItem
@@ -93,7 +104,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           </MenuBarItem>
         </div>
 
-        <MenuBarItem id={MenuBarItemId.DATE_TIME} isActive={false}>
+        <MenuBarItem id={MenuBarItemId.NOTIFICATION_CENTER} isActive={false}>
           <span>{format(date, "eee d MMM h:mm aa")}</span>
         </MenuBarItem>
       </div>

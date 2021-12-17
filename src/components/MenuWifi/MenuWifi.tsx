@@ -1,18 +1,17 @@
 import { BsFillLockFill } from "react-icons/bs";
-import { FC, useState } from "react";
+import { ChangeEventHandler, FC } from "react";
 import { MdWifi } from "react-icons/md";
 import classNames from "classnames";
 
-const MenuWifi: FC<Record<string, never>> = () => {
-  const [isWifiOn, setIsWifiOn] = useState<boolean>(true);
+export type MenuWifiProps = {
+  isWifiOn: boolean;
+  onChange: ChangeEventHandler;
+};
 
-  const handleChange = () => {
-    setIsWifiOn(!isWifiOn);
-  };
-
+const MenuWifi: FC<MenuWifiProps> = ({ isWifiOn, onChange }) => {
   const sliderClassNames = classNames(
-    "absolute w-full h-full box-content border rounded-full transition-colors duration-300",
-    "before:absolute before:bg-white before:w-5 before:h-5 before:rounded-full before:transition-transform before:duration-300",
+    "absolute w-full h-full box-content border rounded-full transition-colors duration-100",
+    "before:absolute before:bg-white before:w-5 before:h-5 before:rounded-full before:transition-transform before:duration-100",
     {
       "bg-neutral-400 border-neutral-400": !isWifiOn,
       "bg-blue-500 border-blue-500 before:translate-x-5": isWifiOn,
@@ -28,7 +27,7 @@ const MenuWifi: FC<Record<string, never>> = () => {
             type="checkbox"
             className="opacity-0 w-0 h-0"
             checked={isWifiOn}
-            onChange={handleChange}
+            onChange={onChange}
           />
           <span className={sliderClassNames}></span>
         </label>
