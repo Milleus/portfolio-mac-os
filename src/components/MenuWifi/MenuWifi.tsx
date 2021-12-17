@@ -1,36 +1,24 @@
 import { BsFillLockFill } from "react-icons/bs";
-import { ChangeEventHandler, FC } from "react";
+import { FC } from "react";
 import { MdWifi } from "react-icons/md";
-import classNames from "classnames";
 
-export type MenuWifiProps = {
-  isWifiOn: boolean;
-  onChange: ChangeEventHandler;
-};
+import { updateSystem } from "reducers/systemSlice";
+import { useAppDispatch, useAppSelector } from "hooks";
+import ToggleSwitch from "base-components/ToggleSwitch";
 
-const MenuWifi: FC<MenuWifiProps> = ({ isWifiOn, onChange }) => {
-  const sliderClassNames = classNames(
-    "absolute w-full h-full box-content border rounded-full transition-colors duration-100",
-    "before:absolute before:bg-white before:w-5 before:h-5 before:rounded-full before:transition-transform before:duration-100",
-    {
-      "bg-neutral-400 border-neutral-400": !isWifiOn,
-      "bg-blue-500 border-blue-500 before:translate-x-5": isWifiOn,
-    }
-  );
+const MenuWifi: FC<Record<string, never>> = () => {
+  const { isWifiOn } = useAppSelector((state) => state.system);
+  const dispatch = useAppDispatch();
+
+  const handleWifiChange = () => {
+    dispatch(updateSystem({ isWifiOn: !isWifiOn }));
+  };
 
   return (
     <div className="absolute top-6 right-0 w-72 bg-neutral-300 p-1 mt-px rounded shadow text-gray-900">
       <div className="flex justify-between items-center p-1.5 text-sm">
         <span className="font-bold">Wi-Fi</span>
-        <label className="relative inline-block w-10 h-5">
-          <input
-            type="checkbox"
-            className="opacity-0 w-0 h-0"
-            checked={isWifiOn}
-            onChange={onChange}
-          />
-          <span className={sliderClassNames}></span>
-        </label>
+        <ToggleSwitch isChecked={isWifiOn} onChange={handleWifiChange} />
       </div>
 
       <hr className="border-neutral-400 m-1.5" />

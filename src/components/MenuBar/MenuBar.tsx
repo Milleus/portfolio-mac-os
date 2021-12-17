@@ -5,8 +5,9 @@ import format from "date-fns/format";
 
 import { MenuBarItemId, updateSystem } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector, useDetectClickOutside } from "hooks";
-import MenuBarItem from "components/MenuBarItem";
+import MenuBarItem from "base-components/MenuBarItem";
 import MenuWifi from "components/MenuWifi";
+import MenuControlCenter from "components/MenuControlCenter";
 
 const MenuBar: FC<Record<string, never>> = () => {
   const systemState = useAppSelector((state) => state.system);
@@ -14,6 +15,7 @@ const MenuBar: FC<Record<string, never>> = () => {
   const dispatch = useAppDispatch();
   const [date, setDate] = useState<Date>(new Date());
   const wifiDropdownRef = useRef<HTMLDivElement>(null);
+  const controlCenterDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -33,15 +35,12 @@ const MenuBar: FC<Record<string, never>> = () => {
     dispatch(updateSystem({ activeMenuBarItemId: newId }));
   };
 
-  const handleWifiChange = () => {
-    dispatch(updateSystem({ isWifiOn: !isWifiOn }));
-  };
-
   const handleClickOutside = () => {
     dispatch(updateSystem({ activeMenuBarItemId: MenuBarItemId.NONE }));
   };
 
   useDetectClickOutside(wifiDropdownRef, handleClickOutside);
+  useDetectClickOutside(controlCenterDropdownRef, handleClickOutside);
 
   return (
     <div className="w-full h-6 fixed top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-2.5">
@@ -81,9 +80,7 @@ const MenuBar: FC<Record<string, never>> = () => {
               <MdWifiOff size={18} className="drop-shadow" />
             )}
           </MenuBarItem>
-          {activeMenuBarItemId === MenuBarItemId.WIFI && (
-            <MenuWifi isWifiOn={isWifiOn} onChange={handleWifiChange} />
-          )}
+          {activeMenuBarItemId === MenuBarItemId.WIFI && <MenuWifi />}
         </div>
 
         <MenuBarItem
@@ -94,7 +91,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           <MdSearch size={18} className="drop-shadow" />
         </MenuBarItem>
 
-        <div className="flex">
+        <div className="flex" ref={controlCenterDropdownRef}>
           <MenuBarItem
             id={MenuBarItemId.CONTROL_CENTER}
             isActive={false}
@@ -102,6 +99,9 @@ const MenuBar: FC<Record<string, never>> = () => {
           >
             <BsToggles size={15} className="drop-shadow" />
           </MenuBarItem>
+          {activeMenuBarItemId === MenuBarItemId.CONTROL_CENTER && (
+            <MenuControlCenter />
+          )}
         </div>
 
         <MenuBarItem id={MenuBarItemId.NOTIFICATION_CENTER} isActive={false}>
