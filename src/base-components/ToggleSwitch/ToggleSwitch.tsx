@@ -1,5 +1,5 @@
-import classNames from "classnames";
 import { ChangeEventHandler, FC } from "react";
+import classNames from "classnames";
 
 export type ToggleSwitchProps = {
   isChecked: boolean;

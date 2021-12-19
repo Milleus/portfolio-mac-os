@@ -7,18 +7,18 @@ export enum ButtonAppearance {
 }
 
 export type ButtonProps = {
-  dataId: string;
   appearance: ButtonAppearance;
   isActive: boolean;
   children: ReactNode;
+  dataId?: string;
   onClick?: MouseEventHandler;
 };
 
 const Button: FC<ButtonProps> = ({
-  dataId,
   appearance,
   isActive,
   children,
+  dataId,
   onClick,
 }) => {
   let buttonClasses;
@@ -35,7 +35,7 @@ const Button: FC<ButtonProps> = ({
 
     case ButtonAppearance.ICON:
       buttonClasses = classNames({
-        "box-content p-1 rounded-full": true,
+        "box-content p-1 rounded-full cursor-default": true,
         "bg-blue-500 text-white": isActive,
         "bg-neutral-400 text-gray-900": !isActive,
       });
@@ -43,7 +43,7 @@ const Button: FC<ButtonProps> = ({
   }
 
   return (
-    <button data-id={dataId} className={buttonClasses} onClick={onClick}>
+    <button className={buttonClasses} data-id={dataId} onClick={onClick}>
       {children}
     </button>
   );

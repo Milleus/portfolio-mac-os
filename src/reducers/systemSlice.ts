@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { RootState } from "reducers/store";
 
 export enum MenuItemId {
@@ -12,20 +13,26 @@ export enum MenuItemId {
   NOTIFICATION_CENTER = "notification-center",
 }
 
-export interface SystemState {
+export type SystemState = {
+  date: string;
   activeMenuItemId: MenuItemId;
   isWifiOn: boolean;
   isBluetoothOn: boolean;
   isAirDropOn: boolean;
+  isDarkModeOn: boolean;
+  isFullScreen: boolean;
   brightnessLevel: number;
   volumeLevel: number;
-}
+};
 
 const initialState: SystemState = {
+  date: new Date().toISOString(),
   activeMenuItemId: MenuItemId.NONE,
   isWifiOn: true,
   isBluetoothOn: true,
   isAirDropOn: true,
+  isDarkModeOn: false,
+  isFullScreen: false,
   brightnessLevel: 100,
   volumeLevel: 100,
 };

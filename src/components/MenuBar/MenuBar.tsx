@@ -1,33 +1,33 @@
-import { BsApple, BsBatteryFull } from "react-icons/bs";
-import { FC, MouseEvent, useEffect, useRef, useState } from "react";
-import { MdSearch } from "react-icons/md";
+import { BsApple, BsBatteryFull, BsToggles } from "react-icons/bs";
+import { FC, MouseEvent, useEffect, useRef } from "react";
+import { MdSearch, MdWifi, MdWifiOff } from "react-icons/md";
 import format from "date-fns/format";
 
 import { MenuItemId, updateSystem } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector, useDetectClickOutside } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
-import MenuWifi from "components/MenuWifi";
 import MenuControlCenter from "components/MenuControlCenter";
+import MenuWifi from "components/MenuWifi";
 
 const MenuBar: FC<Record<string, never>> = () => {
-  const { activeMenuItemId } = useAppSelector((state) => state.system);
+  const { activeMenuItemId, isWifiOn, date } = useAppSelector(
+    (state) => state.system
+  );
   const dispatch = useAppDispatch();
-
-  const [date, setDate] = useState<Date>(new Date());
   const menuWifiRef = useRef<HTMLDivElement>(null);
   const menuControlCenterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setDate(new Date());
+      dispatch(updateSystem({ date: new Date().toISOString() }));
     }, 60 * 1000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [dispatch]);
 
-  const handleButtonClick = (event: MouseEvent) => {
+  const handleMenuItemClick = (event: MouseEvent) => {
     const id = event.currentTarget.getAttribute("data-id");
     const newId =
       id === activeMenuItemId ? MenuItemId.NONE : (id as MenuItemId);
@@ -59,7 +59,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           dataId={MenuItemId.APPLE}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
-          onClick={handleButtonClick}
+          onClick={handleMenuItemClick}
         >
           <BsApple size={16} className="drop-shadow" />
         </Button>
@@ -78,34 +78,58 @@ const MenuBar: FC<Record<string, never>> = () => {
           dataId={MenuItemId.BATTERY}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
-          onClick={handleButtonClick}
+          onClick={handleMenuItemClick}
         >
           <span className="text-xs mr-1">100%</span>
           <BsBatteryFull size={22} className="drop-shadow mr-1" />
         </Button>
 
-        <MenuWifi ref={menuWifiRef} onButtonClick={handleButtonClick} />
+        <div className="flex relative" ref={menuWifiRef}>
+          <Button
+            dataId={MenuItemId.WIFI}
+            appearance={ButtonAppearance.MENU_ITEM}
+            isActive={activeMenuItemId === MenuItemId.WIFI}
+            onClick={handleMenuItemClick}
+          >
+            {isWifiOn ? (
+              <MdWifi size={18} className="drop-shadow" />
+            ) : (
+              <MdWifiOff size={18} className="drop-shadow" />
+            )}
+          </Button>
+          {activeMenuItemId === MenuItemId.WIFI && <MenuWifi />}
+        </div>
 
         <Button
           dataId={MenuItemId.SPOTLIGHT}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
-          onClick={handleButtonClick}
+          onClick={handleMenuItemClick}
         >
           <MdSearch size={18} className="drop-shadow" />
         </Button>
 
-        <MenuControlCenter
-          ref={menuControlCenterRef}
-          onButtonClick={handleButtonClick}
-        />
+        <div className="flex" ref={menuControlCenterRef}>
+          <Button
+            dataId={MenuItemId.CONTROL_CENTER}
+            appearance={ButtonAppearance.MENU_ITEM}
+            isActive={activeMenuItemId === MenuItemId.CONTROL_CENTER}
+            onClick={handleMenuItemClick}
+          >
+            <BsToggles size={15} className="drop-shadow" />
+          </Button>
+
+          {activeMenuItemId === MenuItemId.CONTROL_CENTER && (
+            <MenuControlCenter />
+          )}
+        </div>
 
         <Button
           dataId={MenuItemId.NOTIFICATION_CENTER}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
         >
-          <span>{format(date, "eee d MMM h:mm aa")}</span>
+          <span>{format(new Date(date), "eee d MMM h:mm aa")}</span>
         </Button>
       </div>
     </div>
