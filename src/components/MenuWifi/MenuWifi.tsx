@@ -25,7 +25,7 @@ const MenuWifi: FC<MenuWifiProps> = ({ ref, onButtonClick }) => {
   return (
     <div className="flex relative" ref={ref}>
       <Button
-        id={MenuItemId.WIFI}
+        dataId={MenuItemId.WIFI}
         appearance={ButtonAppearance.MENU_ITEM}
         isActive={activeMenuItemId === MenuItemId.WIFI}
         onClick={onButtonClick}
@@ -39,8 +39,8 @@ const MenuWifi: FC<MenuWifiProps> = ({ ref, onButtonClick }) => {
 
       {activeMenuItemId === MenuItemId.WIFI && (
         <div className="absolute top-6 right-0 w-72 bg-neutral-300 p-1 mt-px rounded shadow text-gray-900">
-          <div className="flex justify-between items-center p-1.5 text-sm">
-            <span className="font-bold">Wi-Fi</span>
+          <div className="flex justify-between items-center p-1.5">
+            <span className="text-sm font-bold">Wi-Fi</span>
             <ToggleSwitch isChecked={isWifiOn} onChange={handleWifiChange} />
           </div>
 
@@ -51,12 +51,12 @@ const MenuWifi: FC<MenuWifiProps> = ({ ref, onButtonClick }) => {
           </p>
 
           <div className="flex justify-between items-center p-1.5 text-sm hover:bg-black/10 hover:rounded">
-            <div className="flex items-center space-x-2.5">
+            <div className="flex items-center">
               <MdWifi
                 size={18}
                 className="box-content bg-blue-500 p-1 rounded-full text-white"
               />
-              <span className="text-sm">Home</span>
+              <span className="text-sm ml-2.5">Home</span>
             </div>
             <BsFillLockFill size={18} className="text-neutral-600" />
           </div>

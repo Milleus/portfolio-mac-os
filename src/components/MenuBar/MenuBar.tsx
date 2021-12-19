@@ -10,9 +10,9 @@ import MenuWifi from "components/MenuWifi";
 import MenuControlCenter from "components/MenuControlCenter";
 
 const MenuBar: FC<Record<string, never>> = () => {
-  const systemState = useAppSelector((state) => state.system);
-  const { activeMenuItemId } = systemState;
+  const { activeMenuItemId } = useAppSelector((state) => state.system);
   const dispatch = useAppDispatch();
+
   const [date, setDate] = useState<Date>(new Date());
   const menuWifiRef = useRef<HTMLDivElement>(null);
   const menuControlCenterRef = useRef<HTMLDivElement>(null);
@@ -28,7 +28,7 @@ const MenuBar: FC<Record<string, never>> = () => {
   }, []);
 
   const handleButtonClick = (event: MouseEvent) => {
-    const { id } = event.currentTarget;
+    const id = event.currentTarget.getAttribute("data-id");
     const newId =
       id === activeMenuItemId ? MenuItemId.NONE : (id as MenuItemId);
 
@@ -56,7 +56,7 @@ const MenuBar: FC<Record<string, never>> = () => {
     <div className="w-full h-6 fixed top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-2.5">
       <div className="flex">
         <Button
-          id={MenuItemId.APPLE}
+          dataId={MenuItemId.APPLE}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
           onClick={handleButtonClick}
@@ -65,7 +65,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         </Button>
 
         <Button
-          id={MenuItemId.FINDER}
+          dataId={MenuItemId.FINDER}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
         >
@@ -75,7 +75,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
       <div className="flex">
         <Button
-          id={MenuItemId.BATTERY}
+          dataId={MenuItemId.BATTERY}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
           onClick={handleButtonClick}
@@ -87,7 +87,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         <MenuWifi ref={menuWifiRef} onButtonClick={handleButtonClick} />
 
         <Button
-          id={MenuItemId.SPOTLIGHT}
+          dataId={MenuItemId.SPOTLIGHT}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
           onClick={handleButtonClick}
@@ -101,7 +101,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         />
 
         <Button
-          id={MenuItemId.NOTIFICATION_CENTER}
+          dataId={MenuItemId.NOTIFICATION_CENTER}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
         >

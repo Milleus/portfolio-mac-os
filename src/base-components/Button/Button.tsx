@@ -2,11 +2,12 @@ import { FC, MouseEventHandler, ReactNode } from "react";
 import classNames from "classnames";
 
 export enum ButtonAppearance {
-  MENU_ITEM = "menuItem",
+  MENU_ITEM,
+  ICON,
 }
 
 export type ButtonProps = {
-  id: string;
+  dataId: string;
   appearance: ButtonAppearance;
   isActive: boolean;
   children: ReactNode;
@@ -14,21 +15,35 @@ export type ButtonProps = {
 };
 
 const Button: FC<ButtonProps> = ({
-  id,
+  dataId,
   appearance,
   isActive,
   children,
   onClick,
 }) => {
-  const buttonClasses = classNames({
-    "flex items-center rounded px-2 text-white text-sm cursor-default":
-      ButtonAppearance.MENU_ITEM,
-    "active:bg-white/30": ButtonAppearance.MENU_ITEM && onClick,
-    "bg-white/30": ButtonAppearance.MENU_ITEM && isActive,
-  });
+  let buttonClasses;
+
+  switch (appearance) {
+    case ButtonAppearance.MENU_ITEM:
+      buttonClasses = classNames({
+        "flex items-center rounded px-2 text-white text-sm cursor-default":
+          true,
+        "active:bg-white/30": onClick,
+        "bg-white/30": isActive,
+      });
+      break;
+
+    case ButtonAppearance.ICON:
+      buttonClasses = classNames({
+        "box-content p-1 rounded-full": true,
+        "bg-blue-500 text-white": isActive,
+        "bg-neutral-400 text-gray-900": !isActive,
+      });
+      break;
+  }
 
   return (
-    <button id={id} className={buttonClasses} onClick={onClick}>
+    <button data-id={dataId} className={buttonClasses} onClick={onClick}>
       {children}
     </button>
   );
