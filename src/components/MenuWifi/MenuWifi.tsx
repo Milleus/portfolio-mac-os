@@ -38,7 +38,7 @@ const MenuWifi: FC<MenuWifiProps> = ({ ref, onButtonClick }) => {
       </Button>
 
       {activeMenuItemId === MenuItemId.WIFI && (
-        <div className="absolute top-6 right-0 w-72 bg-neutral-300 p-1 mt-px rounded shadow text-gray-900">
+        <div className="absolute top-6 right-0 w-72 bg-neutral-300 p-1 mt-px rounded shadow">
           <div className="flex justify-between items-center p-1.5">
             <span className="text-sm font-bold">Wi-Fi</span>
             <ToggleSwitch isChecked={isWifiOn} onChange={handleWifiChange} />

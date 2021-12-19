@@ -8,11 +8,11 @@ export enum MenuItemId {
   BATTERY = "battery",
   WIFI = "wifi",
   SPOTLIGHT = "spotlight",
-  CONTROL_CENTER = "controlCenter",
-  NOTIFICATION_CENTER = "notificationCenter",
+  CONTROL_CENTER = "control-center",
+  NOTIFICATION_CENTER = "notification-center",
 }
 
-interface SystemState {
+export interface SystemState {
   activeMenuItemId: MenuItemId;
   isWifiOn: boolean;
   isBluetoothOn: boolean;
