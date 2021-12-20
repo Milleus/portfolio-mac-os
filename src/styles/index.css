@@ -14,8 +14,7 @@ html, body, #root {
 
 /* webkit */
 .input-range::-webkit-slider-thumb {
-  @apply appearance-none w-5 h-5 bg-white border border-solid border-gray-400 rounded-full shadow cursor-default;
-  margin-top: calc(max((0.75rem - 1px - 1px) * 0.5,0px) - max(0.75rem * 0.5,1px));
+  @apply appearance-none w-5 h-5 bg-white rounded-full shadow shadow-gray-400 cursor-default;
 }
 
 .input-range::-webkit-slider-thumb:active {
@@ -23,14 +22,14 @@ html, body, #root {
 }
 
 .input-range::-webkit-slider-runnable-track {
-  @apply w-full h-5 border border-solid border-gray-400 rounded-full;
+  @apply w-full h-5 border border-solid border-gray-400 rounded-full box-content;
   @apply bg-gradient-to-r from-white to-white bg-left-bottom bg-no-repeat bg-gray-300;
   background-size: var(--sx) 100%;
 }
 
 /* mozilla */
 .input-range::-moz-range-thumb {
-  @apply appearance-none w-5 h-5 bg-white border border-solid border-gray-400 rounded-full shadow cursor-default;
+  @apply appearance-none w-5 h-5 bg-white rounded-full shadow cursor-default;
 }
 
 .input-range::-moz-range-thumb:active {
@@ -38,14 +37,14 @@ html, body, #root {
 }
 
 .input-range::-moz-range-track {
-  @apply w-full h-5 border border-solid border-gray-400 rounded-full;
+  @apply w-full h-5 border border-solid border-gray-400 rounded-full box-content;
   @apply bg-gradient-to-r from-white to-white bg-left-bottom bg-no-repeat bg-gray-300;
   background-size: var(--sx) 100%;
 }
 
 /* ms */
 .input-range::-ms-thumb {
-  @apply appearance-none w-5 h-5 bg-white border border-solid border-gray-400 rounded-full shadow cursor-default;
+  @apply appearance-none w-5 h-5 bg-white rounded-full shadow cursor-default;
 }
 
 .input-range::-ms-thumb:active {
@@ -61,7 +60,7 @@ html, body, #root {
 }
 
 .input-range::-ms-track {
-  @apply w-full h-5 border border-solid border-gray-400 rounded-full;
+  @apply w-full h-5 border border-solid border-gray-400 rounded-full box-content;
   @apply bg-gradient-to-r from-white to-white bg-left-bottom bg-no-repeat bg-gray-300;
   background-size: var(--sx) 100%;
 }

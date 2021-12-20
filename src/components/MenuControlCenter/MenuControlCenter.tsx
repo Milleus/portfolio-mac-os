@@ -1,6 +1,13 @@
 import { BsBrightnessAltHigh } from "react-icons/bs";
 import { ChangeEvent, FC } from "react";
 import {
+  IoSunny,
+  IoVolumeHigh,
+  IoVolumeLow,
+  IoVolumeMedium,
+  IoVolumeMute,
+} from "react-icons/io5";
+import {
   MdBluetooth,
   MdBluetoothDisabled,
   MdDarkMode,
@@ -61,13 +68,20 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
     dispatch(updateSystem({ volumeLevel: Number(value) }));
   };
 
+  const renderVolumeIcon = () => {
+    if (volumeLevel === 0) return <IoVolumeMute size={12} />;
+    if (volumeLevel < 33) return <IoVolumeLow size={12} />;
+    if (volumeLevel < 66) return <IoVolumeMedium size={12} />;
+    return <IoVolumeHigh size={12} />;
+  };
+
   return (
     <div
       className="absolute top-6 right-0 w-72 bg-gray-200/50 backdrop-blur p-2.5 m-1 rounded-2xl shadow-lg"
       style={{ width: "19rem" }}
     >
       <div className="grid grid-cols-4 grid-rows-5 gap-2.5">
-        <div className="flex flex-col justify-around bg-gray-200/80 rounded-xl shadow-lg col-span-2 row-span-2 p-2.5">
+        <div className="flex flex-col justify-around bg-gray-200/80 rounded-xl shadow-lg col-span-2 row-span-2 p-3">
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.ICON}
@@ -121,7 +135,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-gray-200/80 rounded-xl shadow-lg col-span-2 p-2.5">
+        <div className="flex flex-col justify-center bg-gray-200/80 rounded-xl shadow-lg col-span-2 p-3">
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.ICON}
@@ -161,28 +175,30 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           )}
         </button>
 
-        <div className="bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
-          <p className="text-xs font-semibold mb-1">Display</p>
+        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
+          <p className="text-xs font-semibold mb-1.5">Display</p>
           <InputRange
             value={brightnessLevel}
             min={0}
             max={100}
+            icon={<IoSunny size={12} />}
             onChange={handleBrightnessChange}
           />
         </div>
 
-        <div className="bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
-          <p className="text-xs font-semibold mb-1">Sound</p>
+        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
+          <p className="text-xs font-semibold mb-1.5">Sound</p>
           <InputRange
             value={volumeLevel}
             min={0}
             max={100}
+            icon={renderVolumeIcon()}
             onChange={handleVolumeChange}
           />
         </div>
 
-        <div className="bg-gray-200/80 rounded-xl shadow-lg col-span-full">
-          music
+        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
+          <p className="text-xs font-semibold mb-1.5">Music</p>
         </div>
       </div>
     </div>

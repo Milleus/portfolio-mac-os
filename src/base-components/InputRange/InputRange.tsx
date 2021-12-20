@@ -1,10 +1,10 @@
-import { ChangeEventHandler, FC, useEffect, useRef } from "react";
+import { ChangeEventHandler, FC, ReactNode, useEffect, useRef } from "react";
 
 export type InputRangeProps = {
   value: number;
   min: number;
   max: number;
-  dataId?: string;
+  icon?: ReactNode;
   onChange: ChangeEventHandler;
 };
 
@@ -12,7 +12,7 @@ const InputRange: FC<InputRangeProps> = ({
   value,
   min,
   max,
-  dataId,
+  icon,
   onChange,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,16 +26,22 @@ const InputRange: FC<InputRangeProps> = ({
   }, [value, min, max]);
 
   return (
-    <input
-      ref={inputRef}
-      type="range"
-      className="input-range"
-      value={value}
-      min={min}
-      max={max}
-      data-id={dataId}
-      onChange={onChange}
-    />
+    <div className="relative flex">
+      {icon && (
+        <div className="absolute w-5 h-5 border border-transparent box-content flex justify-center items-center text-gray-400">
+          {icon}
+        </div>
+      )}
+      <input
+        ref={inputRef}
+        type="range"
+        className="input-range"
+        value={value}
+        min={min}
+        max={max}
+        onChange={onChange}
+      />
+    </div>
   );
 };
 
