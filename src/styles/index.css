@@ -5,3 +5,63 @@
 html, body, #root {
   @apply h-full overflow-hidden font-sans text-gray-900;
 }
+
+/* INPUT RANGE */
+.input-range {
+  @apply appearance-none w-full bg-transparent;
+  --sx: calc(0.5 * 0.75rem + var(--ratio) * (100% - 0.75rem));
+}
+
+/* webkit */
+.input-range::-webkit-slider-thumb {
+  @apply appearance-none w-5 h-5 bg-white border border-solid border-gray-400 rounded-full shadow cursor-default;
+  margin-top: calc(max((0.75rem - 1px - 1px) * 0.5,0px) - max(0.75rem * 0.5,1px));
+}
+
+.input-range::-webkit-slider-thumb:active {
+  @apply bg-gray-100;
+}
+
+.input-range::-webkit-slider-runnable-track {
+  @apply w-full h-5 border border-solid border-gray-400 rounded-full;
+  @apply bg-gradient-to-r from-white to-white bg-left-bottom bg-no-repeat bg-gray-300;
+  background-size: var(--sx) 100%;
+}
+
+/* mozilla */
+.input-range::-moz-range-thumb {
+  @apply appearance-none w-5 h-5 bg-white border border-solid border-gray-400 rounded-full shadow cursor-default;
+}
+
+.input-range::-moz-range-thumb:active {
+  @apply bg-gray-100;
+}
+
+.input-range::-moz-range-track {
+  @apply w-full h-5 border border-solid border-gray-400 rounded-full;
+  @apply bg-gradient-to-r from-white to-white bg-left-bottom bg-no-repeat bg-gray-300;
+  background-size: var(--sx) 100%;
+}
+
+/* ms */
+.input-range::-ms-thumb {
+  @apply appearance-none w-5 h-5 bg-white border border-solid border-gray-400 rounded-full shadow cursor-default;
+}
+
+.input-range::-ms-thumb:active {
+  @apply bg-gray-100;
+}
+
+.input-range::-ms-fill-upper {
+  @apply bg-transparent border-transparent;
+}
+
+.input-range::-ms-fill-lower {
+  @apply bg-transparent border-transparent;
+}
+
+.input-range::-ms-track {
+  @apply w-full h-5 border border-solid border-gray-400 rounded-full;
+  @apply bg-gradient-to-r from-white to-white bg-left-bottom bg-no-repeat bg-gray-300;
+  background-size: var(--sx) 100%;
+}
