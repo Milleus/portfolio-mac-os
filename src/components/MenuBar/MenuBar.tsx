@@ -1,51 +1,59 @@
 import { BsApple, BsBatteryFull, BsToggles } from "react-icons/bs";
-import { FC, MouseEvent, useEffect, useRef } from "react";
+import { FC, MouseEvent, useEffect, useRef, useState } from "react";
 import { MdSearch, MdWifi, MdWifiOff } from "react-icons/md";
 import format from "date-fns/format";
 
-import { MenuItemId, updateSystem } from "reducers/systemSlice";
-import { useAppDispatch, useAppSelector, useDetectClickOutside } from "hooks";
+import { useAppSelector, useDetectClickOutside } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
 import MenuControlCenter from "components/MenuControlCenter";
 import MenuWifi from "components/MenuWifi";
 
+enum MenuId {
+  NONE = "none",
+  APPLE = "apple",
+  FINDER = "finder",
+  BATTERY = "battery",
+  WIFI = "wifi",
+  SPOTLIGHT = "spotlight",
+  CONTROL_CENTER = "control-center",
+  NOTIFICATION_CENTER = "notification-center",
+}
+
 const MenuBar: FC<Record<string, never>> = () => {
-  const { activeMenuItemId, isWifiOn, date } = useAppSelector(
-    (state) => state.system
-  );
-  const dispatch = useAppDispatch();
+  const { isWifiOn } = useAppSelector((state) => state.system);
+  const [activeMenuId, setActiveMenuId] = useState<string>(MenuId.NONE);
+  const [date, setDate] = useState<Date>(new Date());
   const menuWifiRef = useRef<HTMLDivElement>(null);
   const menuControlCenterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      dispatch(updateSystem({ date: new Date().toISOString() }));
+      setDate(new Date());
     }, 60 * 1000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [dispatch]);
+  }, []);
 
   const handleMenuItemClick = (event: MouseEvent) => {
     const id = event.currentTarget.getAttribute("data-id");
-    const newId =
-      id === activeMenuItemId ? MenuItemId.NONE : (id as MenuItemId);
+    const newId = id === activeMenuId ? MenuId.NONE : id;
 
-    dispatch(updateSystem({ activeMenuItemId: newId }));
+    newId && setActiveMenuId(newId);
   };
 
   const handleClickOutside = () => {
-    dispatch(updateSystem({ activeMenuItemId: MenuItemId.NONE }));
+    setActiveMenuId(MenuId.NONE);
   };
 
   let ref;
 
-  switch (activeMenuItemId) {
-    case MenuItemId.WIFI:
+  switch (activeMenuId) {
+    case MenuId.WIFI:
       ref = menuWifiRef;
       break;
-    case MenuItemId.CONTROL_CENTER:
+    case MenuId.CONTROL_CENTER:
       ref = menuControlCenterRef;
       break;
   }
@@ -56,7 +64,7 @@ const MenuBar: FC<Record<string, never>> = () => {
     <div className="w-full h-6 fixed top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-2.5">
       <div className="flex">
         <Button
-          dataId={MenuItemId.APPLE}
+          dataId={MenuId.APPLE}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
           onClick={handleMenuItemClick}
@@ -65,7 +73,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         </Button>
 
         <Button
-          dataId={MenuItemId.FINDER}
+          dataId={MenuId.FINDER}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
         >
@@ -75,7 +83,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
       <div className="flex">
         <Button
-          dataId={MenuItemId.BATTERY}
+          dataId={MenuId.BATTERY}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
           onClick={handleMenuItemClick}
@@ -86,9 +94,9 @@ const MenuBar: FC<Record<string, never>> = () => {
 
         <div className="flex relative" ref={menuWifiRef}>
           <Button
-            dataId={MenuItemId.WIFI}
+            dataId={MenuId.WIFI}
             appearance={ButtonAppearance.MENU_ITEM}
-            isActive={activeMenuItemId === MenuItemId.WIFI}
+            isActive={activeMenuId === MenuId.WIFI}
             onClick={handleMenuItemClick}
           >
             {isWifiOn ? (
@@ -97,11 +105,11 @@ const MenuBar: FC<Record<string, never>> = () => {
               <MdWifiOff size={18} className="drop-shadow" />
             )}
           </Button>
-          {activeMenuItemId === MenuItemId.WIFI && <MenuWifi />}
+          {activeMenuId === MenuId.WIFI && <MenuWifi />}
         </div>
 
         <Button
-          dataId={MenuItemId.SPOTLIGHT}
+          dataId={MenuId.SPOTLIGHT}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
           onClick={handleMenuItemClick}
@@ -111,21 +119,19 @@ const MenuBar: FC<Record<string, never>> = () => {
 
         <div className="flex" ref={menuControlCenterRef}>
           <Button
-            dataId={MenuItemId.CONTROL_CENTER}
+            dataId={MenuId.CONTROL_CENTER}
             appearance={ButtonAppearance.MENU_ITEM}
-            isActive={activeMenuItemId === MenuItemId.CONTROL_CENTER}
+            isActive={activeMenuId === MenuId.CONTROL_CENTER}
             onClick={handleMenuItemClick}
           >
             <BsToggles size={15} className="drop-shadow" />
           </Button>
 
-          {activeMenuItemId === MenuItemId.CONTROL_CENTER && (
-            <MenuControlCenter />
-          )}
+          {activeMenuId === MenuId.CONTROL_CENTER && <MenuControlCenter />}
         </div>
 
         <Button
-          dataId={MenuItemId.NOTIFICATION_CENTER}
+          dataId={MenuId.NOTIFICATION_CENTER}
           appearance={ButtonAppearance.MENU_ITEM}
           isActive={false}
         >
