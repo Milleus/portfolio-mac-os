@@ -1,5 +1,5 @@
 import { BsBrightnessAltHigh } from "react-icons/bs";
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 import {
   MdBluetooth,
   MdBluetoothDisabled,
@@ -14,10 +14,18 @@ import { toggleFullScreen } from "utilities";
 import { updateSystem } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
+import InputRange from "base-components/InputRange";
 
 const MenuControlCenter: FC<Record<string, never>> = () => {
-  const { isWifiOn, isBluetoothOn, isAirDropOn, isDarkModeOn, isFullScreen } =
-    useAppSelector((state) => state.system);
+  const {
+    isWifiOn,
+    isBluetoothOn,
+    isAirDropOn,
+    isDarkModeOn,
+    isFullScreen,
+    brightnessLevel,
+    volumeLevel,
+  } = useAppSelector((state) => state.system);
   const dispatch = useAppDispatch();
 
   const handleWifiClick = () => {
@@ -43,13 +51,23 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
     toggleFullScreen();
   };
 
+  const handleBrightnessChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    dispatch(updateSystem({ brightnessLevel: Number(value) }));
+  };
+
+  const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    dispatch(updateSystem({ volumeLevel: Number(value) }));
+  };
+
   return (
     <div
-      className="absolute top-6 right-0 w-72 bg-neutral-300/50 backdrop-shadow-3xl p-2.5 m-1 rounded-2xl shadow-lg"
+      className="absolute top-6 right-0 w-72 bg-gray-200/50 backdrop-blur p-2.5 m-1 rounded-2xl shadow-lg"
       style={{ width: "19rem" }}
     >
       <div className="grid grid-cols-4 grid-rows-5 gap-2.5">
-        <div className="flex flex-col justify-around bg-neutral-300 rounded-xl shadow-lg col-span-2 row-span-2 p-2.5">
+        <div className="flex flex-col justify-around bg-gray-200/80 rounded-xl shadow-lg col-span-2 row-span-2 p-2.5">
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.ICON}
@@ -103,7 +121,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-neutral-300 rounded-xl shadow-lg col-span-2 p-2.5">
+        <div className="flex flex-col justify-center bg-gray-200/80 rounded-xl shadow-lg col-span-2 p-2.5">
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.ICON}
@@ -121,13 +139,13 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           </div>
         </div>
 
-        <button className="flex flex-col justify-center items-center bg-neutral-300 rounded-xl shadow-lg py-2 cursor-default">
+        <button className="flex flex-col justify-center items-center bg-gray-200/80 rounded-xl shadow-lg py-2 cursor-default">
           <BsBrightnessAltHigh size={24} />
           <p className="text-xxs">Keyboard Brightness</p>
         </button>
 
         <button
-          className="flex flex-col justify-center items-center bg-neutral-300 rounded-xl shadow-lg py-2 cursor-default"
+          className="flex flex-col justify-center items-center bg-gray-200/80 rounded-xl shadow-lg py-2 cursor-default"
           onClick={handleFullScreenClick}
         >
           {isFullScreen ? (
@@ -143,15 +161,27 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           )}
         </button>
 
-        <div className="bg-neutral-300 rounded-xl shadow-lg col-span-full">
-          display
+        <div className="bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
+          <p className="text-xs font-semibold mb-1">Display</p>
+          <InputRange
+            value={brightnessLevel}
+            min={0}
+            max={100}
+            onChange={handleBrightnessChange}
+          />
         </div>
 
-        <div className="bg-neutral-300 rounded-xl shadow-lg col-span-full">
-          sound
+        <div className="bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
+          <p className="text-xs font-semibold mb-1">Sound</p>
+          <InputRange
+            value={volumeLevel}
+            min={0}
+            max={100}
+            onChange={handleVolumeChange}
+          />
         </div>
 
-        <div className="bg-neutral-300 rounded-xl shadow-lg col-span-full">
+        <div className="bg-gray-200/80 rounded-xl shadow-lg col-span-full">
           music
         </div>
       </div>

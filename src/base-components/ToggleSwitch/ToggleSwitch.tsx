@@ -12,7 +12,7 @@ const ToggleSwitch: FC<ToggleSwitchProps> = ({ isChecked, onChange }) => {
       true,
     "before:absolute before:bg-white before:w-5 before:h-5 before:rounded-full before:transition-transform before:duration-100":
       true,
-    "bg-neutral-400 border-neutral-400": !isChecked,
+    "bg-gray-300 border-gray-300": !isChecked,
     "bg-blue-500 border-blue-500 before:translate-x-5": isChecked,
   });
 

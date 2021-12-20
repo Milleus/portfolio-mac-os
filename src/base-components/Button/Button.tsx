@@ -35,9 +35,9 @@ const Button: FC<ButtonProps> = ({
 
     case ButtonAppearance.ICON:
       buttonClasses = classNames({
-        "box-content p-1 rounded-full cursor-default": true,
+        "p-1 rounded-full cursor-default": true,
         "bg-blue-500 text-white": isActive,
-        "bg-neutral-400 text-gray-900": !isActive,
+        "bg-gray-300 text-gray-900": !isActive,
       });
       break;
   }
