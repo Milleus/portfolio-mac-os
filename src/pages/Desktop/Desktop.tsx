@@ -10,9 +10,8 @@ import MenuBar from "components/MenuBar";
 import WallpaperMonterey from "./images/wallpaper-monterey.jpeg";
 
 const Desktop: FC<Record<string, never>> = () => {
-  const { volumeLevel, isAudioPlaying, audioPlaylistIndex } = useAppSelector(
-    (state) => state.system
-  );
+  const { brightnessLevel, volumeLevel, isAudioPlaying, audioPlaylistIndex } =
+    useAppSelector((state) => state.system);
   const dispatch = useAppDispatch();
 
   const handleTrackEnded = () => {
@@ -29,7 +28,10 @@ const Desktop: FC<Record<string, never>> = () => {
   return (
     <div
       className="w-full h-full overflow-hidden bg-center bg-cover"
-      style={{ backgroundImage: `url(${WallpaperMonterey})` }}
+      style={{
+        backgroundImage: `url(${WallpaperMonterey})`,
+        filter: `brightness(${brightnessLevel})`,
+      }}
     >
       <MenuBar />
     </div>

@@ -42,8 +42,8 @@ const initialState: SystemState = {
   isAirDropOn: true,
   isDarkModeOn: false,
   isFullScreen: false,
-  brightnessLevel: 80,
-  volumeLevel: 100,
+  brightnessLevel: 1,
+  volumeLevel: 1,
   isAudioPlaying: false,
   audioPlaylistIndex: 0,
 };

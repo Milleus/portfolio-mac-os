@@ -4,6 +4,7 @@ export type InputRangeProps = {
   value: number;
   min: number;
   max: number;
+  step?: number;
   icon?: ReactNode;
   onChange: ChangeEventHandler;
 };
@@ -12,6 +13,7 @@ const InputRange: FC<InputRangeProps> = ({
   value,
   min,
   max,
+  step,
   icon,
   onChange,
 }) => {
@@ -39,6 +41,7 @@ const InputRange: FC<InputRangeProps> = ({
         value={value}
         min={min}
         max={max}
+        step={step}
         onChange={onChange}
       />
     </div>

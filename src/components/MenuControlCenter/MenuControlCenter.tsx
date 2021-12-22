@@ -201,8 +201,9 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           <p className="text-xs font-semibold mb-1.5">Display</p>
           <InputRange
             value={brightnessLevel}
-            min={0}
-            max={100}
+            min={0.2}
+            max={1}
+            step={0.01}
             icon={<IoSunny size={12} />}
             onChange={handleBrightnessChange}
           />
@@ -213,7 +214,8 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           <InputRange
             value={volumeLevel}
             min={0}
-            max={100}
+            max={1}
+            step={0.01}
             icon={renderVolumeIcon()}
             onChange={handleVolumeChange}
           />

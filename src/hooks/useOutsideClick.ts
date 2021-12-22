@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from "react";
 
-export const useDetectOutsideClick = (
+export const useOutsideClick = (
   onOutsideClick: () => void,
   ref?: RefObject<HTMLElement>
 ) => {

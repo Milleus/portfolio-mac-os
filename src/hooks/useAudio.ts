@@ -28,7 +28,7 @@ export const useAudio = ({
 
   // when volume changes, update volume
   useEffect(() => {
-    audioRef.current.volume = volumeLevel / 100;
+    audioRef.current.volume = volumeLevel;
   }, [volumeLevel]);
 
   // when track ends, call onTrackEnded
