@@ -1,6 +1,9 @@
 import { BsBrightnessAltHigh } from "react-icons/bs";
 import { ChangeEvent, FC } from "react";
 import {
+  IoPause,
+  IoPlay,
+  IoPlayForward,
   IoSunny,
   IoVolumeHigh,
   IoVolumeLow,
@@ -17,8 +20,12 @@ import {
   MdWifiTethering,
 } from "react-icons/md";
 
+import {
+  audioPlaylist,
+  incrementAudioPlaylistIndex,
+  updateSystem,
+} from "reducers/systemSlice";
 import { toggleFullScreen } from "utilities";
-import { updateSystem } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
 import InputRange from "base-components/InputRange";
@@ -32,6 +39,8 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
     isFullScreen,
     brightnessLevel,
     volumeLevel,
+    isAudioPlaying,
+    audioPlaylistIndex,
   } = useAppSelector((state) => state.system);
   const dispatch = useAppDispatch();
 
@@ -53,7 +62,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
   const handleFullScreenClick = () => {
     // Note: full screen triggered by keypress is not the same as browser full screen API.
-    // therefore there is no reason to update state through other means, e.g. on mount, event listeners, etc.
+    // therefore there is no need to update state through other means (e.g. on mount, event listeners, etc.) since this is the only way the state will change.
     dispatch(updateSystem({ isFullScreen: !isFullScreen }));
     toggleFullScreen();
   };
@@ -66,6 +75,14 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     dispatch(updateSystem({ volumeLevel: Number(value) }));
+  };
+
+  const handleAudioPlayPauseClick = () => {
+    dispatch(updateSystem({ isAudioPlaying: !isAudioPlaying }));
+  };
+
+  const handlAudioSkipForwardClick = () => {
+    dispatch(incrementAudioPlaylistIndex());
   };
 
   const renderVolumeIcon = () => {
@@ -82,7 +99,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
     >
       <div className="grid grid-cols-4 grid-rows-5 gap-2.5">
         <div className="flex flex-col justify-around bg-gray-200/80 rounded-xl shadow-lg col-span-2 row-span-2 p-3">
-          <div className="flex items-center">
+          <div className="flex items-center space-x-2">
             <Button
               appearance={ButtonAppearance.ICON}
               isActive={isWifiOn}
@@ -90,7 +107,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             >
               <MdWifi size={18} />
             </Button>
-            <div className="ml-2">
+            <div>
               <p className="text-xs font-semibold">Wi-Fi</p>
               <p className="text-xxs text-neutral-600">
                 {isWifiOn ? "Home" : "Not connected"}
@@ -98,7 +115,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </div>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center space-x-2">
             <Button
               appearance={ButtonAppearance.ICON}
               isActive={isBluetoothOn}
@@ -110,7 +127,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
                 <MdBluetoothDisabled size={18} />
               )}
             </Button>
-            <div className="ml-2">
+            <div>
               <p className="text-xs font-semibold">Bluetooth</p>
               <p className="text-xxs text-neutral-600">
                 {isBluetoothOn ? "On" : "Off"}
@@ -118,7 +135,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </div>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center space-x-2">
             <Button
               appearance={ButtonAppearance.ICON}
               isActive={isBluetoothOn && isAirDropOn}
@@ -126,7 +143,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             >
               <MdWifiTethering size={18} />
             </Button>
-            <div className="ml-2">
+            <div>
               <p className="text-xs font-semibold">AirDrop</p>
               <p className="text-xxs text-neutral-600">
                 {isBluetoothOn && isAirDropOn ? "Contacts Only" : "Off"}
@@ -153,27 +170,32 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           </div>
         </div>
 
-        <button className="flex flex-col justify-center items-center bg-gray-200/80 rounded-xl shadow-lg py-2 cursor-default">
-          <BsBrightnessAltHigh size={24} />
-          <p className="text-xxs">Keyboard Brightness</p>
-        </button>
+        <div className="flex flex-row bg-gray-200/80 rounded-xl shadow-lg">
+          <Button isActive={false} appearance={ButtonAppearance.TRANSPARENT}>
+            <BsBrightnessAltHigh size={24} />
+            <p className="text-xxs">Keyboard Brightness</p>
+          </Button>
+        </div>
 
-        <button
-          className="flex flex-col justify-center items-center bg-gray-200/80 rounded-xl shadow-lg py-2 cursor-default"
-          onClick={handleFullScreenClick}
-        >
-          {isFullScreen ? (
-            <>
-              <MdFullscreenExit size={24} />
-              <p className="text-xxs">Exit Full Screen</p>
-            </>
-          ) : (
-            <>
-              <MdFullscreen size={24} />
-              <p className="text-xxs">Enter Fullscreen</p>
-            </>
-          )}
-        </button>
+        <div className="flex flex-row bg-gray-200/80 rounded-xl shadow-lg">
+          <Button
+            isActive={false}
+            appearance={ButtonAppearance.TRANSPARENT}
+            onClick={handleFullScreenClick}
+          >
+            {isFullScreen ? (
+              <>
+                <MdFullscreenExit size={24} />
+                <p className="text-xxs">Exit Full Screen</p>
+              </>
+            ) : (
+              <>
+                <MdFullscreen size={24} />
+                <p className="text-xxs">Enter Fullscreen</p>
+              </>
+            )}
+          </Button>
+        </div>
 
         <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
           <p className="text-xs font-semibold mb-1.5">Display</p>
@@ -197,8 +219,39 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           />
         </div>
 
-        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
-          <p className="text-xs font-semibold mb-1.5">Music</p>
+        <div className="flex flex-row justify-between bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5 space-x-4">
+          <div className="flex items-center min-w-0 space-x-2">
+            <img
+              className="w-10 h-10 rounded"
+              src={audioPlaylist[audioPlaylistIndex].coverSrc}
+              alt="cover art"
+            />
+            <div className="overflow-hidden">
+              <p className="truncate text-xs font-semibold">
+                {audioPlaylist[audioPlaylistIndex].title}
+              </p>
+              <p className="truncate text-xxs text-neutral-600">
+                {audioPlaylist[audioPlaylistIndex].artist}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Button
+              isActive={false}
+              appearance={ButtonAppearance.TRANSPARENT}
+              onClick={handleAudioPlayPauseClick}
+            >
+              {isAudioPlaying ? <IoPause size={18} /> : <IoPlay size={18} />}
+            </Button>
+            <Button
+              isActive={false}
+              appearance={ButtonAppearance.TRANSPARENT}
+              onClick={handlAudioSkipForwardClick}
+            >
+              <IoPlayForward size={18} />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import classNames from "classnames";
 export enum ButtonAppearance {
   MENU_ITEM,
   ICON,
+  TRANSPARENT,
 }
 
 export type ButtonProps = {
@@ -35,15 +36,26 @@ const Button: FC<ButtonProps> = ({
 
     case ButtonAppearance.ICON:
       buttonClasses = classNames({
-        "p-1 rounded-full cursor-default": true,
+        "p-1 rounded-full": true,
         "bg-blue-500 text-white": isActive,
         "bg-gray-300 text-gray-900": !isActive,
+      });
+      break;
+
+    case ButtonAppearance.TRANSPARENT:
+      buttonClasses = classNames({
+        "flex flex-col justify-center items-center": true,
       });
       break;
   }
 
   return (
-    <button className={buttonClasses} data-id={dataId} onClick={onClick}>
+    <button
+      className={buttonClasses}
+      data-id={dataId}
+      onClick={onClick}
+      disabled={!onClick}
+    >
       {children}
     </button>
   );
