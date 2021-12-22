@@ -1,5 +1,3 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
-
 type FullScreenDocument = Document & {
   mozFullScreenElement: Element | null;
   msFullscreenElement: Element | null;

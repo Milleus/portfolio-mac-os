@@ -3,7 +3,7 @@ import { FC, MouseEvent, useEffect, useRef, useState } from "react";
 import { MdSearch, MdWifi, MdWifiOff } from "react-icons/md";
 import format from "date-fns/format";
 
-import { useAppSelector, useDetectClickOutside } from "hooks";
+import { useAppSelector, useDetectOutsideClick } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
 import MenuControlCenter from "components/MenuControlCenter";
 import MenuWifi from "components/MenuWifi";
@@ -43,7 +43,7 @@ const MenuBar: FC<Record<string, never>> = () => {
     newId && setActiveMenuId(newId);
   };
 
-  const handleClickOutside = () => {
+  const handleOutsideClick = () => {
     setActiveMenuId(MenuId.NONE);
   };
 
@@ -58,7 +58,7 @@ const MenuBar: FC<Record<string, never>> = () => {
       break;
   }
 
-  useDetectClickOutside(handleClickOutside, ref);
+  useDetectOutsideClick(handleOutsideClick, ref);
 
   return (
     <div className="w-full h-6 fixed top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-2.5">
