@@ -43,7 +43,7 @@ const initialState: SystemState = {
   isDarkModeOn: false,
   isFullScreen: false,
   brightnessLevel: 1,
-  volumeLevel: 1,
+  volumeLevel: 0.8,
   isAudioPlaying: false,
   audioPlaylistIndex: 0,
 };

@@ -21,9 +21,9 @@ const MenuWifi: FC<Record<string, never>> = () => {
         <ToggleSwitch isChecked={isWifiOn} onChange={handleWifiChange} />
       </div>
 
-      <hr className="border-neutral-400 m-1.5" />
+      <hr className="border-gray-400 m-1.5" />
 
-      <p className="font-bold px-1.5 text-xs text-neutral-600">
+      <p className="font-bold px-1.5 text-xs text-gray-600">
         Preferred Network
       </p>
 
@@ -35,7 +35,7 @@ const MenuWifi: FC<Record<string, never>> = () => {
           />
           <span className="text-sm ml-2.5">Home</span>
         </div>
-        <BsFillLockFill size={18} className="text-neutral-600" />
+        <BsFillLockFill size={18} className="text-gray-600" />
       </div>
     </div>
   );

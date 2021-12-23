@@ -109,7 +109,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div>
               <p className="text-xs font-semibold">Wi-Fi</p>
-              <p className="text-xxs text-neutral-600">
+              <p className="text-xxs text-gray-600">
                 {isWifiOn ? "Home" : "Not connected"}
               </p>
             </div>
@@ -129,7 +129,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div>
               <p className="text-xs font-semibold">Bluetooth</p>
-              <p className="text-xxs text-neutral-600">
+              <p className="text-xxs text-gray-600">
                 {isBluetoothOn ? "On" : "Off"}
               </p>
             </div>
@@ -145,7 +145,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div>
               <p className="text-xs font-semibold">AirDrop</p>
-              <p className="text-xxs text-neutral-600">
+              <p className="text-xxs text-gray-600">
                 {isBluetoothOn && isAirDropOn ? "Contacts Only" : "Off"}
               </p>
             </div>
@@ -163,7 +163,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div className="ml-2">
               <p className="text-xs font-semibold">Dark Mode</p>
-              <p className="text-xxs text-neutral-600">
+              <p className="text-xxs text-gray-600">
                 {isDarkModeOn ? "On" : "Off"}
               </p>
             </div>
@@ -232,7 +232,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
               <p className="truncate text-xs font-semibold">
                 {audioPlaylist[audioPlaylistIndex].title}
               </p>
-              <p className="truncate text-xxs text-neutral-600">
+              <p className="truncate text-xxs text-gray-600">
                 {audioPlaylist[audioPlaylistIndex].artist}
               </p>
             </div>
