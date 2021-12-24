@@ -6,7 +6,9 @@ html, body, #root {
   @apply h-full overflow-hidden font-sans text-gray-900;
 }
 
+/* ----------- */
 /* INPUT RANGE */
+/* ----------- */
 .input-range {
   @apply appearance-none w-full bg-transparent;
   --sx: calc(0.5 * 0.75rem + var(--ratio) * (100% - 0.75rem));

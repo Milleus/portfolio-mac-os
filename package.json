@@ -7,7 +7,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js,.ts,.tsx ./ --ignore-path .gitignore",
     "start": "react-scripts start",
-    "test": "react-scripts test"
+    "test": "react-scripts test --watchAll=false"
   },
   "browserslist": {
     "production": [

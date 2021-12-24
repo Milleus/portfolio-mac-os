@@ -55,9 +55,11 @@ const MenuBar: FC<Record<string, never>> = () => {
     case MenuId.APPLE:
       ref = menuAppleRef;
       break;
+
     case MenuId.WIFI:
       ref = menuWifiRef;
       break;
+
     case MenuId.CONTROL_CENTER:
       ref = menuControlCenterRef;
       break;
@@ -75,7 +77,7 @@ const MenuBar: FC<Record<string, never>> = () => {
             isActive={false}
             onClick={handleMenuItemClick}
           >
-            <BsApple size={16} className="drop-shadow" />
+            <BsApple size={16} className="drop-shadow mx-1" />
           </Button>
           {activeMenuId === MenuId.APPLE && <MenuApple />}
         </div>
@@ -85,7 +87,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           appearance={ButtonAppearance.MENU}
           isActive={false}
         >
-          <span className="font-bold drop-shadow px-1">Finder</span>
+          <span className="font-bold drop-shadow">Finder</span>
         </Button>
       </div>
 
@@ -97,7 +99,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           onClick={handleMenuItemClick}
         >
           <span className="text-xs mr-1">100%</span>
-          <BsBatteryFull size={22} className="drop-shadow mr-1" />
+          <BsBatteryFull size={24} className="drop-shadow mr-1" />
         </Button>
 
         <div className="flex relative" ref={menuWifiRef}>
@@ -142,7 +144,9 @@ const MenuBar: FC<Record<string, never>> = () => {
           appearance={ButtonAppearance.MENU}
           isActive={false}
         >
-          <span>{format(new Date(date), "eee d MMM h:mm aa")}</span>
+          <span className="mx-1">
+            {format(new Date(date), "eee d MMM h:mm aa")}
+          </span>
         </Button>
       </div>
     </div>

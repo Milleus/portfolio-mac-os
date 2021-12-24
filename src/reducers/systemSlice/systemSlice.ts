@@ -45,7 +45,7 @@ export type SystemState = {
   audioPlaylistIndex: number;
 };
 
-const initialState: SystemState = {
+export const initialState: SystemState = {
   activePage: Page.DESKTOP,
   isWifiOn: true,
   isBluetoothOn: true,

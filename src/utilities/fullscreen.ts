@@ -12,7 +12,7 @@ type FullScreenDocumentElement = HTMLElement & {
   msRequestFullscreen: () => void;
 };
 
-export const detectFullScreen = (): boolean => {
+const detectFullScreen = (): boolean => {
   const doc = document as FullScreenDocument;
 
   return !!(
@@ -23,23 +23,29 @@ export const detectFullScreen = (): boolean => {
   );
 };
 
-export const toggleFullScreen = (): void => {
-  const isFullScreen = detectFullScreen();
-  const doc = document as FullScreenDocument;
+const requestFullScreen = () => {
   const docEl = document.documentElement as FullScreenDocumentElement;
 
-  if (isFullScreen) {
-    const exitFullScreen =
-      doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen;
+  const request =
+    docEl.requestFullscreen ||
+    docEl.mozRequestFullScreen ||
+    docEl.webkitRequestFullscreen ||
+    docEl.msRequestFullscreen;
 
-    exitFullScreen && exitFullScreen.call(doc);
-  } else {
-    const requestFullScreen =
-      docEl.requestFullscreen ||
-      docEl.mozRequestFullScreen ||
-      docEl.webkitRequestFullscreen ||
-      docEl.msRequestFullscreen;
+  request && request.call(docEl);
+};
 
-    requestFullScreen && requestFullScreen.call(docEl);
-  }
+const exitFullScreen = () => {
+  const doc = document as FullScreenDocument;
+
+  const exit =
+    doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen;
+
+  exit && exit.call(doc);
+};
+
+export const toggleFullScreen = (): void => {
+  const isFullScreen = detectFullScreen();
+
+  isFullScreen ? exitFullScreen() : requestFullScreen();
 };
