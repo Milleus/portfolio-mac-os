@@ -170,14 +170,14 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           </div>
         </div>
 
-        <div className="flex flex-row bg-gray-200/80 rounded-xl shadow-lg">
+        <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-lg">
           <Button isActive={false} appearance={ButtonAppearance.TRANSPARENT}>
             <BsBrightnessAltHigh size={24} />
             <p className="text-xxs">Keyboard Brightness</p>
           </Button>
         </div>
 
-        <div className="flex flex-row bg-gray-200/80 rounded-xl shadow-lg">
+        <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-lg">
           <Button
             isActive={false}
             appearance={ButtonAppearance.TRANSPARENT}
