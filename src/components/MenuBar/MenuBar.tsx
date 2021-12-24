@@ -5,6 +5,7 @@ import format from "date-fns/format";
 
 import { useAppSelector, useOutsideClick } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
+import MenuApple from "components/MenuApple";
 import MenuControlCenter from "components/MenuControlCenter";
 import MenuWifi from "components/MenuWifi";
 
@@ -23,6 +24,7 @@ const MenuBar: FC<Record<string, never>> = () => {
   const { isWifiOn } = useAppSelector((state) => state.system);
   const [activeMenuId, setActiveMenuId] = useState<string>(MenuId.NONE);
   const [date, setDate] = useState<Date>(new Date());
+  const menuAppleRef = useRef<HTMLDivElement>(null);
   const menuWifiRef = useRef<HTMLDivElement>(null);
   const menuControlCenterRef = useRef<HTMLDivElement>(null);
 
@@ -50,6 +52,9 @@ const MenuBar: FC<Record<string, never>> = () => {
   let ref;
 
   switch (activeMenuId) {
+    case MenuId.APPLE:
+      ref = menuAppleRef;
+      break;
     case MenuId.WIFI:
       ref = menuWifiRef;
       break;
@@ -61,20 +66,23 @@ const MenuBar: FC<Record<string, never>> = () => {
   useOutsideClick(handleOutsideClick, ref);
 
   return (
-    <div className="w-full h-6 fixed top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-2.5">
+    <div className="w-full h-6 fixed top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-1.5">
       <div className="flex">
-        <Button
-          dataId={MenuId.APPLE}
-          appearance={ButtonAppearance.MENU_ITEM}
-          isActive={false}
-          onClick={handleMenuItemClick}
-        >
-          <BsApple size={16} className="drop-shadow" />
-        </Button>
+        <div className="flex relative" ref={menuAppleRef}>
+          <Button
+            dataId={MenuId.APPLE}
+            appearance={ButtonAppearance.MENU}
+            isActive={false}
+            onClick={handleMenuItemClick}
+          >
+            <BsApple size={16} className="drop-shadow" />
+          </Button>
+          {activeMenuId === MenuId.APPLE && <MenuApple />}
+        </div>
 
         <Button
           dataId={MenuId.FINDER}
-          appearance={ButtonAppearance.MENU_ITEM}
+          appearance={ButtonAppearance.MENU}
           isActive={false}
         >
           <span className="font-bold drop-shadow px-1">Finder</span>
@@ -84,7 +92,7 @@ const MenuBar: FC<Record<string, never>> = () => {
       <div className="flex">
         <Button
           dataId={MenuId.BATTERY}
-          appearance={ButtonAppearance.MENU_ITEM}
+          appearance={ButtonAppearance.MENU}
           isActive={false}
           onClick={handleMenuItemClick}
         >
@@ -95,7 +103,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         <div className="flex relative" ref={menuWifiRef}>
           <Button
             dataId={MenuId.WIFI}
-            appearance={ButtonAppearance.MENU_ITEM}
+            appearance={ButtonAppearance.MENU}
             isActive={activeMenuId === MenuId.WIFI}
             onClick={handleMenuItemClick}
           >
@@ -110,7 +118,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
         <Button
           dataId={MenuId.SPOTLIGHT}
-          appearance={ButtonAppearance.MENU_ITEM}
+          appearance={ButtonAppearance.MENU}
           isActive={false}
           onClick={handleMenuItemClick}
         >
@@ -120,19 +128,18 @@ const MenuBar: FC<Record<string, never>> = () => {
         <div className="flex" ref={menuControlCenterRef}>
           <Button
             dataId={MenuId.CONTROL_CENTER}
-            appearance={ButtonAppearance.MENU_ITEM}
+            appearance={ButtonAppearance.MENU}
             isActive={activeMenuId === MenuId.CONTROL_CENTER}
             onClick={handleMenuItemClick}
           >
             <BsToggles size={15} className="drop-shadow" />
           </Button>
-
           {activeMenuId === MenuId.CONTROL_CENTER && <MenuControlCenter />}
         </div>
 
         <Button
           dataId={MenuId.NOTIFICATION_CENTER}
-          appearance={ButtonAppearance.MENU_ITEM}
+          appearance={ButtonAppearance.MENU}
           isActive={false}
         >
           <span>{format(new Date(date), "eee d MMM h:mm aa")}</span>

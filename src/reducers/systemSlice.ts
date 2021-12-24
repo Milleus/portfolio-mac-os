@@ -2,6 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { RootState } from "reducers/store";
 
+export enum Page {
+  DESKTOP = "desktop",
+  LOGIN = "login",
+  BOOT_SLEEP = "boot-sleep",
+  BOOT_RESTART = "boot-restart",
+  BOOT_SHUT_DOWN = "boot-shut-down",
+}
+
 type AudioTrack = {
   title: string;
   artist: string;
@@ -25,6 +33,7 @@ export const audioPlaylist: Array<AudioTrack> = [
 ];
 
 export type SystemState = {
+  activePage: Page;
   isWifiOn: boolean;
   isBluetoothOn: boolean;
   isAirDropOn: boolean;
@@ -37,6 +46,7 @@ export type SystemState = {
 };
 
 const initialState: SystemState = {
+  activePage: Page.DESKTOP,
   isWifiOn: true,
   isBluetoothOn: true,
   isAirDropOn: true,

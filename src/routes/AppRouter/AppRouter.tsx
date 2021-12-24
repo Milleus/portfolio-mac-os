@@ -1,21 +1,25 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 
-import Desktop from "../../pages/Desktop";
-import Login from "../../pages/Login";
+import { Page } from "reducers/systemSlice";
+import { useAppSelector } from "hooks";
+import Boot from "pages/Boot";
+import Desktop from "pages/Desktop";
+import Login from "pages/Login";
 
 const AppRouter: FC<Record<string, never>> = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const { activePage } = useAppSelector((state) => state.system);
 
-  const handleLoginClick = () => {
-    setIsLoggedIn(true);
-  };
+  switch (activePage) {
+    case Page.LOGIN:
+      return <Login />;
 
-  switch (isLoggedIn) {
-    case true:
+    case Page.DESKTOP:
       return <Desktop />;
-    case false:
-    default:
-      return <Login onLoginClick={handleLoginClick} />;
+
+    case Page.BOOT_SLEEP:
+    case Page.BOOT_RESTART:
+    case Page.BOOT_SHUT_DOWN:
+      return <Boot />;
   }
 };
 

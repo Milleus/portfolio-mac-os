@@ -2,6 +2,7 @@ import { FC, MouseEventHandler, ReactNode } from "react";
 import classNames from "classnames";
 
 export enum ButtonAppearance {
+  MENU,
   MENU_ITEM,
   ICON,
   TRANSPARENT,
@@ -25,12 +26,19 @@ const Button: FC<ButtonProps> = ({
   let buttonClasses;
 
   switch (appearance) {
-    case ButtonAppearance.MENU_ITEM:
+    case ButtonAppearance.MENU:
       buttonClasses = classNames({
         "flex items-center rounded px-2 text-white text-sm cursor-default":
           true,
         "active:bg-white/30": onClick,
         "bg-white/30": isActive,
+      });
+      break;
+
+    case ButtonAppearance.MENU_ITEM:
+      buttonClasses = classNames({
+        "flex w-full rounded px-2.5 py-1.5 text-xs leading-none tracking-wide hover:bg-blue-500 hover:text-white":
+          true,
       });
       break;
 
