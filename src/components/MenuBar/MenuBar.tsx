@@ -1,5 +1,5 @@
 import { BsApple, BsBatteryFull, BsToggles } from "react-icons/bs";
-import { FC, MouseEvent, useEffect, useRef, useState } from "react";
+import { FC, MouseEvent, useRef, useState } from "react";
 import { MdSearch, MdWifi, MdWifiOff } from "react-icons/md";
 import format from "date-fns/format";
 
@@ -21,22 +21,11 @@ enum MenuId {
 }
 
 const MenuBar: FC<Record<string, never>> = () => {
-  const { isWifiOn } = useAppSelector((state) => state.system);
+  const { isWifiOn, date } = useAppSelector((state) => state.system);
   const [activeMenuId, setActiveMenuId] = useState<string>(MenuId.NONE);
-  const [date, setDate] = useState<Date>(new Date());
   const menuAppleRef = useRef<HTMLDivElement>(null);
   const menuWifiRef = useRef<HTMLDivElement>(null);
   const menuControlCenterRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setDate(new Date());
-    }, 60 * 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
 
   const handleMenuItemClick = (event: MouseEvent) => {
     const id = event.currentTarget.getAttribute("data-id");
@@ -68,7 +57,7 @@ const MenuBar: FC<Record<string, never>> = () => {
   useOutsideClick(handleOutsideClick, ref);
 
   return (
-    <div className="w-full h-6 fixed top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-1.5">
+    <div className="w-full h-6 absolute top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-1.5">
       <div className="flex">
         <div className="flex relative" ref={menuAppleRef}>
           <Button
@@ -87,7 +76,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           appearance={ButtonAppearance.MENU}
           isActive={false}
         >
-          <span className="font-bold drop-shadow">Finder</span>
+          <span className="font-bold drop-shadow mx-1">Finder</span>
         </Button>
       </div>
 
@@ -124,7 +113,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           isActive={false}
           onClick={handleMenuItemClick}
         >
-          <MdSearch size={18} className="drop-shadow" />
+          <MdSearch size={18} className="drop-shadow mx-1" />
         </Button>
 
         <div className="flex" ref={menuControlCenterRef}>
@@ -134,7 +123,7 @@ const MenuBar: FC<Record<string, never>> = () => {
             isActive={activeMenuId === MenuId.CONTROL_CENTER}
             onClick={handleMenuItemClick}
           >
-            <BsToggles size={15} className="drop-shadow" />
+            <BsToggles size={14} className="drop-shadow" />
           </Button>
           {activeMenuId === MenuId.CONTROL_CENTER && <MenuControlCenter />}
         </div>
@@ -144,8 +133,9 @@ const MenuBar: FC<Record<string, never>> = () => {
           appearance={ButtonAppearance.MENU}
           isActive={false}
         >
-          <span className="mx-1">
-            {format(new Date(date), "eee d MMM h:mm aa")}
+          <span className="mx-1">{format(new Date(date), "eee d MMM")}</span>
+          <span className="min-w-0 w-16 mr-1">
+            {format(new Date(date), "h:mm aa")}
           </span>
         </Button>
       </div>

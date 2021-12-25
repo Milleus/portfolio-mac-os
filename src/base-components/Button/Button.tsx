@@ -28,7 +28,7 @@ const Button: FC<ButtonProps> = ({
   switch (appearance) {
     case ButtonAppearance.MENU:
       buttonClasses = classNames({
-        "flex items-center rounded px-2 text-white text-sm cursor-default":
+        "flex items-center rounded px-1.5 text-white text-sm cursor-default":
           true,
         "active:bg-white/30": onClick,
         "bg-white/30": isActive,

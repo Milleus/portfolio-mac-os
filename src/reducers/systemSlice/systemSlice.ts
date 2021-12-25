@@ -34,6 +34,7 @@ export const audioPlaylist: Array<AudioTrack> = [
 
 export type SystemState = {
   activePage: Page;
+  date: string;
   isWifiOn: boolean;
   isBluetoothOn: boolean;
   isAirDropOn: boolean;
@@ -46,7 +47,8 @@ export type SystemState = {
 };
 
 export const initialState: SystemState = {
-  activePage: Page.DESKTOP,
+  activePage: Page.LOGIN,
+  date: new Date().toISOString(),
   isWifiOn: true,
   isBluetoothOn: true,
   isAirDropOn: true,

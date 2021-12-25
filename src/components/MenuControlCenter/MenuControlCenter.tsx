@@ -68,13 +68,11 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   };
 
   const handleBrightnessChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    dispatch(updateSystem({ brightnessLevel: Number(value) }));
+    dispatch(updateSystem({ brightnessLevel: Number(event.target.value) }));
   };
 
   const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    dispatch(updateSystem({ volumeLevel: Number(value) }));
+    dispatch(updateSystem({ volumeLevel: Number(event.target.value) }));
   };
 
   const handleAudioPlayPauseClick = () => {
@@ -86,10 +84,16 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   };
 
   const renderVolumeIcon = () => {
-    if (volumeLevel === 0) return <IoVolumeMute size={12} />;
-    if (volumeLevel < 33) return <IoVolumeLow size={12} />;
-    if (volumeLevel < 66) return <IoVolumeMedium size={12} />;
-    return <IoVolumeHigh size={12} />;
+    switch (true) {
+      case volumeLevel === 0:
+        return <IoVolumeMute size={12} />;
+      case volumeLevel < 33:
+        return <IoVolumeLow size={12} />;
+      case volumeLevel < 66:
+        return <IoVolumeMedium size={12} />;
+      default:
+        return <IoVolumeHigh size={12} />;
+    }
   };
 
   return (
@@ -109,7 +113,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div>
               <p className="text-xs font-semibold">Wi-Fi</p>
-              <p className="text-xxs text-gray-600">
+              <p className="text-[0.65rem] leading-[1.1] text-gray-600">
                 {isWifiOn ? "Home" : "Not connected"}
               </p>
             </div>
@@ -129,7 +133,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div>
               <p className="text-xs font-semibold">Bluetooth</p>
-              <p className="text-xxs text-gray-600">
+              <p className="text-[0.65rem] leading-[1.1] text-gray-600">
                 {isBluetoothOn ? "On" : "Off"}
               </p>
             </div>
@@ -145,7 +149,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div>
               <p className="text-xs font-semibold">AirDrop</p>
-              <p className="text-xxs text-gray-600">
+              <p className="text-[0.65rem] leading-[1.1] text-gray-600">
                 {isBluetoothOn && isAirDropOn ? "Contacts Only" : "Off"}
               </p>
             </div>
@@ -163,7 +167,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div className="ml-2">
               <p className="text-xs font-semibold">Dark Mode</p>
-              <p className="text-xxs text-gray-600">
+              <p className="text-[0.65rem] leading-[1.1] text-gray-600">
                 {isDarkModeOn ? "On" : "Off"}
               </p>
             </div>
@@ -173,7 +177,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
         <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-lg">
           <Button isActive={false} appearance={ButtonAppearance.TRANSPARENT}>
             <BsBrightnessAltHigh size={24} />
-            <p className="text-xxs">Keyboard Brightness</p>
+            <p className="text-[0.65rem] leading-[1.1]">Keyboard Brightness</p>
           </Button>
         </div>
 
@@ -186,12 +190,12 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             {isFullScreen ? (
               <>
                 <MdFullscreenExit size={24} />
-                <p className="text-xxs">Exit Full Screen</p>
+                <p className="text-[0.65rem] leading-[1.1]">Exit Full Screen</p>
               </>
             ) : (
               <>
                 <MdFullscreen size={24} />
-                <p className="text-xxs">Enter Fullscreen</p>
+                <p className="text-[0.65rem] leading-[1.1]">Enter Fullscreen</p>
               </>
             )}
           </Button>
@@ -232,7 +236,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
               <p className="truncate text-xs font-semibold">
                 {audioPlaylist[audioPlaylistIndex].title}
               </p>
-              <p className="truncate text-xxs text-gray-600">
+              <p className="truncate text-[0.65rem] leading-[1.1] text-gray-600">
                 {audioPlaylist[audioPlaylistIndex].artist}
               </p>
             </div>

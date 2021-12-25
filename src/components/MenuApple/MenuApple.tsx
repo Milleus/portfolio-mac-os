@@ -38,7 +38,7 @@ const MenuApple: FC<Record<string, never>> = () => {
     { label: "Shut Down...", onClick: handleShutDownClick },
     { label: undefined },
     { label: "Lock Screen", onClick: handleLockScreenClick },
-    { label: "Log Out Milleus..." },
+    { label: "Log Out Milleus...", onClick: handleLockScreenClick },
   ];
 
   return (
