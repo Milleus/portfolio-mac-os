@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector, useInterval } from "hooks";
 import Boot from "pages/Boot";
 import Desktop from "pages/Desktop";
 import Login from "pages/Login";
+import Sleep from "pages/Sleep";
 
 const AppRouter: FC<Record<string, never>> = () => {
   const { activePage } = useAppSelector((state) => state.system);
@@ -22,7 +23,9 @@ const AppRouter: FC<Record<string, never>> = () => {
     case Page.DESKTOP:
       return <Desktop />;
 
-    case Page.BOOT_SLEEP:
+    case Page.SLEEP:
+      return <Sleep />;
+
     case Page.BOOT_RESTART:
     case Page.BOOT_SHUT_DOWN:
       return <Boot />;

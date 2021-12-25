@@ -14,7 +14,7 @@ const Boot: FC<Record<string, never>> = () => {
 
   const handlePageLoad = () => {
     setTimeout(() => {
-      dispatch(updateSystem({ activePage: Page.LOGIN }));
+      dispatch(updateSystem({ isFirstLogIn: true, activePage: Page.LOGIN }));
     }, 1000);
   };
 
@@ -32,12 +32,12 @@ const Boot: FC<Record<string, never>> = () => {
   );
 
   return (
-    <button
+    <div
       className="w-full h-full flex flex-col justify-center items-center bg-black cursor-default"
       onClick={handleClick}
     >
       <BsApple className="w-24 h-24 text-white mb-20" />
-      {isBooting && (
+      {isBooting ? (
         <div
           data-testid="boot-progress-bar"
           className="w-60 h-1.5 bg-white/20 rounded-full overflow-hidden"
@@ -48,14 +48,12 @@ const Boot: FC<Record<string, never>> = () => {
             style={{ width: `${bootProgress.toString()}%` }}
           ></div>
         </div>
-      )}
-      {!isBooting && (
-        <span className="h-1.5 text-white">
-          Click anywhere to{" "}
-          {activePage === Page.BOOT_SLEEP ? "wake up" : "boot up"}
+      ) : (
+        <span className="h-1.5 text-white cursor-pointer">
+          Click to boot up
         </span>
       )}
-    </button>
+    </div>
   );
 };
 

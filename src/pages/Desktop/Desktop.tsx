@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 import {
   audioPlaylist,
   incrementAudioPlaylistIndex,
+  updateSystem,
 } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAudio } from "hooks/useAudio";
@@ -13,6 +14,10 @@ const Desktop: FC<Record<string, never>> = () => {
   const { brightnessLevel, volumeLevel, isAudioPlaying, audioPlaylistIndex } =
     useAppSelector((state) => state.system);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(updateSystem({ isFirstLogIn: false }));
+  }, [dispatch]);
 
   const handleTrackEnded = () => {
     dispatch(incrementAudioPlaylistIndex());

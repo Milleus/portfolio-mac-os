@@ -5,7 +5,7 @@ import { RootState } from "reducers/store";
 export enum Page {
   DESKTOP = "desktop",
   LOGIN = "login",
-  BOOT_SLEEP = "boot-sleep",
+  SLEEP = "sleep",
   BOOT_RESTART = "boot-restart",
   BOOT_SHUT_DOWN = "boot-shut-down",
 }
@@ -35,6 +35,7 @@ export const audioPlaylist: Array<AudioTrack> = [
 export type SystemState = {
   activePage: Page;
   date: string;
+  isFirstLogIn: boolean;
   isWifiOn: boolean;
   isBluetoothOn: boolean;
   isAirDropOn: boolean;
@@ -49,6 +50,7 @@ export type SystemState = {
 export const initialState: SystemState = {
   activePage: Page.LOGIN,
   date: new Date().toISOString(),
+  isFirstLogIn: true,
   isWifiOn: true,
   isBluetoothOn: true,
   isAirDropOn: true,

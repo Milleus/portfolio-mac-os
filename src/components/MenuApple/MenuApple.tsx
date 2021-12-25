@@ -8,7 +8,7 @@ const MenuApple: FC<Record<string, never>> = () => {
   const dispatch = useAppDispatch();
 
   const handleSleepClick = () => {
-    dispatch(updateSystem({ activePage: Page.BOOT_SLEEP }));
+    dispatch(updateSystem({ activePage: Page.SLEEP }));
   };
 
   const handleRestartClick = () => {
