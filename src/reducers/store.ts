@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import applicationReducer from "./applicationSlice";
 import systemReducer from "./systemSlice";
 
 export const store = configureStore({
   reducer: {
+    application: applicationReducer,
     system: systemReducer,
   },
 });
