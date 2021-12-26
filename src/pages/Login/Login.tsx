@@ -90,6 +90,7 @@ const Login: FC<Record<string, never>> = () => {
             value={value}
             autoFocus={true}
             autoComplete="off"
+            aria-label="password"
             onClick={handleInputClick}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
@@ -109,6 +110,7 @@ const Login: FC<Record<string, never>> = () => {
             <>
               <div className="flex flex-col items-center">
                 <button
+                  aria-label="shut down"
                   className="w-8 h-8 flex justify-center items-center rounded-full bg-white/40"
                   onClick={handleShutDownClick}
                 >
@@ -118,6 +120,7 @@ const Login: FC<Record<string, never>> = () => {
               </div>
               <div className="flex flex-col items-center">
                 <button
+                  aria-label="restart"
                   className="w-8 h-8 flex justify-center items-center rounded-full bg-white/40"
                   onClick={handleRestartClick}
                 >
@@ -129,6 +132,7 @@ const Login: FC<Record<string, never>> = () => {
           )}
           <div className="flex flex-col items-center">
             <button
+              aria-label="sleep"
               className="w-8 h-8 flex justify-center items-center rounded-full bg-white/40"
               onClick={handleSleepClick}
             >

@@ -12,6 +12,7 @@ export type ButtonProps = {
   appearance: ButtonAppearance;
   isActive: boolean;
   children: ReactNode;
+  ariaLabel?: string;
   dataId?: string;
   onClick?: MouseEventHandler;
 };
@@ -20,6 +21,7 @@ const Button: FC<ButtonProps> = ({
   appearance,
   isActive,
   children,
+  ariaLabel,
   dataId,
   onClick,
 }) => {
@@ -60,6 +62,7 @@ const Button: FC<ButtonProps> = ({
   return (
     <button
       className={buttonClasses}
+      aria-label={ariaLabel}
       data-id={dataId}
       onClick={onClick}
       disabled={!onClick}
