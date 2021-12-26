@@ -62,10 +62,14 @@ const Login: FC<Record<string, never>> = () => {
     >
       <div className="absolute top-px right-3 flex">
         <Button appearance={ButtonAppearance.MENU} isActive={false}>
-          <BsBatteryFull size={24} className="drop-shadow mr-1" />
+          <BsBatteryFull size={24} className="mr-1" />
         </Button>
         <Button appearance={ButtonAppearance.MENU} isActive={false}>
-          {isWifiOn ? <MdWifi size={18} /> : <MdWifiOff size={18} />}
+          {!isFirstLogIn && isWifiOn ? (
+            <MdWifi size={18} />
+          ) : (
+            <MdWifiOff size={18} />
+          )}
         </Button>
         <Button appearance={ButtonAppearance.MENU} isActive={false}>
           <span className="mx-1">{format(new Date(date), "eee d MMM")}</span>
