@@ -57,7 +57,7 @@ const MenuBar: FC<Record<string, never>> = () => {
   useOutsideClick(handleOutsideClick, ref);
 
   return (
-    <div className="w-full h-6 absolute top-0 flex justify-between items-stretch bg-black/10 backdrop-blur px-1.5">
+    <div className="w-full h-6 absolute top-0 flex justify-between items-stretch bg-white/40 backdrop-blur px-1.5">
       <div className="flex">
         <div className="flex relative" ref={menuAppleRef}>
           <Button

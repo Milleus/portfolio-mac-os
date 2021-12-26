@@ -23,7 +23,7 @@ const detectFullScreen = (): boolean => {
   );
 };
 
-const requestFullScreen = () => {
+const requestFullScreen = (): void => {
   const docEl = document.documentElement as FullScreenDocumentElement;
 
   const request =
@@ -35,7 +35,7 @@ const requestFullScreen = () => {
   request && request.call(docEl);
 };
 
-const exitFullScreen = () => {
+const exitFullScreen = (): void => {
   const doc = document as FullScreenDocument;
 
   const exit =

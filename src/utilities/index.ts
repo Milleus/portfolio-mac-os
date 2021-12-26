@@ -1,1 +1,1 @@
-export * from "./fullscreen";
+export * from "./fullScreen";
