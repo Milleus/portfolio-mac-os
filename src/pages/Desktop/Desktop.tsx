@@ -7,6 +7,7 @@ import {
 } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAudio } from "hooks/useAudio";
+import Dock from "components/Dock";
 import MenuBar from "components/MenuBar";
 import WallpaperMonterey from "./images/wallpaper-monterey.jpeg";
 
@@ -39,6 +40,8 @@ const Desktop: FC<Record<string, never>> = () => {
       }}
     >
       <MenuBar />
+
+      <Dock />
     </div>
   );
 };
