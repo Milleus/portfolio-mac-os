@@ -35,7 +35,7 @@ const Login: FC<Record<string, never>> = () => {
     setValue(event.target.value);
   };
 
-  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+  const handleInputKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     event.key === "Enter" && handleLoginClick();
   };
 
@@ -97,7 +97,7 @@ const Login: FC<Record<string, never>> = () => {
             aria-label="password"
             onClick={handleInputClick}
             onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
+            onKeyPress={handleInputKeyPress}
           />
           {!!value && (
             <BsArrowRightCircle className="absolute top-0 right-0 w-7 h-7 p-0.5 text-white/80 cursor-pointer" />

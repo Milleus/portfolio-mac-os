@@ -1,8 +1,13 @@
-import { FC } from "react";
+import { FC, MouseEventHandler } from "react";
 
 import { Page, updateSystem } from "reducers/systemSlice";
 import { useAppDispatch } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
+
+type MenuAppleItem = {
+  label?: string;
+  onClick?: MouseEventHandler;
+};
 
 const MenuApple: FC<Record<string, never>> = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +28,7 @@ const MenuApple: FC<Record<string, never>> = () => {
     dispatch(updateSystem({ activePage: Page.LOGIN }));
   };
 
-  const listItems = [
+  const menuAppleItems: Array<MenuAppleItem> = [
     { label: "About This Mac" },
     { label: undefined },
     { label: "System Preferences..." },
@@ -42,26 +47,25 @@ const MenuApple: FC<Record<string, never>> = () => {
   ];
 
   return (
-    <div className="absolute top-6 left-0 w-60 bg-gray-200/80 p-1 mt-px rounded shadow">
-      {listItems.map((item, index) => {
-        if (item.label) {
-          return (
-            <Button
-              key={`item-${index}`}
-              appearance={ButtonAppearance.MENU_ITEM}
-              isActive={false}
-              onClick={item.onClick}
-            >
-              {item.label}
-            </Button>
-          );
-        }
-
+    <ul className="absolute top-6 left-0 w-60 bg-gray-200/80 p-1 mt-px rounded shadow">
+      {menuAppleItems.map((item, index) => {
         return (
-          <hr key={`hr-${index}`} className="border-gray-400 mx-2.5 my-1" />
+          <li key={`menu-apple-${index}`}>
+            {item.label ? (
+              <Button
+                appearance={ButtonAppearance.MENU_ITEM}
+                isActive={false}
+                onClick={item.onClick}
+              >
+                {item.label}
+              </Button>
+            ) : (
+              <hr className="border-gray-400 mx-2.5 my-1" />
+            )}
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };
 
