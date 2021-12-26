@@ -87,9 +87,9 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
     switch (true) {
       case volumeLevel === 0:
         return <IoVolumeMute size={12} />;
-      case volumeLevel < 33:
+      case volumeLevel < 0.33:
         return <IoVolumeLow size={12} />;
-      case volumeLevel < 66:
+      case volumeLevel < 0.66:
         return <IoVolumeMedium size={12} />;
       default:
         return <IoVolumeHigh size={12} />;
