@@ -5,7 +5,7 @@ import { RootState } from "reducers/store";
 export type ApplicationState = {
   isLaunchpadOpen: boolean;
   isNotesOpen: boolean;
-  isVisualStudioCodeOpen: boolean;
+  isVSCodeOpen: boolean;
   isITermOpen: boolean;
   isSafariOpen: boolean;
   isFaceTimeOpen: boolean;
@@ -14,7 +14,7 @@ export type ApplicationState = {
 export const initialState: ApplicationState = {
   isLaunchpadOpen: false,
   isNotesOpen: true,
-  isVisualStudioCodeOpen: false,
+  isVSCodeOpen: false,
   isITermOpen: false,
   isSafariOpen: false,
   isFaceTimeOpen: false,

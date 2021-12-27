@@ -9,7 +9,7 @@ import AppLaunchpad from "./images/app-launchpad.png";
 import AppMail from "./images/app-mail.png";
 import AppNotes from "./images/app-notes.png";
 import AppSafari from "./images/app-safari.png";
-import AppVisualStudioCode from "./images/app-visual-studio-code.png";
+import AppVSCode from "./images/app-vscode.png";
 import Button, { ButtonAppearance } from "base-components/Button";
 
 type DockItem = {
@@ -24,7 +24,7 @@ const Dock: FC<Record<string, never>> = () => {
   const {
     isLaunchpadOpen,
     isNotesOpen,
-    isVisualStudioCodeOpen,
+    isVSCodeOpen,
     isITermOpen,
     isSafariOpen,
     isFaceTimeOpen,
@@ -39,8 +39,8 @@ const Dock: FC<Record<string, never>> = () => {
     dispatch(updateApplication({ isNotesOpen: true }));
   };
 
-  const handleAppVisualStudioCodeClick = () => {
-    dispatch(updateApplication({ isVisualStudioCodeOpen: true }));
+  const handleAppVSCodeClick = () => {
+    dispatch(updateApplication({ isVSCodeOpen: true }));
   };
 
   const handleITermClick = () => {
@@ -70,9 +70,9 @@ const Dock: FC<Record<string, never>> = () => {
     },
     {
       label: "Visual Studio Code",
-      imgSrc: AppVisualStudioCode,
-      isActive: isVisualStudioCodeOpen,
-      onClick: handleAppVisualStudioCodeClick,
+      imgSrc: AppVSCode,
+      isActive: isVSCodeOpen,
+      onClick: handleAppVSCodeClick,
     },
     {
       label: "ITerm",
