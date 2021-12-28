@@ -14,12 +14,9 @@ export const HEIGHT_MENU_BAR_REM = 1.5;
 enum MenuId {
   NONE = "none",
   APPLE = "apple",
-  FINDER = "finder",
-  BATTERY = "battery",
   WIFI = "wifi",
   SPOTLIGHT = "spotlight",
   CONTROL_CENTER = "control-center",
-  NOTIFICATION_CENTER = "notification-center",
 }
 
 const MenuBar: FC<Record<string, never>> = () => {
@@ -67,9 +64,9 @@ const MenuBar: FC<Record<string, never>> = () => {
         <div className="flex relative" ref={menuAppleRef}>
           <Button
             ariaLabel="apple menu toggle"
-            dataId={MenuId.APPLE}
             appearance={ButtonAppearance.MENU}
-            isActive={false}
+            isActive={activeMenuId === MenuId.APPLE}
+            dataId={MenuId.APPLE}
             onClick={handleItemClick}
           >
             <BsApple size={16} className="drop-shadow mx-1" />
@@ -77,21 +74,13 @@ const MenuBar: FC<Record<string, never>> = () => {
           {activeMenuId === MenuId.APPLE && <MenuApple />}
         </div>
 
-        <Button
-          dataId={MenuId.FINDER}
-          appearance={ButtonAppearance.MENU}
-          isActive={false}
-        >
+        <Button appearance={ButtonAppearance.MENU} isActive={false}>
           <span className="font-bold drop-shadow mx-1">Finder</span>
         </Button>
       </div>
 
       <div className="flex">
-        <Button
-          dataId={MenuId.BATTERY}
-          appearance={ButtonAppearance.MENU}
-          isActive={false}
-        >
+        <Button appearance={ButtonAppearance.MENU} isActive={false}>
           <span className="text-xs mr-1">100%</span>
           <BsBatteryFull size={24} className="drop-shadow mr-1" />
         </Button>
@@ -99,9 +88,9 @@ const MenuBar: FC<Record<string, never>> = () => {
         <div className="flex relative" ref={menuWifiRef}>
           <Button
             ariaLabel="wifi menu toggle"
-            dataId={MenuId.WIFI}
             appearance={ButtonAppearance.MENU}
             isActive={activeMenuId === MenuId.WIFI}
+            dataId={MenuId.WIFI}
             onClick={handleItemClick}
           >
             {isWifiOn ? (
@@ -115,9 +104,9 @@ const MenuBar: FC<Record<string, never>> = () => {
 
         <Button
           ariaLabel="spotlight toggle"
-          dataId={MenuId.SPOTLIGHT}
           appearance={ButtonAppearance.MENU}
           isActive={false}
+          dataId={MenuId.SPOTLIGHT}
           onClick={handleItemClick}
         >
           <MdSearch size={18} className="drop-shadow mx-1" />
@@ -126,9 +115,9 @@ const MenuBar: FC<Record<string, never>> = () => {
         <div className="flex" ref={menuControlCenterRef}>
           <Button
             ariaLabel="control center menu toggle"
-            dataId={MenuId.CONTROL_CENTER}
             appearance={ButtonAppearance.MENU}
             isActive={activeMenuId === MenuId.CONTROL_CENTER}
+            dataId={MenuId.CONTROL_CENTER}
             onClick={handleItemClick}
           >
             <BsToggles size={14} className="drop-shadow" />
@@ -136,11 +125,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           {activeMenuId === MenuId.CONTROL_CENTER && <MenuControlCenter />}
         </div>
 
-        <Button
-          dataId={MenuId.NOTIFICATION_CENTER}
-          appearance={ButtonAppearance.MENU}
-          isActive={false}
-        >
+        <Button appearance={ButtonAppearance.MENU} isActive={false}>
           <span className="mx-1">{format(new Date(date), "eee d MMM")}</span>
           <span className="min-w-0 w-16 mr-1">
             {format(new Date(date), "h:mm aa")}
