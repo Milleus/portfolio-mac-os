@@ -15,6 +15,7 @@ import WallpaperMonterey from "./images/wallpaper-monterey.jpeg";
 const Desktop: FC<Record<string, never>> = () => {
   const { brightnessLevel, volumeLevel, isAudioPlaying, audioPlaylistIndex } =
     useAppSelector((state) => state.system);
+  const { vscode } = useAppSelector((state) => state.application);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const Desktop: FC<Record<string, never>> = () => {
         className="window-boundary"
         style={{ marginTop: `${HEIGHT_MENU_BAR_REM}rem` }}
       >
-        <AppVSCode />
+        {vscode.isOpen && <AppVSCode />}
       </div>
 
       <Dock />

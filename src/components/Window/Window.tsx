@@ -6,7 +6,14 @@ import { Rnd, RndResizeCallback, RndDragCallback } from "react-rnd";
 import { convertRemToPixels } from "utilities";
 import { HEIGHT_DOCK_REM } from "components/Dock";
 import { HEIGHT_MENU_BAR_REM } from "components/MenuBar";
-import { useWindowSize } from "hooks";
+import { useAppDispatch, useAppSelector, useWindowSize } from "hooks";
+import {
+  ApplicationKeys,
+  closeApplication,
+  maximizeApplication,
+  normalizeApplication,
+} from "reducers/applicationSlice";
+import classNames from "classnames";
 
 type PositionSize = {
   x: number;
@@ -18,42 +25,37 @@ type PositionSize = {
 const dragHandleClass = "drag-handle";
 
 export type WindowProps = {
+  appKey: ApplicationKeys;
   children: ReactNode;
   title?: string;
-  width?: number;
-  height?: number;
-  onCloseClick: () => void;
-  onMinimizeClick: () => void;
-  onMaximizeClick: () => void;
+  defaultWidth?: number;
+  defaultHeight?: number;
 };
 
 const Window: FC<WindowProps> = ({
+  appKey,
   children,
   title,
-  width,
-  height,
-  onCloseClick,
-  onMinimizeClick,
-  onMaximizeClick,
+  defaultWidth,
+  defaultHeight,
 }) => {
+  const applicationState = useAppSelector((state) => state.application);
+  const dispatch = useAppDispatch();
   const { winWidth, winHeight } = useWindowSize();
-  const initWidth = Math.min(winWidth, width ? width : 640);
-  const initHeight = Math.min(winHeight, height ? height : 400);
+  const initWidth = Math.min(winWidth, defaultWidth ? defaultWidth : 640);
+  const initHeight = Math.min(winHeight, defaultHeight ? defaultHeight : 400);
+  const heightMenuBarPx = convertRemToPixels(HEIGHT_MENU_BAR_REM);
+  const heightDockPx = convertRemToPixels(HEIGHT_DOCK_REM);
+  const isMaximized = applicationState[appKey].windowStatus === "maximized";
 
   const [positionSize, setPositionSize] = useState<PositionSize>({
     width: initWidth,
     height: initHeight,
-    // plus winWidth because of window boundary
-    x: Math.random() * (winWidth - initWidth) + winWidth,
+    x: Math.random() * (winWidth - initWidth) + winWidth, // plus winWidth because of window boundary
     y:
-      Math.random() *
-      (winHeight -
-        initHeight -
-        convertRemToPixels(HEIGHT_MENU_BAR_REM) -
-        convertRemToPixels(HEIGHT_DOCK_REM)),
+      Math.random() * (winHeight - initHeight - heightMenuBarPx - heightDockPx),
   });
 
-  // adjust size when browser is resized
   useEffect(() => {
     setPositionSize({
       ...positionSize,
@@ -81,43 +83,69 @@ const Window: FC<WindowProps> = ({
     });
   };
 
+  const handleBarDoubleClick = () => {
+    dispatch(maximizeApplication(appKey));
+  };
+
+  const handleCloseClick = () => {
+    dispatch(closeApplication(appKey));
+  };
+
+  const handleMinimizeClick = () => {
+    // do nothing for now
+  };
+
+  const handleMaximizeClick = () => {
+    isMaximized
+      ? dispatch(normalizeApplication(appKey))
+      : dispatch(maximizeApplication(appKey));
+  };
+
+  const width = isMaximized ? winWidth : positionSize.width;
+  const height = isMaximized ? winHeight : positionSize.height;
+  const x = isMaximized ? winWidth : Math.max(0, positionSize.x); // winWidth because of window boundary
+  const y = isMaximized ? -heightMenuBarPx : Math.max(0, positionSize.y); // -heightMenuBarPx because of window boundary
+
+  const windowClassNames = classNames({
+    "absolute w-full h-full rounded overflow-hidden shadow-md": true,
+    "z-30": !isMaximized,
+    "z-50": isMaximized,
+  });
+
   return (
     <Rnd
       bounds="parent"
-      size={{
-        width: positionSize.width,
-        height: positionSize.height,
-      }}
-      position={{
-        x: positionSize.x,
-        y: positionSize.y,
-      }}
-      className="absolute w-full h-full rounded overflow-hidden shadow-md"
+      size={{ width, height }}
+      position={{ x, y }}
+      className={windowClassNames}
       dragHandleClassName={dragHandleClass}
+      disableDragging={isMaximized}
+      enableResizing={!isMaximized}
       onDragStop={handleDragStop}
       onResizeStop={handleResizeStop}
     >
       <div
         className={`${dragHandleClass} relative h-6 bg-neutral-700 text-center`}
+        onDoubleClick={handleBarDoubleClick}
       >
         <div className="absolute h-6 flex items-center mx-2 space-x-2 group">
           <button
             className="w-3 h-3 flex justify-center items-center rounded-full bg-red-500"
-            onClick={onCloseClick}
+            onClick={handleCloseClick}
           >
             <BsX className="invisible group-hover:visible" />
           </button>
 
           <button
             className="w-3 h-3 flex justify-center items-center rounded-full bg-amber-500"
-            onClick={onMinimizeClick}
+            onClick={handleMinimizeClick}
           >
             <CgMathMinus className="invisible group-hover:visible" />
           </button>
 
           <button
             className="w-3 h-3 flex justify-center items-center rounded-full bg-green-500"
-            onClick={onMaximizeClick}
+            onClick={handleMaximizeClick}
           >
             <CgArrowsExpandLeft className="invisible group-hover:visible p-0.5" />
           </button>

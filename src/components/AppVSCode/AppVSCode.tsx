@@ -1,27 +1,11 @@
 import { FC } from "react";
 
 import Window from "components/Window";
+import { ApplicationKeys } from "reducers/applicationSlice";
 
 const AppVSCode: FC<Record<string, never>> = () => {
-  const handleCloseClick = () => {
-    // do nothing for now
-  };
-
-  const handleMinimizeClick = () => {
-    // do nothing for now
-  };
-
-  const handleMaximizeClick = () => {
-    // do nothing for now
-  };
-
   return (
-    <Window
-      title="Visual Studio Code"
-      onCloseClick={handleCloseClick}
-      onMinimizeClick={handleMinimizeClick}
-      onMaximizeClick={handleMaximizeClick}
-    >
+    <Window appKey={ApplicationKeys.VSCODE} title="Visual Studio Code">
       <iframe
         className="w-full h-full bg-neutral-800"
         title="Visual Studio Code"

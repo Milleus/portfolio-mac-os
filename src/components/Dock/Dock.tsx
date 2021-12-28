@@ -1,6 +1,6 @@
 import { FC, MouseEvent } from "react";
 
-import { ApplicationState, updateApplication } from "reducers/applicationSlice";
+import { ApplicationKeys, openApplication } from "reducers/applicationSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import AppFaceTime from "./images/app-facetime.png";
 import AppGitHub from "./images/app-github.png";
@@ -18,18 +18,46 @@ export const HEIGHT_DOCK_REM = 3.5;
 type DockItem = {
   label: string;
   imgSrc: string;
-  appKey?: keyof ApplicationState;
+  appKey?: ApplicationKeys;
   link?: string;
 };
 
 const dockItems: Array<DockItem> = [
-  { label: "Launchpad", imgSrc: AppLaunchpad, appKey: "isLaunchpadOpen" },
-  { label: "Notes", imgSrc: AppNotes, appKey: "isNotesOpen" },
-  { label: "Visual Studio Code", imgSrc: AppVSCode, appKey: "isVSCodeOpen" },
-  { label: "ITerm", imgSrc: AppITerm, appKey: "isITermOpen" },
-  { label: "Safari", imgSrc: AppSafari, appKey: "isSafariOpen" },
-  { label: "FaceTime", imgSrc: AppFaceTime, appKey: "isFaceTimeOpen" },
-  { label: "Mail", imgSrc: AppMail, link: "mailto:quahdave@gmail.com" },
+  {
+    label: "Launchpad",
+    imgSrc: AppLaunchpad,
+    appKey: ApplicationKeys.LAUNCHPAD,
+  },
+  {
+    label: "Notes",
+    imgSrc: AppNotes,
+    appKey: ApplicationKeys.NOTES,
+  },
+  {
+    label: "Visual Studio Code",
+    imgSrc: AppVSCode,
+    appKey: ApplicationKeys.VSCODE,
+  },
+  {
+    label: "ITerm",
+    imgSrc: AppITerm,
+    appKey: ApplicationKeys.ITERM,
+  },
+  {
+    label: "Safari",
+    imgSrc: AppSafari,
+    appKey: ApplicationKeys.SAFARI,
+  },
+  {
+    label: "FaceTime",
+    imgSrc: AppFaceTime,
+    appKey: ApplicationKeys.FACETIME,
+  },
+  {
+    label: "Mail",
+    imgSrc: AppMail,
+    link: "mailto:quahdave@gmail.com",
+  },
   {
     label: "GitHub",
     imgSrc: AppGitHub,
@@ -44,12 +72,12 @@ const Dock: FC<Record<string, never>> = () => {
   const handleItemClick = (event: MouseEvent) => {
     const appKey = event.currentTarget.getAttribute("data-id");
 
-    appKey && dispatch(updateApplication({ [appKey]: true }));
+    appKey && dispatch(openApplication(appKey as ApplicationKeys));
   };
 
   return (
     <ul
-      className="absolute z-50 bottom-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-white/40 backdrop-blur rounded-2xl p-1"
+      className="absolute z-40 bottom-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-white/40 backdrop-blur rounded-2xl p-1"
       style={{ height: `${HEIGHT_DOCK_REM}rem` }}
     >
       {dockItems.map((item, index) => {
@@ -69,12 +97,12 @@ const Dock: FC<Record<string, never>> = () => {
                       className="w-12 h-12"
                     />
                   </Button>
-                  {applicationState[item.appKey] && (
+                  {applicationState[item.appKey].isOpen && (
                     <div className="absolute bottom-0 left-0 right-0 w-1 h-1 rounded-full bg-black mx-auto -mb-0.5"></div>
                   )}
                 </>
               ) : (
-                <a href={item.link} target="_blank" rel="noreferrer">
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
                   <img
                     src={item.imgSrc}
                     alt={`${item.label} app`}

@@ -20,7 +20,7 @@ enum MenuId {
 }
 
 const MenuBar: FC<Record<string, never>> = () => {
-  const { isWifiOn, date } = useAppSelector((state) => state.system);
+  const { date, isWifiOn } = useAppSelector((state) => state.system);
   const [activeMenuId, setActiveMenuId] = useState<string>(MenuId.NONE);
   const menuAppleRef = useRef<HTMLDivElement>(null);
   const menuWifiRef = useRef<HTMLDivElement>(null);
@@ -57,7 +57,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
   return (
     <div
-      className="absolute z-50 top-0 w-full flex justify-between items-stretch bg-white/40 backdrop-blur px-1.5"
+      className="absolute z-40 top-0 w-full flex justify-between items-stretch bg-white/40 backdrop-blur px-1.5"
       style={{ height: `${HEIGHT_MENU_BAR_REM}rem` }}
     >
       <div className="flex">
