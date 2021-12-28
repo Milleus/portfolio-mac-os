@@ -64,13 +64,11 @@ const Login: FC<Record<string, never>> = () => {
         <Button appearance={ButtonAppearance.MENU}>
           <BsBatteryFull size={24} className="mr-1" />
         </Button>
-        <Button appearance={ButtonAppearance.MENU}>
-          {!isFirstLogIn && isWifiOn ? (
-            <MdWifi size={18} />
-          ) : (
-            <MdWifiOff size={18} />
-          )}
-        </Button>
+        {!isFirstLogIn && (
+          <Button appearance={ButtonAppearance.MENU}>
+            {isWifiOn ? <MdWifi size={18} /> : <MdWifiOff size={18} />}
+          </Button>
+        )}
         <Button appearance={ButtonAppearance.MENU}>
           <span className="mx-1">{format(new Date(date), "eee d MMM")}</span>
           <span className="min-w-0 w-16">
