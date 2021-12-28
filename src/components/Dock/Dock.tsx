@@ -108,7 +108,7 @@ const Dock: FC<Record<string, never>> = () => {
 
   return (
     <ul
-      className="absolute z-50 bottom-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-white/40 rounded-2xl p-1"
+      className="absolute z-50 bottom-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-white/40 backdrop-blur rounded-2xl p-1"
       style={{ height: `${HEIGHT_DOCK_REM}rem` }}
     >
       {dockItems.map((item, index) => {

@@ -97,9 +97,9 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   };
 
   return (
-    <div className="absolute top-6 right-0 w-[19rem] bg-gray-200/50 backdrop-blur p-2.5 m-1 rounded-2xl shadow-lg">
+    <div className="absolute top-6 right-0 w-[19rem] bg-gray-200/50 backdrop-blur p-2.5 m-1 rounded-2xl shadow-md">
       <div className="grid grid-cols-4 grid-rows-5 gap-2.5">
-        <div className="flex flex-col justify-around bg-gray-200/80 rounded-xl shadow-lg col-span-2 row-span-2 p-3">
+        <div className="flex flex-col justify-around bg-gray-200/80 rounded-xl shadow-md col-span-2 row-span-2 p-3">
           <div className="flex items-center space-x-2">
             <Button
               appearance={ButtonAppearance.ICON}
@@ -153,7 +153,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-gray-200/80 rounded-xl shadow-lg col-span-2 p-3">
+        <div className="flex flex-col justify-center bg-gray-200/80 rounded-xl shadow-md col-span-2 p-3">
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.ICON}
@@ -171,14 +171,14 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           </div>
         </div>
 
-        <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-lg">
+        <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-md">
           <Button isActive={false} appearance={ButtonAppearance.TRANSPARENT}>
             <BsBrightnessAltHigh size={24} />
             <p className="text-[0.65rem] leading-[1.1]">Keyboard Brightness</p>
           </Button>
         </div>
 
-        <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-lg">
+        <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-md">
           <Button
             isActive={false}
             appearance={ButtonAppearance.TRANSPARENT}
@@ -198,7 +198,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           </Button>
         </div>
 
-        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
+        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-md col-span-full px-3 py-1.5">
           <p className="text-xs font-semibold mb-1.5">Display</p>
           <InputRange
             value={brightnessLevel}
@@ -210,7 +210,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           />
         </div>
 
-        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5">
+        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-md col-span-full px-3 py-1.5">
           <p className="text-xs font-semibold mb-1.5">Sound</p>
           <InputRange
             value={volumeLevel}
@@ -222,7 +222,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           />
         </div>
 
-        <div className="flex flex-row justify-between bg-gray-200/80 rounded-xl shadow-lg col-span-full px-3 py-1.5 space-x-4">
+        <div className="flex flex-row justify-between bg-gray-200/80 rounded-xl shadow-md col-span-full px-3 py-1.5 space-x-4">
           <div className="flex items-center min-w-0 space-x-2">
             <img
               className="w-10 h-10 rounded"

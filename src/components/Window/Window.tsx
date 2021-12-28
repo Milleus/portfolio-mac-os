@@ -92,7 +92,7 @@ const Window: FC<WindowProps> = ({
         x: positionSize.x,
         y: positionSize.y,
       }}
-      className="absolute w-full h-full rounded overflow-hidden shadow-lg"
+      className="absolute w-full h-full rounded overflow-hidden shadow-md"
       dragHandleClassName={dragHandleClass}
       onDragStop={handleDragStop}
       onResizeStop={handleResizeStop}
