@@ -1,6 +1,6 @@
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEvent } from "react";
 
-import { updateApplication } from "reducers/applicationSlice";
+import { ApplicationState, updateApplication } from "reducers/applicationSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import AppFaceTime from "./images/app-facetime.png";
 import AppGitHub from "./images/app-github.png";
@@ -18,94 +18,34 @@ export const HEIGHT_DOCK_REM = 3.5;
 type DockItem = {
   label: string;
   imgSrc: string;
-  isActive?: boolean;
-  onClick?: MouseEventHandler;
+  appKey?: keyof ApplicationState;
   link?: string;
 };
 
+const dockItems: Array<DockItem> = [
+  { label: "Launchpad", imgSrc: AppLaunchpad, appKey: "isLaunchpadOpen" },
+  { label: "Notes", imgSrc: AppNotes, appKey: "isNotesOpen" },
+  { label: "Visual Studio Code", imgSrc: AppVSCode, appKey: "isVSCodeOpen" },
+  { label: "ITerm", imgSrc: AppITerm, appKey: "isITermOpen" },
+  { label: "Safari", imgSrc: AppSafari, appKey: "isSafariOpen" },
+  { label: "FaceTime", imgSrc: AppFaceTime, appKey: "isFaceTimeOpen" },
+  { label: "Mail", imgSrc: AppMail, link: "mailto:quahdave@gmail.com" },
+  {
+    label: "GitHub",
+    imgSrc: AppGitHub,
+    link: "https://github.com/Milleus/portfolio-mac-os",
+  },
+];
+
 const Dock: FC<Record<string, never>> = () => {
-  const {
-    isLaunchpadOpen,
-    isNotesOpen,
-    isVSCodeOpen,
-    isITermOpen,
-    isSafariOpen,
-    isFaceTimeOpen,
-  } = useAppSelector((state) => state.application);
+  const applicationState = useAppSelector((state) => state.application);
   const dispatch = useAppDispatch();
 
-  const handleLaunchpadClick = () => {
-    dispatch(updateApplication({ isLaunchpadOpen: true }));
-  };
+  const handleItemClick = (event: MouseEvent) => {
+    const appKey = event.currentTarget.getAttribute("data-id");
 
-  const handleNotesClick = () => {
-    dispatch(updateApplication({ isNotesOpen: true }));
+    appKey && dispatch(updateApplication({ [appKey]: true }));
   };
-
-  const handleAppVSCodeClick = () => {
-    dispatch(updateApplication({ isVSCodeOpen: true }));
-  };
-
-  const handleITermClick = () => {
-    dispatch(updateApplication({ isITermOpen: true }));
-  };
-
-  const handleSafariClick = () => {
-    dispatch(updateApplication({ isSafariOpen: true }));
-  };
-
-  const handleFaceTimeClick = () => {
-    dispatch(updateApplication({ isFaceTimeOpen: true }));
-  };
-
-  const dockItems: Array<DockItem> = [
-    {
-      label: "Launchpad",
-      imgSrc: AppLaunchpad,
-      isActive: isLaunchpadOpen,
-      onClick: handleLaunchpadClick,
-    },
-    {
-      label: "Notes",
-      imgSrc: AppNotes,
-      isActive: isNotesOpen,
-      onClick: handleNotesClick,
-    },
-    {
-      label: "Visual Studio Code",
-      imgSrc: AppVSCode,
-      isActive: isVSCodeOpen,
-      onClick: handleAppVSCodeClick,
-    },
-    {
-      label: "ITerm",
-      imgSrc: AppITerm,
-      isActive: isITermOpen,
-      onClick: handleITermClick,
-    },
-    {
-      label: "Safari",
-      imgSrc: AppSafari,
-      isActive: isSafariOpen,
-      onClick: handleSafariClick,
-    },
-    {
-      label: "FaceTime",
-      imgSrc: AppFaceTime,
-      isActive: isFaceTimeOpen,
-      onClick: handleFaceTimeClick,
-    },
-    {
-      label: "Mail",
-      imgSrc: AppMail,
-      link: "mailto:quahdave@gmail.com",
-    },
-    {
-      label: "GitHub",
-      imgSrc: AppGitHub,
-      link: "https://github.com/Milleus/portfolio-mac-os",
-    },
-  ];
 
   return (
     <ul
@@ -116,19 +56,12 @@ const Dock: FC<Record<string, never>> = () => {
         return (
           <li key={`dock-${index}`} className="relative">
             <Tooltip content={item.label}>
-              {item.link ? (
-                <a href={item.link} target="_blank" rel="noreferrer">
-                  <img
-                    src={item.imgSrc}
-                    alt={`${item.label} app`}
-                    className="w-12 h-12"
-                  />
-                </a>
-              ) : (
+              {item.appKey ? (
                 <>
                   <Button
                     appearance={ButtonAppearance.TRANSPARENT}
-                    onClick={item.onClick}
+                    dataId={item.appKey}
+                    onClick={handleItemClick}
                   >
                     <img
                       src={item.imgSrc}
@@ -136,10 +69,18 @@ const Dock: FC<Record<string, never>> = () => {
                       className="w-12 h-12"
                     />
                   </Button>
-                  {item.isActive && (
+                  {applicationState[item.appKey] && (
                     <div className="absolute bottom-0 left-0 right-0 w-1 h-1 rounded-full bg-black mx-auto -mb-0.5"></div>
                   )}
                 </>
+              ) : (
+                <a href={item.link} target="_blank" rel="noreferrer">
+                  <img
+                    src={item.imgSrc}
+                    alt={`${item.label} app`}
+                    className="w-12 h-12"
+                  />
+                </a>
               )}
             </Tooltip>
           </li>
