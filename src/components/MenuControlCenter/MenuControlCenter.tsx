@@ -172,7 +172,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
         </div>
 
         <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-md">
-          <Button isActive={false} appearance={ButtonAppearance.TRANSPARENT}>
+          <Button appearance={ButtonAppearance.TRANSPARENT}>
             <BsBrightnessAltHigh size={24} />
             <p className="text-[0.65rem] leading-[1.1]">Keyboard Brightness</p>
           </Button>
@@ -180,7 +180,6 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
         <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-md">
           <Button
-            isActive={false}
             appearance={ButtonAppearance.TRANSPARENT}
             onClick={handleFullScreenClick}
           >
@@ -241,14 +240,12 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
           <div className="flex items-center space-x-2">
             <Button
-              isActive={false}
               appearance={ButtonAppearance.TRANSPARENT}
               onClick={handleAudioPlayPauseClick}
             >
               {isAudioPlaying ? <IoPause size={18} /> : <IoPlay size={18} />}
             </Button>
             <Button
-              isActive={false}
               appearance={ButtonAppearance.TRANSPARENT}
               onClick={handlAudioSkipForwardClick}
             >

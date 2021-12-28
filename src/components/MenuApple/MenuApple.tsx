@@ -54,7 +54,6 @@ const MenuApple: FC<Record<string, never>> = () => {
             {item.label ? (
               <Button
                 appearance={ButtonAppearance.MENU_ITEM}
-                isActive={false}
                 onClick={item.onClick}
               >
                 {item.label}

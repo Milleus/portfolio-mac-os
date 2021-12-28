@@ -10,8 +10,8 @@ export enum ButtonAppearance {
 
 export type ButtonProps = {
   appearance: ButtonAppearance;
-  isActive: boolean;
   children: ReactNode;
+  isActive?: boolean;
   ariaLabel?: string;
   dataId?: string;
   onClick?: MouseEventHandler;
@@ -19,8 +19,8 @@ export type ButtonProps = {
 
 const Button: FC<ButtonProps> = ({
   appearance,
-  isActive,
   children,
+  isActive,
   ariaLabel,
   dataId,
   onClick,

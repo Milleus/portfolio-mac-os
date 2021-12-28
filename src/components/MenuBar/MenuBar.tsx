@@ -74,13 +74,13 @@ const MenuBar: FC<Record<string, never>> = () => {
           {activeMenuId === MenuId.APPLE && <MenuApple />}
         </div>
 
-        <Button appearance={ButtonAppearance.MENU} isActive={false}>
+        <Button appearance={ButtonAppearance.MENU}>
           <span className="font-bold drop-shadow mx-1">Finder</span>
         </Button>
       </div>
 
       <div className="flex">
-        <Button appearance={ButtonAppearance.MENU} isActive={false}>
+        <Button appearance={ButtonAppearance.MENU}>
           <span className="text-xs mr-1">100%</span>
           <BsBatteryFull size={24} className="drop-shadow mr-1" />
         </Button>
@@ -125,7 +125,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           {activeMenuId === MenuId.CONTROL_CENTER && <MenuControlCenter />}
         </div>
 
-        <Button appearance={ButtonAppearance.MENU} isActive={false}>
+        <Button appearance={ButtonAppearance.MENU}>
           <span className="mx-1">{format(new Date(date), "eee d MMM")}</span>
           <span className="min-w-0 w-16 mr-1">
             {format(new Date(date), "h:mm aa")}

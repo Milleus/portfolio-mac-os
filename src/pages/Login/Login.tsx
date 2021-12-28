@@ -61,17 +61,17 @@ const Login: FC<Record<string, never>> = () => {
       style={{ backgroundImage: `url(${WallpaperMonterey})` }}
     >
       <div className="absolute top-px right-3 flex">
-        <Button appearance={ButtonAppearance.MENU} isActive={false}>
+        <Button appearance={ButtonAppearance.MENU}>
           <BsBatteryFull size={24} className="mr-1" />
         </Button>
-        <Button appearance={ButtonAppearance.MENU} isActive={false}>
+        <Button appearance={ButtonAppearance.MENU}>
           {!isFirstLogIn && isWifiOn ? (
             <MdWifi size={18} />
           ) : (
             <MdWifiOff size={18} />
           )}
         </Button>
-        <Button appearance={ButtonAppearance.MENU} isActive={false}>
+        <Button appearance={ButtonAppearance.MENU}>
           <span className="mx-1">{format(new Date(date), "eee d MMM")}</span>
           <span className="min-w-0 w-16">
             {format(new Date(date), "h:mm aa")}

@@ -128,7 +128,6 @@ const Dock: FC<Record<string, never>> = () => {
                 <>
                   <Button
                     appearance={ButtonAppearance.TRANSPARENT}
-                    isActive={false}
                     onClick={item.onClick}
                   >
                     <img
