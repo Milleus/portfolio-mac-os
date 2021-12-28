@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 
-type options = {
+type AudioProps = {
   volumeLevel: number;
   isPlaying: boolean;
   trackSrc: string;
@@ -12,7 +12,7 @@ export const useAudio = ({
   isPlaying,
   trackSrc,
   onTrackEnded,
-}: options) => {
+}: AudioProps) => {
   const audioElement = useMemo(() => new Audio(), []);
   const audioRef = useRef<HTMLAudioElement>(audioElement);
 
@@ -37,6 +37,9 @@ export const useAudio = ({
 
     return () => {
       audioElement.removeEventListener("ended", onTrackEnded);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      audioRef.current.pause();
     };
-  }, [audioElement, onTrackEnded]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };

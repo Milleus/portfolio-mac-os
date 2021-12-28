@@ -13,19 +13,23 @@ const MenuApple: FC<Record<string, never>> = () => {
   const dispatch = useAppDispatch();
 
   const handleSleepClick = () => {
-    dispatch(updateSystem({ activePage: Page.SLEEP }));
+    dispatch(updateSystem({ activePage: Page.SLEEP, isAudioPlaying: false }));
   };
 
   const handleRestartClick = () => {
-    dispatch(updateSystem({ activePage: Page.BOOT_RESTART }));
+    dispatch(
+      updateSystem({ activePage: Page.BOOT_RESTART, isAudioPlaying: false })
+    );
   };
 
   const handleShutDownClick = () => {
-    dispatch(updateSystem({ activePage: Page.BOOT_SHUT_DOWN }));
+    dispatch(
+      updateSystem({ activePage: Page.BOOT_SHUT_DOWN, isAudioPlaying: false })
+    );
   };
 
   const handleLockScreenClick = () => {
-    dispatch(updateSystem({ activePage: Page.LOGIN }));
+    dispatch(updateSystem({ activePage: Page.LOGIN, isAudioPlaying: false }));
   };
 
   const menuAppleItems: Array<MenuAppleItem> = [
