@@ -97,10 +97,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   };
 
   return (
-    <div
-      className="absolute top-6 right-0 w-72 bg-gray-200/50 backdrop-blur p-2.5 m-1 rounded-2xl shadow-lg"
-      style={{ width: "19rem" }}
-    >
+    <div className="absolute top-6 right-0 w-[19rem] bg-gray-200/50 backdrop-blur p-2.5 m-1 rounded-2xl shadow-lg">
       <div className="grid grid-cols-4 grid-rows-5 gap-2.5">
         <div className="flex flex-col justify-around bg-gray-200/80 rounded-xl shadow-lg col-span-2 row-span-2 p-3">
           <div className="flex items-center space-x-2">

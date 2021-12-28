@@ -9,6 +9,8 @@ import MenuApple from "components/MenuApple";
 import MenuControlCenter from "components/MenuControlCenter";
 import MenuWifi from "components/MenuWifi";
 
+export const HEIGHT_MENU_BAR_REM = 1.5;
+
 enum MenuId {
   NONE = "none",
   APPLE = "apple",
@@ -27,7 +29,7 @@ const MenuBar: FC<Record<string, never>> = () => {
   const menuWifiRef = useRef<HTMLDivElement>(null);
   const menuControlCenterRef = useRef<HTMLDivElement>(null);
 
-  const handleMenuItemClick = (event: MouseEvent) => {
+  const handleItemClick = (event: MouseEvent) => {
     const id = event.currentTarget.getAttribute("data-id");
     const newId = id === activeMenuId ? MenuId.NONE : id;
 
@@ -57,7 +59,10 @@ const MenuBar: FC<Record<string, never>> = () => {
   useOutsideClick(handleOutsideClick, ref);
 
   return (
-    <div className="w-full h-6 absolute top-0 flex justify-between items-stretch bg-white/40 backdrop-blur px-1.5">
+    <div
+      className="absolute z-50 top-0 w-full flex justify-between items-stretch bg-white/40 backdrop-blur px-1.5"
+      style={{ height: `${HEIGHT_MENU_BAR_REM}rem` }}
+    >
       <div className="flex">
         <div className="flex relative" ref={menuAppleRef}>
           <Button
@@ -65,7 +70,7 @@ const MenuBar: FC<Record<string, never>> = () => {
             dataId={MenuId.APPLE}
             appearance={ButtonAppearance.MENU}
             isActive={false}
-            onClick={handleMenuItemClick}
+            onClick={handleItemClick}
           >
             <BsApple size={16} className="drop-shadow mx-1" />
           </Button>
@@ -97,7 +102,7 @@ const MenuBar: FC<Record<string, never>> = () => {
             dataId={MenuId.WIFI}
             appearance={ButtonAppearance.MENU}
             isActive={activeMenuId === MenuId.WIFI}
-            onClick={handleMenuItemClick}
+            onClick={handleItemClick}
           >
             {isWifiOn ? (
               <MdWifi size={18} className="drop-shadow" />
@@ -113,7 +118,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           dataId={MenuId.SPOTLIGHT}
           appearance={ButtonAppearance.MENU}
           isActive={false}
-          onClick={handleMenuItemClick}
+          onClick={handleItemClick}
         >
           <MdSearch size={18} className="drop-shadow mx-1" />
         </Button>
@@ -124,7 +129,7 @@ const MenuBar: FC<Record<string, never>> = () => {
             dataId={MenuId.CONTROL_CENTER}
             appearance={ButtonAppearance.MENU}
             isActive={activeMenuId === MenuId.CONTROL_CENTER}
-            onClick={handleMenuItemClick}
+            onClick={handleItemClick}
           >
             <BsToggles size={14} className="drop-shadow" />
           </Button>

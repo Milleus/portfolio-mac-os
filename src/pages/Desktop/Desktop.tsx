@@ -7,8 +7,9 @@ import {
 } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAudio } from "hooks/useAudio";
+import AppVSCode from "components/AppVSCode";
 import Dock from "components/Dock";
-import MenuBar from "components/MenuBar";
+import MenuBar, { HEIGHT_MENU_BAR_REM } from "components/MenuBar";
 import WallpaperMonterey from "./images/wallpaper-monterey.jpeg";
 
 const Desktop: FC<Record<string, never>> = () => {
@@ -40,6 +41,13 @@ const Desktop: FC<Record<string, never>> = () => {
       }}
     >
       <MenuBar />
+
+      <div
+        className="window-boundary"
+        style={{ marginTop: `${HEIGHT_MENU_BAR_REM}rem` }}
+      >
+        <AppVSCode />
+      </div>
 
       <Dock />
     </div>
