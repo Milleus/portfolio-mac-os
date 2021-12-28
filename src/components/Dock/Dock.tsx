@@ -11,6 +11,7 @@ import AppNotes from "./images/app-notes.png";
 import AppSafari from "./images/app-safari.png";
 import AppVSCode from "./images/app-vscode.png";
 import Button, { ButtonAppearance } from "base-components/Button";
+import Tooltip from "base-components/Tooltip";
 
 export const HEIGHT_DOCK_REM = 3.5;
 
@@ -114,32 +115,34 @@ const Dock: FC<Record<string, never>> = () => {
       {dockItems.map((item, index) => {
         return (
           <li key={`dock-${index}`} className="relative">
-            {item.link ? (
-              <a href={item.link} target="_blank" rel="noreferrer">
-                <img
-                  src={item.imgSrc}
-                  alt={`${item.label} app`}
-                  className="w-12 h-12"
-                />
-              </a>
-            ) : (
-              <>
-                <Button
-                  appearance={ButtonAppearance.TRANSPARENT}
-                  isActive={false}
-                  onClick={item.onClick}
-                >
+            <Tooltip content={item.label}>
+              {item.link ? (
+                <a href={item.link} target="_blank" rel="noreferrer">
                   <img
                     src={item.imgSrc}
                     alt={`${item.label} app`}
                     className="w-12 h-12"
                   />
-                </Button>
-                {item.isActive && (
-                  <div className="absolute bottom-0 left-0 right-0 w-1 h-1 rounded-full bg-black mx-auto -mb-0.5"></div>
-                )}
-              </>
-            )}
+                </a>
+              ) : (
+                <>
+                  <Button
+                    appearance={ButtonAppearance.TRANSPARENT}
+                    isActive={false}
+                    onClick={item.onClick}
+                  >
+                    <img
+                      src={item.imgSrc}
+                      alt={`${item.label} app`}
+                      className="w-12 h-12"
+                    />
+                  </Button>
+                  {item.isActive && (
+                    <div className="absolute bottom-0 left-0 right-0 w-1 h-1 rounded-full bg-black mx-auto -mb-0.5"></div>
+                  )}
+                </>
+              )}
+            </Tooltip>
           </li>
         );
       })}
