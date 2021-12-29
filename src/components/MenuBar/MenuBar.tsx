@@ -73,13 +73,13 @@ const MenuBar: FC<Record<string, never>> = () => {
             dataId={MenuId.APPLE}
             onClick={handleItemClick}
           >
-            <BsApple size={16} className="drop-shadow mx-1" />
+            <BsApple className="w-4 h-4 mx-1" />
           </Button>
           {activeMenuId === MenuId.APPLE && <MenuApple />}
         </div>
 
         <Button appearance={ButtonAppearance.MENU}>
-          <span className="font-bold drop-shadow mx-1">Finder</span>
+          <span className="font-bold mx-1">Finder</span>
         </Button>
       </div>
 
@@ -97,9 +97,9 @@ const MenuBar: FC<Record<string, never>> = () => {
             onClick={handleItemClick}
           >
             {isWifiOn ? (
-              <MdWifi size={18} className="drop-shadow" />
+              <MdWifi className="w-4.5 h-4.5" />
             ) : (
-              <MdWifiOff size={18} className="drop-shadow" />
+              <MdWifiOff className="w-4.5 h-4.5" />
             )}
           </Button>
           {activeMenuId === MenuId.WIFI && <MenuWifi />}
@@ -112,7 +112,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           dataId={MenuId.SPOTLIGHT}
           onClick={handleItemClick}
         >
-          <MdSearch size={18} className="drop-shadow mx-1" />
+          <MdSearch className="w-4.5 h-4.5 mx-1" />
         </Button>
 
         <div className="flex" ref={menuControlCenterRef}>
@@ -123,7 +123,7 @@ const MenuBar: FC<Record<string, never>> = () => {
             dataId={MenuId.CONTROL_CENTER}
             onClick={handleItemClick}
           >
-            <BsToggles size={14} className="drop-shadow" />
+            <BsToggles className="w-3.5 h-3.5" />
           </Button>
           {activeMenuId === MenuId.CONTROL_CENTER && <MenuControlCenter />}
         </div>

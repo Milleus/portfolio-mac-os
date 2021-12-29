@@ -31,10 +31,7 @@ const MenuWifi: FC<Record<string, never>> = () => {
 
       <div className="flex justify-between items-center p-1.5 text-sm hover:bg-black/10 hover:rounded">
         <div className="flex items-center">
-          <MdWifi
-            size={18}
-            className="box-content bg-blue-500 p-1 rounded-full text-white"
-          />
+          <MdWifi className="w-4.5 h-4.5 box-content bg-blue-500 p-1 rounded-full text-white" />
           <span className="text-sm ml-2.5">Home</span>
         </div>
         <BsFillLockFill size={12} className="text-gray-600" />

@@ -86,13 +86,13 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   const renderVolumeIcon = () => {
     switch (true) {
       case volumeLevel === 0:
-        return <IoVolumeMute size={12} />;
+        return <IoVolumeMute className="w-3 h-3" />;
       case volumeLevel < 0.33:
-        return <IoVolumeLow size={12} />;
+        return <IoVolumeLow className="w-3 h-3" />;
       case volumeLevel < 0.66:
-        return <IoVolumeMedium size={12} />;
+        return <IoVolumeMedium className="w-3 h-3" />;
       default:
-        return <IoVolumeHigh size={12} />;
+        return <IoVolumeHigh className="w-3 h-3" />;
     }
   };
 
@@ -106,7 +106,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
               isActive={isWifiOn}
               onClick={handleWifiClick}
             >
-              <MdWifi size={18} />
+              <MdWifi className="w-4.5 h-4.5" />
             </Button>
             <div>
               <p className="text-xs font-semibold">Wi-Fi</p>
@@ -123,9 +123,9 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
               onClick={handleBluetoothClick}
             >
               {isBluetoothOn ? (
-                <MdBluetooth size={18} />
+                <MdBluetooth className="w-4.5 h-4.5" />
               ) : (
-                <MdBluetoothDisabled size={18} />
+                <MdBluetoothDisabled className="w-4.5 h-4.5" />
               )}
             </Button>
             <div>
@@ -142,7 +142,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
               isActive={isBluetoothOn && isAirDropOn}
               onClick={handleAirDropClick}
             >
-              <MdWifiTethering size={18} />
+              <MdWifiTethering className="w-4.5 h-4.5" />
             </Button>
             <div>
               <p className="text-xs font-semibold">AirDrop</p>
@@ -160,7 +160,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
               isActive={isDarkModeOn}
               onClick={handleDarkModeClick}
             >
-              <MdDarkMode size={18} />
+              <MdDarkMode className="w-4.5 h-4.5" />
             </Button>
             <div className="ml-2">
               <p className="text-xs font-semibold">Dark Mode</p>
@@ -173,7 +173,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
         <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-md">
           <Button appearance={ButtonAppearance.TRANSPARENT}>
-            <BsBrightnessAltHigh size={24} />
+            <BsBrightnessAltHigh className="w-6 h-6" />
             <p className="text-[0.65rem] leading-[1.1]">Keyboard Brightness</p>
           </Button>
         </div>
@@ -185,12 +185,12 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           >
             {isFullScreen ? (
               <>
-                <MdFullscreenExit size={24} />
+                <MdFullscreenExit className="w-6 h-6" />
                 <p className="text-[0.65rem] leading-[1.1]">Exit Full Screen</p>
               </>
             ) : (
               <>
-                <MdFullscreen size={24} />
+                <MdFullscreen className="w-6 h-6" />
                 <p className="text-[0.65rem] leading-[1.1]">Enter Fullscreen</p>
               </>
             )}
@@ -204,7 +204,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             min={0.2}
             max={1}
             step={0.01}
-            icon={<IoSunny size={12} />}
+            icon={<IoSunny className="w-3 h-3" />}
             onChange={handleBrightnessChange}
           />
         </div>
@@ -243,13 +243,17 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
               appearance={ButtonAppearance.TRANSPARENT}
               onClick={handleAudioPlayPauseClick}
             >
-              {isAudioPlaying ? <IoPause size={18} /> : <IoPlay size={18} />}
+              {isAudioPlaying ? (
+                <IoPause className="w-4.5 h-4.5" />
+              ) : (
+                <IoPlay className="w-4.5 h-4.5" />
+              )}
             </Button>
             <Button
               appearance={ButtonAppearance.TRANSPARENT}
               onClick={handlAudioSkipForwardClick}
             >
-              <IoPlayForward size={18} />
+              <IoPlayForward className="w-4.5 h-4.5" />
             </Button>
           </div>
         </div>

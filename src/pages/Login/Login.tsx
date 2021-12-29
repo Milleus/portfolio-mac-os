@@ -62,7 +62,11 @@ const Login: FC<Record<string, never>> = () => {
         </Button>
         {!isFirstLogIn && (
           <Button appearance={ButtonAppearance.MENU}>
-            {isWifiOn ? <MdWifi size={18} /> : <MdWifiOff size={18} />}
+            {isWifiOn ? (
+              <MdWifi className="w-4.5 h-4.5" />
+            ) : (
+              <MdWifiOff className="w-4.5 h-4.5" />
+            )}
           </Button>
         )}
         <Button appearance={ButtonAppearance.MENU}>
