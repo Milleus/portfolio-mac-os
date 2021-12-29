@@ -1,9 +1,4 @@
-import {
-  BsArrowRightCircle,
-  BsBatteryFull,
-  BsXCircle,
-  BsPower,
-} from "react-icons/bs";
+import { BsArrowRightCircle, BsXCircle, BsPower } from "react-icons/bs";
 import { CgSleep } from "react-icons/cg";
 import { ChangeEvent, FC, KeyboardEvent, MouseEvent, useState } from "react";
 import { format } from "date-fns";
@@ -12,6 +7,7 @@ import { VscPlayCircle } from "react-icons/vsc";
 
 import { Page, updateSystem } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
+import BatteryIcon from "components/BatteryIcon";
 import Button, { ButtonAppearance } from "base-components/Button";
 import PhotoProfile from "./images/photo-profile.jpeg";
 import WallpaperMonterey from "../Desktop/images/wallpaper-monterey.jpeg";
@@ -62,7 +58,7 @@ const Login: FC<Record<string, never>> = () => {
     >
       <div className="absolute top-px right-3 flex">
         <Button appearance={ButtonAppearance.MENU}>
-          <BsBatteryFull size={24} className="mr-1" />
+          <BatteryIcon />
         </Button>
         {!isFirstLogIn && (
           <Button appearance={ButtonAppearance.MENU}>

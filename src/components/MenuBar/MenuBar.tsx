@@ -1,9 +1,10 @@
-import { BsApple, BsBatteryFull, BsToggles } from "react-icons/bs";
+import { BsApple, BsToggles } from "react-icons/bs";
 import { FC, MouseEvent, useRef, useState } from "react";
 import { MdSearch, MdWifi, MdWifiOff } from "react-icons/md";
 import format from "date-fns/format";
 
 import { useAppSelector, useOutsideClick } from "hooks";
+import BatteryIcon from "components/BatteryIcon";
 import Button, { ButtonAppearance } from "base-components/Button";
 import MenuApple from "components/MenuApple";
 import MenuControlCenter from "components/MenuControlCenter";
@@ -84,8 +85,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
       <div className="flex">
         <Button appearance={ButtonAppearance.MENU}>
-          <span className="text-xs mr-1">100%</span>
-          <BsBatteryFull size={24} className="drop-shadow mr-1" />
+          <BatteryIcon />
         </Button>
 
         <div className="flex relative" ref={menuWifiRef}>
