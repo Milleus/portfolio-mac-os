@@ -5,7 +5,7 @@ import { useAppDispatch } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
 
 type MenuAppleItem = {
-  label?: string;
+  label: string | null;
   onClick?: MouseEventHandler;
 };
 
@@ -34,18 +34,18 @@ const MenuApple: FC<Record<string, never>> = () => {
 
   const menuAppleItems: Array<MenuAppleItem> = [
     { label: "About This Mac" },
-    { label: undefined },
+    { label: null },
     { label: "System Preferences..." },
     { label: "App Store..." },
-    { label: undefined },
+    { label: null },
     { label: "Recent Items" },
-    { label: undefined },
+    { label: null },
     { label: "Force Quit..." },
-    { label: undefined },
+    { label: null },
     { label: "Sleep", onClick: handleSleepClick },
     { label: "Restart...", onClick: handleRestartClick },
     { label: "Shut Down...", onClick: handleShutDownClick },
-    { label: undefined },
+    { label: null },
     { label: "Lock Screen", onClick: handleLockScreenClick },
     { label: "Log Out Milleus...", onClick: handleLockScreenClick },
   ];

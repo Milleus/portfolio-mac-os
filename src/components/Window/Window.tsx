@@ -7,12 +7,7 @@ import { convertRemToPixels } from "utilities";
 import { HEIGHT_DOCK_REM } from "components/Dock";
 import { HEIGHT_MENU_BAR_REM } from "components/MenuBar";
 import { useAppDispatch, useAppSelector, useWindowSize } from "hooks";
-import {
-  ApplicationKeys,
-  closeApplication,
-  maximizeApplication,
-  normalizeApplication,
-} from "reducers/applicationSlice";
+import { ApplicationKeys, updateApplication } from "reducers/applicationSlice";
 import classNames from "classnames";
 
 type PositionSize = {
@@ -84,11 +79,18 @@ const Window: FC<WindowProps> = ({
   };
 
   const handleBarDoubleClick = () => {
-    dispatch(maximizeApplication(appKey));
+    dispatch(
+      updateApplication({ appKey, status: { windowStatus: "maximized" } })
+    );
   };
 
   const handleCloseClick = () => {
-    dispatch(closeApplication(appKey));
+    dispatch(
+      updateApplication({
+        appKey,
+        status: { isOpen: false, windowStatus: "normal" },
+      })
+    );
   };
 
   const handleMinimizeClick = () => {
@@ -96,9 +98,9 @@ const Window: FC<WindowProps> = ({
   };
 
   const handleMaximizeClick = () => {
-    isMaximized
-      ? dispatch(normalizeApplication(appKey))
-      : dispatch(maximizeApplication(appKey));
+    const windowStatus = isMaximized ? "normal" : "maximized";
+
+    dispatch(updateApplication({ appKey, status: { windowStatus } }));
   };
 
   const width = isMaximized ? winWidth : positionSize.width;

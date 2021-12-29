@@ -51,9 +51,12 @@ const MenuBar: FC<Record<string, never>> = () => {
     case MenuId.CONTROL_CENTER:
       ref = menuControlCenterRef;
       break;
+
+    default:
+      ref = null;
   }
 
-  useOutsideClick(handleOutsideClick, ref);
+  useOutsideClick(ref, handleOutsideClick);
 
   return (
     <div

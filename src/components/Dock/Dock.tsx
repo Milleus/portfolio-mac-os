@@ -1,6 +1,6 @@
 import { FC, MouseEvent } from "react";
 
-import { ApplicationKeys, openApplication } from "reducers/applicationSlice";
+import { ApplicationKeys, updateApplication } from "reducers/applicationSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import AppFaceTime from "./images/app-facetime.png";
 import AppGitHub from "./images/app-github.png";
@@ -72,7 +72,13 @@ const Dock: FC<Record<string, never>> = () => {
   const handleItemClick = (event: MouseEvent) => {
     const appKey = event.currentTarget.getAttribute("data-id");
 
-    appKey && dispatch(openApplication(appKey as ApplicationKeys));
+    appKey &&
+      dispatch(
+        updateApplication({
+          appKey: appKey as ApplicationKeys,
+          status: { isOpen: true, windowStatus: "normal" },
+        })
+      );
   };
 
   return (

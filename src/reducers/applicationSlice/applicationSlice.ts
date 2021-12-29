@@ -49,73 +49,27 @@ export const applicationSlice = createSlice({
   name: "application",
   initialState,
   reducers: {
-    openApplication: (state, action: PayloadAction<ApplicationKeys>) => {
-      const appKey = action.payload;
+    updateApplication: (
+      state,
+      action: PayloadAction<{
+        appKey: ApplicationKeys;
+        status: Partial<ApplicationStatus>;
+      }>
+    ) => {
+      const { appKey, status } = action.payload;
 
       return {
         ...state,
         [appKey]: {
           ...state[appKey],
-          isOpen: true,
-          windowStatus: "normal",
-        },
-      };
-    },
-    closeApplication: (state, action: PayloadAction<ApplicationKeys>) => {
-      const appKey = action.payload;
-
-      return {
-        ...state,
-        [appKey]: {
-          ...state[appKey],
-          isOpen: false,
-          windowStatus: "normal",
-        },
-      };
-    },
-    maximizeApplication: (state, action: PayloadAction<ApplicationKeys>) => {
-      const appKey = action.payload;
-
-      return {
-        ...state,
-        [appKey]: {
-          ...state[appKey],
-          windowStatus: "maximized",
-        },
-      };
-    },
-    minimizeApplication: (state, action: PayloadAction<ApplicationKeys>) => {
-      const appKey = action.payload;
-
-      return {
-        ...state,
-        [appKey]: {
-          ...state[appKey],
-          windowStatus: "minimized",
-        },
-      };
-    },
-    normalizeApplication: (state, action: PayloadAction<ApplicationKeys>) => {
-      const appKey = action.payload;
-
-      return {
-        ...state,
-        [appKey]: {
-          ...state[appKey],
-          windowStatus: "normal",
+          ...status,
         },
       };
     },
   },
 });
 
-export const {
-  openApplication,
-  closeApplication,
-  maximizeApplication,
-  minimizeApplication,
-  normalizeApplication,
-} = applicationSlice.actions;
+export const { updateApplication } = applicationSlice.actions;
 
 export const selectApplication = (state: RootState) => {
   return state.application;

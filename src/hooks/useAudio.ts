@@ -12,7 +12,7 @@ export const useAudio = ({
   isPlaying,
   trackSrc,
   onTrackEnded,
-}: AudioProps) => {
+}: AudioProps): void => {
   const audioElement = useMemo(() => new Audio(), []);
   const audioRef = useRef<HTMLAudioElement>(audioElement);
 
