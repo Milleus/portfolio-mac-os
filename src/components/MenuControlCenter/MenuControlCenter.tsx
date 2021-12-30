@@ -97,12 +97,12 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   };
 
   return (
-    <div className="absolute top-6 right-0 w-[19rem] bg-gray-200/50 backdrop-blur p-2.5 m-1 rounded-2xl shadow-md">
+    <div className="absolute top-6 right-0 w-[19rem] bg-gray-200/50 backdrop-blur-lg p-2.5 m-1 rounded-2xl shadow-md">
       <div className="grid grid-cols-4 grid-rows-5 gap-2.5">
         <div className="flex flex-col justify-around bg-gray-200/80 rounded-xl shadow-md col-span-2 row-span-2 p-3">
           <div className="flex items-center space-x-2">
             <Button
-              appearance={ButtonAppearance.ICON}
+              appearance={ButtonAppearance.TOGGLE}
               isActive={isWifiOn}
               onClick={handleWifiClick}
             >
@@ -118,7 +118,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
           <div className="flex items-center space-x-2">
             <Button
-              appearance={ButtonAppearance.ICON}
+              appearance={ButtonAppearance.TOGGLE}
               isActive={isBluetoothOn}
               onClick={handleBluetoothClick}
             >
@@ -138,7 +138,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
           <div className="flex items-center space-x-2">
             <Button
-              appearance={ButtonAppearance.ICON}
+              appearance={ButtonAppearance.TOGGLE}
               isActive={isBluetoothOn && isAirDropOn}
               onClick={handleAirDropClick}
             >
@@ -156,7 +156,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
         <div className="flex flex-col justify-center bg-gray-200/80 rounded-xl shadow-md col-span-2 p-3">
           <div className="flex items-center">
             <Button
-              appearance={ButtonAppearance.ICON}
+              appearance={ButtonAppearance.TOGGLE}
               isActive={isDarkModeOn}
               onClick={handleDarkModeClick}
             >
@@ -172,7 +172,10 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
         </div>
 
         <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-md">
-          <Button appearance={ButtonAppearance.TRANSPARENT}>
+          <Button
+            appearance={ButtonAppearance.TRANSPARENT}
+            className="flex-col"
+          >
             <BsBrightnessAltHigh className="w-6 h-6" />
             <p className="text-[0.65rem] leading-[1.1]">Keyboard Brightness</p>
           </Button>
@@ -181,6 +184,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
         <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-md">
           <Button
             appearance={ButtonAppearance.TRANSPARENT}
+            className="flex-col"
             onClick={handleFullScreenClick}
           >
             {isFullScreen ? (

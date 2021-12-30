@@ -2,9 +2,10 @@ import { FC, MouseEventHandler, ReactNode } from "react";
 import classNames from "classnames";
 
 export enum ButtonAppearance {
+  APP_MENU,
+  TOGGLE,
   MENU,
   MENU_ITEM,
-  ICON,
   TRANSPARENT,
 }
 
@@ -13,6 +14,7 @@ export type ButtonProps = {
   children: ReactNode;
   isActive?: boolean;
   ariaLabel?: string;
+  className?: string;
   dataId?: string;
   onClick?: MouseEventHandler;
 };
@@ -22,6 +24,7 @@ const Button: FC<ButtonProps> = ({
   children,
   isActive,
   ariaLabel,
+  className,
   dataId,
   onClick,
 }) => {
@@ -29,38 +32,46 @@ const Button: FC<ButtonProps> = ({
 
   switch (appearance) {
     case ButtonAppearance.MENU:
-      buttonClasses = classNames({
+      buttonClasses = {
         "flex items-center rounded px-1.5 text-sm cursor-default": true,
         "active:bg-black/10": onClick,
         "bg-black/10": isActive,
-      });
+      };
       break;
 
     case ButtonAppearance.MENU_ITEM:
-      buttonClasses = classNames({
+      buttonClasses = {
         "flex w-full rounded px-2.5 py-1.5 text-xs leading-none tracking-wide hover:bg-blue-500 hover:text-white":
           true,
-      });
+      };
       break;
 
-    case ButtonAppearance.ICON:
-      buttonClasses = classNames({
+    case ButtonAppearance.TOGGLE:
+      buttonClasses = {
         "p-1 rounded-full": true,
         "bg-blue-500 text-white": isActive,
         "bg-gray-300 text-gray-900": !isActive,
-      });
+      };
       break;
 
     case ButtonAppearance.TRANSPARENT:
-      buttonClasses = classNames({
-        "flex flex-col justify-center items-center": true,
-      });
+      buttonClasses = {
+        "flex justify-center items-center": true,
+      };
+      break;
+
+    case ButtonAppearance.APP_MENU:
+      buttonClasses = {
+        "h-full flex justify-center items-center p-1.5": true,
+        "text-neutral-500 hover:bg-black/10 hover:rounded": isActive,
+        "text-neutral-400": !isActive,
+      };
       break;
   }
 
   return (
     <button
-      className={buttonClasses}
+      className={classNames(buttonClasses, className)}
       aria-label={ariaLabel}
       data-id={dataId}
       onClick={onClick}

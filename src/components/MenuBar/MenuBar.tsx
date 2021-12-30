@@ -61,13 +61,13 @@ const MenuBar: FC<Record<string, never>> = () => {
 
   return (
     <div
-      className="absolute z-40 top-0 w-full flex justify-between items-stretch bg-white/40 backdrop-blur px-1.5"
+      className="absolute z-40 top-0 w-full flex justify-between items-stretch bg-white/40 px-1.5"
       style={{ height: `${HEIGHT_MENU_BAR_REM}rem` }}
     >
       <div className="flex">
         <div className="flex relative" ref={menuAppleRef}>
           <Button
-            ariaLabel="apple menu toggle"
+            ariaLabel="apple menu"
             appearance={ButtonAppearance.MENU}
             isActive={activeMenuId === MenuId.APPLE}
             dataId={MenuId.APPLE}
@@ -90,7 +90,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
         <div className="flex relative" ref={menuWifiRef}>
           <Button
-            ariaLabel="wifi menu toggle"
+            ariaLabel="wifi menu"
             appearance={ButtonAppearance.MENU}
             isActive={activeMenuId === MenuId.WIFI}
             dataId={MenuId.WIFI}
@@ -106,7 +106,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         </div>
 
         <Button
-          ariaLabel="spotlight toggle"
+          ariaLabel="spotlight"
           appearance={ButtonAppearance.MENU}
           isActive={false}
           dataId={MenuId.SPOTLIGHT}
@@ -117,7 +117,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
         <div className="flex" ref={menuControlCenterRef}>
           <Button
-            ariaLabel="control center menu toggle"
+            ariaLabel="control center menu"
             appearance={ButtonAppearance.MENU}
             isActive={activeMenuId === MenuId.CONTROL_CENTER}
             dataId={MenuId.CONTROL_CENTER}
