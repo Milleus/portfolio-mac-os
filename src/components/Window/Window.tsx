@@ -99,7 +99,7 @@ const Window: FC<WindowProps> = ({
         height: isMaximized ? winHeight : positionSize.height,
       }}
       position={{
-        x: isMaximized ? winWidth : Math.max(0, positionSize.x), // winWidth because of window boundary, y }}
+        x: isMaximized ? winWidth : Math.max(0, positionSize.x), // winWidth because of window boundary
         y: isMaximized ? -heightMenuBarPx : Math.max(0, positionSize.y), // -heightMenuBarPx because of window boundary
       }}
       minWidth={minWidth ? minWidth : 320}

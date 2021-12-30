@@ -15,7 +15,7 @@ const AppVSCode: FC<Record<string, never>> = () => {
 
       <div
         className="w-full overflow-y-hidden"
-        style={{ height: "calc(100% - 1.5rem)" }} // offset h-6, height of drag handle
+        style={{ height: "calc(100% - 1.5rem)" }} // offset h-6, height of window bar
       >
         <iframe
           className="w-full h-full bg-neutral-800"

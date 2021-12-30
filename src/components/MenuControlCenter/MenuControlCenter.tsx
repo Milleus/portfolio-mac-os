@@ -61,7 +61,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   };
 
   const handleFullScreenClick = () => {
-    // Note: full screen triggered by keypress is not the same as browser full screen API.
+    // full screen triggered by keypress is not the same as browser full screen API.
     // therefore there is no need to update state through other means (e.g. on mount, event listeners, etc.) since this is the only way the state will change.
     dispatch(updateSystem({ isFullScreen: !isFullScreen }));
     toggleFullScreen();
