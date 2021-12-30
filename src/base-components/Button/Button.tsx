@@ -2,10 +2,10 @@ import { FC, MouseEvent, MouseEventHandler, ReactNode } from "react";
 import classNames from "classnames";
 
 export enum ButtonAppearance {
-  APP_MENU,
-  TOGGLE,
+  DEFAULT,
   MENU,
   MENU_ITEM,
+  TOGGLE,
   TRANSPARENT,
 }
 
@@ -31,6 +31,12 @@ const Button: FC<ButtonProps> = ({
   let buttonClasses;
 
   switch (appearance) {
+    case ButtonAppearance.DEFAULT:
+      buttonClasses = {
+        "flex justify-center items-center": true,
+      };
+      break;
+
     case ButtonAppearance.MENU:
       buttonClasses = {
         "flex items-center rounded px-1.5 text-sm cursor-default": true,
@@ -55,12 +61,6 @@ const Button: FC<ButtonProps> = ({
       break;
 
     case ButtonAppearance.TRANSPARENT:
-      buttonClasses = {
-        "flex justify-center items-center": true,
-      };
-      break;
-
-    case ButtonAppearance.APP_MENU:
       buttonClasses = {
         "h-full flex justify-center items-center p-1.5": true,
         "text-neutral-500 hover:bg-black/10 hover:rounded": isActive,

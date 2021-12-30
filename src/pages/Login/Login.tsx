@@ -112,7 +112,7 @@ const Login: FC<Record<string, never>> = () => {
             <>
               <div className="flex flex-col items-center">
                 <Button
-                  appearance={ButtonAppearance.TRANSPARENT}
+                  appearance={ButtonAppearance.DEFAULT}
                   ariaLabel="shut down"
                   className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
                   onClick={handleShutDownClick}
@@ -123,7 +123,7 @@ const Login: FC<Record<string, never>> = () => {
               </div>
               <div className="flex flex-col items-center">
                 <Button
-                  appearance={ButtonAppearance.TRANSPARENT}
+                  appearance={ButtonAppearance.DEFAULT}
                   ariaLabel="restart"
                   className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
                   onClick={handleRestartClick}
@@ -136,7 +136,7 @@ const Login: FC<Record<string, never>> = () => {
           )}
           <div className="flex flex-col items-center">
             <Button
-              appearance={ButtonAppearance.TRANSPARENT}
+              appearance={ButtonAppearance.DEFAULT}
               ariaLabel="sleep"
               className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
               onClick={handleSleepClick}

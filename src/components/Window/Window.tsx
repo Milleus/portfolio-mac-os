@@ -1,11 +1,20 @@
-import { FC, ReactNode, useEffect, useState } from "react";
+import {
+  Children,
+  cloneElement,
+  FC,
+  isValidElement,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 import { Rnd, RndResizeCallback, RndDragCallback } from "react-rnd";
 import classNames from "classnames";
 
+import { ApplicationKeys } from "reducers/applicationSlice";
 import { convertRemToPixels } from "utilities";
 import { HEIGHT_DOCK_REM } from "components/Dock";
 import { HEIGHT_MENU_BAR_REM } from "components/MenuBar";
-import { useWindowSize } from "hooks";
+import { useAppSelector, useWindowSize } from "hooks";
 
 type PositionSize = {
   x: number;
@@ -17,7 +26,7 @@ type PositionSize = {
 export const dragHandleClass = "drag-handle";
 
 export type WindowProps = {
-  isMaximized: boolean;
+  appKey: ApplicationKeys;
   children: ReactNode;
   defaultWidth?: number;
   defaultHeight?: number;
@@ -26,18 +35,20 @@ export type WindowProps = {
 };
 
 const Window: FC<WindowProps> = ({
-  isMaximized,
+  appKey,
   children,
   defaultWidth,
   defaultHeight,
   minWidth,
   minHeight,
 }) => {
+  const applicationState = useAppSelector((state) => state.application);
   const { winWidth, winHeight } = useWindowSize();
   const initWidth = Math.min(winWidth, defaultWidth ? defaultWidth : 640);
   const initHeight = Math.min(winHeight, defaultHeight ? defaultHeight : 400);
   const heightMenuBarPx = convertRemToPixels(HEIGHT_MENU_BAR_REM);
   const heightDockPx = convertRemToPixels(HEIGHT_DOCK_REM);
+  const isMaximized = applicationState[appKey].windowStatus === "maximized";
 
   const [positionSize, setPositionSize] = useState<PositionSize>({
     width: initWidth,
@@ -100,7 +111,18 @@ const Window: FC<WindowProps> = ({
       onDragStop={handleDragStop}
       onResizeStop={handleResizeStop}
     >
-      {children}
+      {Children.map(children, (child) => {
+        if (!isValidElement(child) || typeof child.type !== "function") {
+          return child;
+        }
+
+        const childProps = {
+          appKey,
+          isMaximized,
+        };
+
+        return cloneElement(child, childProps);
+      })}
     </Rnd>
   );
 };

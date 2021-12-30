@@ -93,7 +93,7 @@ const Dock: FC<Record<string, never>> = () => {
               {item.appKey ? (
                 <>
                   <Button
-                    appearance={ButtonAppearance.TRANSPARENT}
+                    appearance={ButtonAppearance.DEFAULT}
                     dataId={item.appKey}
                     onClick={handleItemClick}
                   >

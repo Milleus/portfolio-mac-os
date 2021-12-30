@@ -172,7 +172,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
         </div>
 
         <Button
-          appearance={ButtonAppearance.TRANSPARENT}
+          appearance={ButtonAppearance.DEFAULT}
           className="flex-col bg-gray-200/80 rounded-xl shadow-md py-2"
         >
           <BsBrightnessAltHigh className="w-6 h-6" />
@@ -180,7 +180,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
         </Button>
 
         <Button
-          appearance={ButtonAppearance.TRANSPARENT}
+          appearance={ButtonAppearance.DEFAULT}
           className="flex-col bg-gray-200/80 rounded-xl shadow-md py-2"
           onClick={handleFullScreenClick}
         >
@@ -240,7 +240,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
           <div className="flex items-center space-x-2">
             <Button
-              appearance={ButtonAppearance.TRANSPARENT}
+              appearance={ButtonAppearance.DEFAULT}
               onClick={handleAudioPlayPauseClick}
             >
               {isAudioPlaying ? (
@@ -250,7 +250,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
               )}
             </Button>
             <Button
-              appearance={ButtonAppearance.TRANSPARENT}
+              appearance={ButtonAppearance.DEFAULT}
               onClick={handlAudioSkipForwardClick}
             >
               <IoPlayForward className="w-4.5 h-4.5" />

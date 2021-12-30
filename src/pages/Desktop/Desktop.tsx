@@ -44,9 +44,7 @@ const Desktop: FC<Record<string, never>> = () => {
     >
       <MenuBar />
 
-      <WindowDragBoundary>
-        {vscode.isOpen && <AppVSCode />}
-      </WindowDragBoundary>
+      <WindowDragBoundary>{vscode.isOpen && <AppVSCode />}</WindowDragBoundary>
 
       <Dock />
     </div>
