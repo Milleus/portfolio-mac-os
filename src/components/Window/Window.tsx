@@ -21,6 +21,8 @@ export type WindowProps = {
   children: ReactNode;
   defaultWidth?: number;
   defaultHeight?: number;
+  minWidth?: number;
+  minHeight?: number;
 };
 
 const Window: FC<WindowProps> = ({
@@ -28,6 +30,8 @@ const Window: FC<WindowProps> = ({
   children,
   defaultWidth,
   defaultHeight,
+  minWidth,
+  minHeight,
 }) => {
   const { winWidth, winHeight } = useWindowSize();
   const initWidth = Math.min(winWidth, defaultWidth ? defaultWidth : 640);
@@ -70,23 +74,26 @@ const Window: FC<WindowProps> = ({
     });
   };
 
-  const width = isMaximized ? winWidth : positionSize.width;
-  const height = isMaximized ? winHeight : positionSize.height;
-  const x = isMaximized ? winWidth : Math.max(0, positionSize.x); // winWidth because of window boundary
-  const y = isMaximized ? -heightMenuBarPx : Math.max(0, positionSize.y); // -heightMenuBarPx because of window boundary
-
-  const windowClassNames = classNames({
+  const windowClasses = {
     "absolute w-full h-full rounded-lg overflow-hidden shadow-md": true,
     "z-30": !isMaximized,
     "z-50": isMaximized,
-  });
+  };
 
   return (
     <Rnd
       bounds="parent"
-      size={{ width, height }}
-      position={{ x, y }}
-      className={windowClassNames}
+      size={{
+        width: isMaximized ? winWidth : positionSize.width,
+        height: isMaximized ? winHeight : positionSize.height,
+      }}
+      position={{
+        x: isMaximized ? winWidth : Math.max(0, positionSize.x), // winWidth because of window boundary, y }}
+        y: isMaximized ? -heightMenuBarPx : Math.max(0, positionSize.y), // -heightMenuBarPx because of window boundary
+      }}
+      minWidth={minWidth ? minWidth : 320}
+      minHeight={minHeight ? minHeight : 200}
+      className={classNames(windowClasses)}
       dragHandleClassName={dragHandleClass}
       disableDragging={isMaximized}
       enableResizing={!isMaximized}
