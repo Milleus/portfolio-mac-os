@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, ReactNode } from "react";
+import { FC, MouseEvent, MouseEventHandler, ReactNode } from "react";
 import classNames from "classnames";
 
 export enum ButtonAppearance {
@@ -69,13 +69,18 @@ const Button: FC<ButtonProps> = ({
       break;
   }
 
+  const handleMouseDown = (event: MouseEvent) => {
+    // prevents drag for app menu buttons
+    event.stopPropagation();
+  };
+
   return (
     <button
       className={classNames(buttonClasses, className)}
       aria-label={ariaLabel}
       data-id={dataId}
+      onMouseDown={handleMouseDown}
       onClick={onClick}
-      disabled={!onClick}
     >
       {children}
     </button>
