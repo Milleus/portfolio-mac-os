@@ -71,19 +71,6 @@ html, body, #root {
  * Window
  * ------------------------------------------------------------------------- */
 
- /**
- * increase boundary area to prevent collision when dragging.
- *  _____ _____ _____
- * |_____|__X__|_____|
- * |_____|_____|_____|
- */
- .window-boundary {
-   @apply absolute;
-   width: 300%;
-   height: 200%;
-   left: -100%;
- }
-
 .window-inner {
   @apply w-full overflow-y-hidden;
   height: calc(100% - 1.5rem); /* 1.5rem = h-6 = height of window bar */

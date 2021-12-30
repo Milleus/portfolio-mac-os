@@ -9,8 +9,9 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import { useAudio } from "hooks/useAudio";
 import AppVSCode from "components/AppVSCode";
 import Dock from "components/Dock";
-import MenuBar, { HEIGHT_MENU_BAR_REM } from "components/MenuBar";
+import MenuBar from "components/MenuBar";
 import WallpaperMonterey from "./images/wallpaper-monterey.jpeg";
+import WindowDragBoundary from "components/WindowDragBoundary";
 
 const Desktop: FC<Record<string, never>> = () => {
   const { brightnessLevel, volumeLevel, isAudioPlaying, audioPlaylistIndex } =
@@ -43,12 +44,9 @@ const Desktop: FC<Record<string, never>> = () => {
     >
       <MenuBar />
 
-      <div
-        className="window-boundary"
-        style={{ marginTop: `${HEIGHT_MENU_BAR_REM}rem` }}
-      >
+      <WindowDragBoundary>
         {vscode.isOpen && <AppVSCode />}
-      </div>
+      </WindowDragBoundary>
 
       <Dock />
     </div>
