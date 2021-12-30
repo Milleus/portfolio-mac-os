@@ -67,11 +67,8 @@ html, body, #root {
   background-size: var(--sx) 100%;
 }
 
-/**
- * Window
- * ------------------------------------------------------------------------- */
-
-.window-inner {
+ /* 1.5rem = h-6 = height of window bar */
+/* .window-inner {
   @apply w-full overflow-y-hidden;
-  height: calc(100% - 1.5rem); /* 1.5rem = h-6 = height of window bar */
-}
+  height: calc(100% - 1.5rem);
+} */
