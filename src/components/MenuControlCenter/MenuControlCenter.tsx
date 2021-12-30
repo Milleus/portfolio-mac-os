@@ -171,35 +171,31 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           </div>
         </div>
 
-        <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-md">
-          <Button
-            appearance={ButtonAppearance.TRANSPARENT}
-            className="flex-col"
-          >
-            <BsBrightnessAltHigh className="w-6 h-6" />
-            <p className="text-[0.65rem] leading-[1.1]">Keyboard Brightness</p>
-          </Button>
-        </div>
+        <Button
+          appearance={ButtonAppearance.TRANSPARENT}
+          className="flex-col bg-gray-200/80 rounded-xl shadow-md py-2"
+        >
+          <BsBrightnessAltHigh className="w-6 h-6" />
+          <p className="text-[0.65rem] leading-[1.1]">Keyboard Brightness</p>
+        </Button>
 
-        <div className="flex flex-row bg-gray-200/80 rounded-xl py-2 shadow-md">
-          <Button
-            appearance={ButtonAppearance.TRANSPARENT}
-            className="flex-col"
-            onClick={handleFullScreenClick}
-          >
-            {isFullScreen ? (
-              <>
-                <MdFullscreenExit className="w-6 h-6" />
-                <p className="text-[0.65rem] leading-[1.1]">Exit Full Screen</p>
-              </>
-            ) : (
-              <>
-                <MdFullscreen className="w-6 h-6" />
-                <p className="text-[0.65rem] leading-[1.1]">Enter Fullscreen</p>
-              </>
-            )}
-          </Button>
-        </div>
+        <Button
+          appearance={ButtonAppearance.TRANSPARENT}
+          className="flex-col bg-gray-200/80 rounded-xl shadow-md py-2"
+          onClick={handleFullScreenClick}
+        >
+          {isFullScreen ? (
+            <>
+              <MdFullscreenExit className="w-6 h-6" />
+              <p className="text-[0.65rem] leading-[1.1]">Exit Full Screen</p>
+            </>
+          ) : (
+            <>
+              <MdFullscreen className="w-6 h-6" />
+              <p className="text-[0.65rem] leading-[1.1]">Enter Fullscreen</p>
+            </>
+          )}
+        </Button>
 
         <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-md col-span-full px-3 py-1.5">
           <p className="text-xs font-semibold mb-1.5">Display</p>
