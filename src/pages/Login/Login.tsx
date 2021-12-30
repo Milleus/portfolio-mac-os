@@ -52,11 +52,11 @@ const Login: FC<Record<string, never>> = () => {
 
   return (
     <div
-      className="w-full h-full overflow-hidden bg-center bg-cover grid place-items-center cursor-default"
+      className="w-full h-full overflow-hidden bg-center bg-cover flex flex-col justify-center items-center"
       onClick={handleLoginClick}
       style={{ backgroundImage: `url(${WallpaperMonterey})` }}
     >
-      <div className="absolute top-px right-3 flex">
+      <div className="w-full flex justify-end mt-px mr-3">
         <Button appearance={ButtonAppearance.MENU}>
           <BatteryIcon isValueShown={false} />
         </Button>
@@ -77,7 +77,7 @@ const Login: FC<Record<string, never>> = () => {
         </Button>
       </div>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col justify-center items-center grow mt-12">
         <img
           className="w-36 h-36 rounded-full"
           src={PhotoProfile}
@@ -106,51 +106,49 @@ const Login: FC<Record<string, never>> = () => {
         </span>
       </div>
 
-      <div className="absolute bottom-12">
-        <div className="grid grid-flow-col auto-cols-fr gap-10">
-          {isFirstLogIn && (
-            <>
-              <div className="flex flex-col items-center">
-                <Button
-                  appearance={ButtonAppearance.DEFAULT}
-                  ariaLabel="shut down"
-                  className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
-                  onClick={handleShutDownClick}
-                >
-                  <BsPower className="w-6 h-6 text-white" />
-                </Button>
-                <p className="text-white text-sm mt-2">Shut Down</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <Button
-                  appearance={ButtonAppearance.DEFAULT}
-                  ariaLabel="restart"
-                  className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
-                  onClick={handleRestartClick}
-                >
-                  <VscPlayCircle className="w-6 h-6 text-white -scale-x-100" />
-                </Button>
-                <p className="text-white text-sm mt-2">Restart</p>
-              </div>
-            </>
-          )}
-          <div className="flex flex-col items-center">
-            <Button
-              appearance={ButtonAppearance.DEFAULT}
-              ariaLabel="sleep"
-              className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
-              onClick={handleSleepClick}
-            >
-              {isFirstLogIn ? (
-                <CgSleep className="w-6 h-6 text-white" />
-              ) : (
-                <BsXCircle className="w-5 h-5 text-white" />
-              )}
-            </Button>
-            <p className="text-white text-sm mt-2">
-              {isFirstLogIn ? "Sleep" : "Cancel"}
-            </p>
-          </div>
+      <div className="grid grid-flow-col auto-cols-fr gap-10 mb-12">
+        {isFirstLogIn && (
+          <>
+            <div className="flex flex-col items-center">
+              <Button
+                appearance={ButtonAppearance.DEFAULT}
+                ariaLabel="shut down"
+                className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
+                onClick={handleShutDownClick}
+              >
+                <BsPower className="w-6 h-6 text-white" />
+              </Button>
+              <p className="text-white text-sm mt-2">Shut Down</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Button
+                appearance={ButtonAppearance.DEFAULT}
+                ariaLabel="restart"
+                className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
+                onClick={handleRestartClick}
+              >
+                <VscPlayCircle className="w-6 h-6 text-white -scale-x-100" />
+              </Button>
+              <p className="text-white text-sm mt-2">Restart</p>
+            </div>
+          </>
+        )}
+        <div className="flex flex-col items-center">
+          <Button
+            appearance={ButtonAppearance.DEFAULT}
+            ariaLabel="sleep"
+            className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
+            onClick={handleSleepClick}
+          >
+            {isFirstLogIn ? (
+              <CgSleep className="w-6 h-6 text-white" />
+            ) : (
+              <BsXCircle className="w-5 h-5 text-white" />
+            )}
+          </Button>
+          <p className="text-white text-sm mt-2">
+            {isFirstLogIn ? "Sleep" : "Cancel"}
+          </p>
         </div>
       </div>
     </div>
