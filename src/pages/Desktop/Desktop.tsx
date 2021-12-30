@@ -7,6 +7,7 @@ import {
 } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAudio } from "hooks/useAudio";
+import AppSafari from "components/AppSafari";
 import AppVSCode from "components/AppVSCode";
 import Dock from "components/Dock";
 import MenuBar from "components/MenuBar";
@@ -16,7 +17,7 @@ import WindowDragBoundary from "components/WindowDragBoundary";
 const Desktop: FC<Record<string, never>> = () => {
   const { brightnessLevel, volumeLevel, isAudioPlaying, audioPlaylistIndex } =
     useAppSelector((state) => state.system);
-  const { vscode } = useAppSelector((state) => state.application);
+  const { safari, vscode } = useAppSelector((state) => state.application);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -44,7 +45,10 @@ const Desktop: FC<Record<string, never>> = () => {
     >
       <MenuBar />
 
-      <WindowDragBoundary>{vscode.isOpen && <AppVSCode />}</WindowDragBoundary>
+      <WindowDragBoundary>
+        {safari.isOpen && <AppSafari />}
+        {vscode.isOpen && <AppVSCode />}
+      </WindowDragBoundary>
 
       <Dock />
     </div>
