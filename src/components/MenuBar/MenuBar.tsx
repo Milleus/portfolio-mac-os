@@ -85,7 +85,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
       <div className="flex">
         <Button appearance={ButtonAppearance.MENU}>
-          <BatteryIcon />
+          <BatteryIcon isValueShown={true} />
         </Button>
 
         <div className="flex relative" ref={menuWifiRef}>

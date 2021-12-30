@@ -3,7 +3,11 @@ import { FC } from "react";
 
 import { useBattery } from "hooks";
 
-const BatteryIcon: FC<Record<string, never>> = () => {
+export type BatteryIconProps = {
+  isValueShown: boolean;
+};
+
+const BatteryIcon: FC<BatteryIconProps> = ({ isValueShown }) => {
   const batteryState = useBattery();
   const maxHorizontal = 10;
   const maxBatteryLevel = 1;
@@ -20,9 +24,11 @@ const BatteryIcon: FC<Record<string, never>> = () => {
 
   return (
     <>
-      <span className="text-xs mr-1">
-        {`${(batteryLevel * 100).toFixed()}%`}
-      </span>
+      {isValueShown && (
+        <span className="text-xs mr-1">
+          {`${(batteryLevel * 100).toFixed()}%`}
+        </span>
+      )}
       <div className="relative">
         <svg
           stroke="currentColor"
