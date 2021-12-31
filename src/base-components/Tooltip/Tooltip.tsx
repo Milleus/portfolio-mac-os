@@ -22,13 +22,13 @@ const Tooltip: FC<TooltipProps> = ({ children, content }) => {
       true,
     "before:absolute before:w-0 before:h-0 before:border-solid before:border-transparent before:border-8":
       true,
-    "-top-11 left-1/2 -translate-x-1/2 before:top-full before:left-1/2 before:-translate-x-1/2 before:border-t-gray-200":
+    "-top-12 left-1/2 -translate-x-1/2 before:top-full before:left-1/2 before:-translate-x-1/2 before:border-t-gray-200":
       true,
   };
 
   return (
     <div
-      className="relative inline-block"
+      className="relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

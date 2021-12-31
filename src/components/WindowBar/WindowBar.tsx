@@ -70,7 +70,7 @@ const WindowBar: FC<WindowBarProps> = ({
           className="w-3 h-3 rounded-full bg-red-500"
           onClick={handleCloseClick}
         >
-          <BsX className="invisible group-hover:visible" />
+          <BsX className="w-3 h-3 invisible group-hover:visible" />
         </Button>
 
         <Button
@@ -78,7 +78,7 @@ const WindowBar: FC<WindowBarProps> = ({
           className="w-3 h-3 rounded-full bg-amber-500"
           onClick={handleMinimizeClick}
         >
-          <CgMathMinus className="invisible group-hover:visible" />
+          <CgMathMinus className="w-3 h-3 invisible group-hover:visible" />
         </Button>
 
         <Button
@@ -86,7 +86,7 @@ const WindowBar: FC<WindowBarProps> = ({
           className="w-3 h-3 rounded-full bg-green-500"
           onClick={handleMaximizeClick}
         >
-          <CgArrowsExpandLeft className="invisible group-hover:visible p-0.5" />
+          <CgArrowsExpandLeft className="w-3 h-3 invisible group-hover:visible p-0.5" />
         </Button>
       </div>
 
