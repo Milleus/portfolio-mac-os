@@ -61,7 +61,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
   return (
     <div
-      className="absolute z-40 top-0 w-full flex justify-between items-stretch bg-white/30 px-1.5"
+      className="absolute z-40 top-0 w-full flex justify-between items-stretch bg-purple-200/90 dark:bg-purple-500/90 px-1.5"
       style={{ height: `${HEIGHT_MENU_BAR_REM}rem` }}
     >
       <div className="flex">

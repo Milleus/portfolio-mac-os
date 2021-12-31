@@ -40,8 +40,8 @@ const Button: FC<ButtonProps> = ({
     case ButtonAppearance.MENU:
       buttonClasses = {
         "flex items-center rounded px-1.5 text-sm cursor-default": true,
-        "active:bg-black/10": onClick,
-        "bg-black/10": isActive,
+        "active:bg-black/10 dark:active:bg-white/30": onClick,
+        "bg-black/10 dark:bg-white/30": isActive,
       };
       break;
 

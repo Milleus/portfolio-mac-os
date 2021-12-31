@@ -44,7 +44,7 @@ const BatteryIcon: FC<BatteryIconProps> = ({ isValueShown }) => {
           <path d="M2 4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H2zm10 1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h10zm4 3a1.5 1.5 0 0 1-1.5 1.5v-3A1.5 1.5 0 0 1 16 8z"></path>
         </svg>
         {isCharging && (
-          <BsLightningChargeFill className="absolute top-1/2 left-1 -translate-y-1/2 w-3.5 h-3.5 stroke-1 stroke-gray-300 fill-gray-900" />
+          <BsLightningChargeFill className="absolute top-1/2 left-1 -translate-y-1/2 w-3.5 h-3.5 stroke-1 stroke-purple-200 fill-gray-900 dark:stroke-purple-500 dark:fill-white" />
         )}
       </div>
     </>
