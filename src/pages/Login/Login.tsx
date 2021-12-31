@@ -87,7 +87,7 @@ const Login: FC<Record<string, never>> = () => {
         <div className="relative mt-3">
           <input
             type="password"
-            className="w-40 h-7 bg-white/40 backdrop-blur-lg rounded-full px-3.5 pl-3 pr-8 text-white text-sm outline-none placeholder:text-white/80 placeholder:text-xs placeholder:font-semibold"
+            className="w-40 h-7 bg-white/30 backdrop-blur-lg rounded-full px-3.5 pl-3 pr-8 text-white text-sm outline-none placeholder:text-white/80 placeholder:text-xs placeholder:font-semibold"
             placeholder="Enter Password"
             value={value}
             autoFocus={true}
@@ -113,7 +113,7 @@ const Login: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.DEFAULT}
                 ariaLabel="shut down"
-                className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
+                className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
                 onClick={handleShutDownClick}
               >
                 <BsPower className="w-6 h-6 text-white" />
@@ -124,7 +124,7 @@ const Login: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.DEFAULT}
                 ariaLabel="restart"
-                className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
+                className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
                 onClick={handleRestartClick}
               >
                 <VscPlayCircle className="w-6 h-6 text-white -scale-x-100" />
@@ -137,7 +137,7 @@ const Login: FC<Record<string, never>> = () => {
           <Button
             appearance={ButtonAppearance.DEFAULT}
             ariaLabel="sleep"
-            className="w-8 h-8 bg-white/40 backdrop-blur-lg rounded-full"
+            className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
             onClick={handleSleepClick}
           >
             {isFirstLogIn ? (
