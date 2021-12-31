@@ -97,7 +97,7 @@ const Login: FC<Record<string, never>> = () => {
             onChange={handleInputChange}
             onKeyPress={handleInputKeyPress}
           />
-          {!!value && (
+          {value.length > 0 && (
             <BsArrowRightCircle className="absolute top-0 right-0 w-7 h-7 p-0.5 text-white/80 cursor-pointer" />
           )}
         </div>

@@ -69,7 +69,7 @@ const Button: FC<ButtonProps> = ({
       break;
   }
 
-  const handleMouseDown = (event: MouseEvent) => {
+  const handleMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
     // prevents drag for app menu buttons
     event.stopPropagation();
   };

@@ -69,7 +69,7 @@ const Dock: FC<Record<string, never>> = () => {
   const applicationState = useAppSelector((state) => state.application);
   const dispatch = useAppDispatch();
 
-  const handleItemClick = (event: MouseEvent) => {
+  const handleItemClick = (event: MouseEvent<HTMLButtonElement>) => {
     const appKey = event.currentTarget.getAttribute("data-id");
 
     appKey &&

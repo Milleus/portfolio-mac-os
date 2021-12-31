@@ -27,7 +27,7 @@ const MenuBar: FC<Record<string, never>> = () => {
   const menuWifiRef = useRef<HTMLDivElement>(null);
   const menuControlCenterRef = useRef<HTMLDivElement>(null);
 
-  const handleItemClick = (event: MouseEvent) => {
+  const handleItemClick = (event: MouseEvent<HTMLButtonElement>) => {
     const id = event.currentTarget.getAttribute("data-id");
     const newId = id === activeMenuId ? MenuId.NONE : id;
 

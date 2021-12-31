@@ -66,9 +66,3 @@ html, body, #root {
   @apply bg-gradient-to-r from-white to-white bg-left-bottom bg-no-repeat bg-gray-300;
   background-size: var(--sx) 100%;
 }
-
- /* 1.5rem = h-6 = height of window bar */
-/* .window-inner {
-  @apply w-full overflow-y-hidden;
-  height: calc(100% - 1.5rem);
-} */
