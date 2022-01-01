@@ -10,11 +10,11 @@ import {
 import { Rnd, RndResizeCallback, RndDragCallback } from "react-rnd";
 import classNames from "classnames";
 
-import { ApplicationKeys } from "reducers/applicationSlice";
+import { ApplicationKeys, updateApplication } from "reducers/applicationSlice";
 import { convertRemToPixels } from "utilities";
 import { HEIGHT_DOCK_REM } from "components/Dock";
 import { HEIGHT_MENU_BAR_REM } from "components/MenuBar";
-import { useAppSelector, useWindowSize } from "hooks";
+import { useAppDispatch, useAppSelector, useWindowSize } from "hooks";
 
 type PositionSize = {
   x: number;
@@ -43,6 +43,7 @@ const Window: FC<WindowProps> = ({
   minHeight,
 }) => {
   const applicationState = useAppSelector((state) => state.application);
+  const dispatch = useAppDispatch();
   const { winWidth, winHeight } = useWindowSize();
   const initWidth = Math.min(winWidth, defaultWidth ? defaultWidth : 640);
   const initHeight = Math.min(winHeight, defaultHeight ? defaultHeight : 400);
@@ -85,6 +86,12 @@ const Window: FC<WindowProps> = ({
     });
   };
 
+  const handleBarDoubleClick = () => {
+    dispatch(
+      updateApplication({ appKey, status: { windowStatus: "maximized" } })
+    );
+  };
+
   const windowClasses = {
     "absolute w-full h-full rounded-lg overflow-hidden shadow-md": true,
     "z-30": !isMaximized,
@@ -117,8 +124,8 @@ const Window: FC<WindowProps> = ({
         }
 
         const childProps = {
-          appKey,
-          isMaximized,
+          dragHandleClass,
+          onBarDoubleClick: handleBarDoubleClick,
         };
 
         return cloneElement(child, childProps);
