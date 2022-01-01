@@ -58,7 +58,7 @@ const Login: FC<Record<string, never>> = () => {
     >
       <div className="w-full flex justify-end mt-px mr-3">
         <Button appearance={ButtonAppearance.MENU}>
-          <BatteryIcon isValueShown={false} />
+          <BatteryIcon isValueVisible={false} />
         </Button>
         {!isFirstLogIn && (
           <Button appearance={ButtonAppearance.MENU}>

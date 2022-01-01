@@ -4,10 +4,10 @@ import { FC } from "react";
 import { useBattery } from "hooks";
 
 export type BatteryIconProps = {
-  isValueShown: boolean;
+  isValueVisible: boolean;
 };
 
-const BatteryIcon: FC<BatteryIconProps> = ({ isValueShown }) => {
+const BatteryIcon: FC<BatteryIconProps> = ({ isValueVisible }) => {
   const batteryState = useBattery();
   const maxHorizontal = 10;
   const maxBatteryLevel = 1;
@@ -24,7 +24,7 @@ const BatteryIcon: FC<BatteryIconProps> = ({ isValueShown }) => {
 
   return (
     <>
-      {isValueShown && (
+      {isValueVisible && (
         <span className="text-xs mr-1">
           {`${(batteryLevel * 100).toFixed()}%`}
         </span>
