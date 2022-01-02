@@ -12,6 +12,7 @@ import AppSafari from "./images/app-safari.png";
 import AppSiri from "./images/app-siri.png";
 import AppVSCode from "./images/app-vscode.png";
 import Button, { ButtonAppearance } from "base-components/Button";
+import Link from "base-components/Link";
 import Tooltip from "base-components/Tooltip";
 
 export const HEIGHT_DOCK_REM = 3.5;
@@ -114,13 +115,13 @@ const Dock: FC<Record<string, never>> = () => {
                   )}
                 </>
               ) : (
-                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                <Link href={item.link}>
                   <img
                     src={item.imgSrc}
                     alt={`${item.label} app`}
                     className="w-12 h-12"
                   />
-                </a>
+                </Link>
               )}
             </Tooltip>
           </li>
