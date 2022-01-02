@@ -69,8 +69,8 @@ const Button: FC<ButtonProps> = ({
       break;
   }
 
-  const handleMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
-    // prevents drag for app menu buttons
+  const stopPropagation = (event: MouseEvent<HTMLButtonElement>) => {
+    // prevents drag / double click for app menu buttons
     event.stopPropagation();
   };
 
@@ -79,7 +79,8 @@ const Button: FC<ButtonProps> = ({
       className={classNames(buttonClasses, className)}
       aria-label={ariaLabel}
       data-id={dataId}
-      onMouseDown={handleMouseDown}
+      onMouseDown={stopPropagation}
+      onDoubleClick={stopPropagation}
       onClick={onClick}
     >
       {children}
