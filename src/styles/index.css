@@ -6,6 +6,13 @@ html, body, #root {
   @apply h-full overflow-hidden font-sans text-gray-900 dark:text-white;
 }
 
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 /**
  * InputRange
  * ------------------------------------------------------------------------- */

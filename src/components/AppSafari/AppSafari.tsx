@@ -23,16 +23,29 @@ import { MdSearch } from "react-icons/md";
 import classNames from "classnames";
 
 import { ApplicationKeys } from "reducers/applicationSlice";
+import AppSafariStart from "components/AppSafariStart";
 import Button, { ButtonAppearance } from "base-components/Button";
 import Window from "components/Window";
 import WindowBar from "components/WindowBar";
 import WindowControls from "components/WindowControls";
+
+const SAFARI_DEFAULT_WIDTH_PX = 1024;
 
 const AppSafari: FC<Record<string, never>> = () => {
   const [value, setValue] = useState<string>("");
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isSearched, setIsSearched] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [width, setWidth] = useState<number>(SAFARI_DEFAULT_WIDTH_PX);
+
+  const handleWidthChange = (width: number) => {
+    setWidth(width);
+  };
+
+  const handleBrowserBack = () => {
+    setValue("");
+    setIsSearched(false);
+  };
 
   const handleInputFocus = () => {
     setIsFocused(true);
@@ -64,15 +77,23 @@ const AppSafari: FC<Record<string, never>> = () => {
     "transition-none w-0": !isFocused && value.length === 0,
   };
 
+  const sectionClasses = {
+    "grid gap-4": true,
+    "grid-cols-6": width <= 814,
+    "grid-cols-9": width > 814 && width <= 1330,
+    "grid-cols-12": width > 1330,
+  };
+
   return (
     <Window
       appKey={ApplicationKeys.SAFARI}
-      defaultWidth={1024}
+      defaultWidth={SAFARI_DEFAULT_WIDTH_PX}
       defaultHeight={576}
       minWidth={651}
       minHeight={226}
+      onWidthChange={handleWidthChange}
     >
-      <WindowBar className="h-14 flex items-stretch bg-gray-100 border-b border-gray-300 py-3 pl-2 pr-3">
+      <WindowBar className="h-[3.25rem] flex items-stretch bg-gray-100 border-b border-gray-300 py-3 pl-2 pr-3">
         <div className="h-full flex justify-between basis-0 grow-[0.29]">
           <div className="flex">
             <WindowControls appKey={ApplicationKeys.SAFARI} />
@@ -93,8 +114,9 @@ const AppSafari: FC<Record<string, never>> = () => {
 
             <Button
               appearance={ButtonAppearance.TRANSPARENT}
-              isActive={false}
+              isActive={isSearched}
               className="ml-2"
+              onClick={handleBrowserBack}
             >
               <BsChevronLeft className="w-4 h-4 stroke-1" />
             </Button>
@@ -162,7 +184,11 @@ const AppSafari: FC<Record<string, never>> = () => {
       </WindowBar>
 
       <div className="w-full h-full bg-gray-200">
-        {isSearched ? <div>favourites</div> : <div>cannot reach</div>}
+        {isSearched ? (
+          <div>search results</div>
+        ) : (
+          <AppSafariStart sectionClassName={classNames(sectionClasses)} />
+        )}
       </div>
     </Window>
   );

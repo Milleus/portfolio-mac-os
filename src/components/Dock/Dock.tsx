@@ -15,7 +15,7 @@ import Button, { ButtonAppearance } from "base-components/Button";
 import Link from "base-components/Link";
 import Tooltip from "base-components/Tooltip";
 
-export const HEIGHT_DOCK_REM = 3.5;
+export const DOCK_HEIGHT_REM = 3.5;
 
 type DockItem = {
   label: string;
@@ -91,7 +91,7 @@ const Dock: FC<Record<string, never>> = () => {
   return (
     <ul
       className="absolute z-40 bottom-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-white/30 backdrop-blur-lg rounded-2xl p-1"
-      style={{ height: `${HEIGHT_DOCK_REM}rem` }}
+      style={{ height: `${DOCK_HEIGHT_REM}rem` }}
     >
       {dockItems.map((item, index) => {
         return (

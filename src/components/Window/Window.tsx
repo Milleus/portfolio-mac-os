@@ -12,8 +12,8 @@ import classNames from "classnames";
 
 import { ApplicationKeys, updateApplication } from "reducers/applicationSlice";
 import { convertRemToPixels } from "utilities";
-import { HEIGHT_DOCK_REM } from "components/Dock";
-import { HEIGHT_MENU_BAR_REM } from "components/MenuBar";
+import { DOCK_HEIGHT_REM } from "components/Dock";
+import { MENU_BAR_HEIGHT_REM } from "components/MenuBar";
 import { useAppDispatch, useAppSelector, useWindowSize } from "hooks";
 
 type PositionSize = {
@@ -32,6 +32,7 @@ export type WindowProps = {
   defaultHeight?: number;
   minWidth?: number;
   minHeight?: number;
+  onWidthChange?: (width: number) => void;
 };
 
 const Window: FC<WindowProps> = ({
@@ -41,14 +42,15 @@ const Window: FC<WindowProps> = ({
   defaultHeight,
   minWidth,
   minHeight,
+  onWidthChange,
 }) => {
   const applicationState = useAppSelector((state) => state.application);
   const dispatch = useAppDispatch();
   const { winWidth, winHeight } = useWindowSize();
   const initWidth = Math.min(winWidth, defaultWidth ? defaultWidth : 640);
   const initHeight = Math.min(winHeight, defaultHeight ? defaultHeight : 400);
-  const heightMenuBarPx = convertRemToPixels(HEIGHT_MENU_BAR_REM);
-  const heightDockPx = convertRemToPixels(HEIGHT_DOCK_REM);
+  const menuBarHeightPx = convertRemToPixels(MENU_BAR_HEIGHT_REM);
+  const dockHeightPx = convertRemToPixels(DOCK_HEIGHT_REM);
   const isMaximized = applicationState[appKey].windowStatus === "maximized";
 
   const [positionSize, setPositionSize] = useState<PositionSize>({
@@ -56,7 +58,7 @@ const Window: FC<WindowProps> = ({
     height: initHeight,
     x: Math.random() * (winWidth - initWidth) + winWidth, // plus winWidth because of window boundary
     y:
-      Math.random() * (winHeight - initHeight - heightMenuBarPx - heightDockPx),
+      Math.random() * (winHeight - initHeight - menuBarHeightPx - dockHeightPx),
   });
 
   useEffect(() => {
@@ -68,8 +70,27 @@ const Window: FC<WindowProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [winWidth, winHeight]);
 
+  useEffect(() => {
+    if (onWidthChange) {
+      const newWidth = isMaximized ? winWidth : positionSize.width;
+
+      onWidthChange(newWidth);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMaximized]);
+
   const handleDragStop: RndDragCallback = (_e, d) => {
     setPositionSize({ ...positionSize, x: d.x, y: d.y });
+  };
+
+  const handleResize: RndResizeCallback = (
+    _e,
+    _direction,
+    ref,
+    _delta,
+    _position
+  ) => {
+    onWidthChange && onWidthChange(ref.offsetWidth);
   };
 
   const handleResizeStop: RndResizeCallback = (
@@ -107,7 +128,7 @@ const Window: FC<WindowProps> = ({
       }}
       position={{
         x: isMaximized ? winWidth : Math.max(0, positionSize.x), // winWidth because of window boundary
-        y: isMaximized ? -heightMenuBarPx : Math.max(0, positionSize.y), // -heightMenuBarPx because of window boundary
+        y: isMaximized ? -menuBarHeightPx : Math.max(0, positionSize.y), // -heightMenuBarPx because of window boundary
       }}
       minWidth={minWidth ? minWidth : 320}
       minHeight={minHeight ? minHeight : 200}
@@ -116,6 +137,7 @@ const Window: FC<WindowProps> = ({
       disableDragging={isMaximized}
       enableResizing={!isMaximized}
       onDragStop={handleDragStop}
+      onResize={handleResize}
       onResizeStop={handleResizeStop}
     >
       {Children.map(children, (child) => {

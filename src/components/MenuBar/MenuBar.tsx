@@ -10,7 +10,7 @@ import MenuApple from "components/MenuApple";
 import MenuControlCenter from "components/MenuControlCenter";
 import MenuWifi from "components/MenuWifi";
 
-export const HEIGHT_MENU_BAR_REM = 1.5;
+export const MENU_BAR_HEIGHT_REM = 1.5;
 
 enum MenuId {
   NONE = "none",
@@ -62,7 +62,7 @@ const MenuBar: FC<Record<string, never>> = () => {
   return (
     <div
       className="absolute z-40 top-0 w-full flex justify-between items-stretch bg-purple-200/90 dark:bg-purple-500/90 px-1.5"
-      style={{ height: `${HEIGHT_MENU_BAR_REM}rem` }}
+      style={{ height: `${MENU_BAR_HEIGHT_REM}rem` }}
     >
       <div className="flex">
         <div className="flex relative" ref={menuAppleRef}>

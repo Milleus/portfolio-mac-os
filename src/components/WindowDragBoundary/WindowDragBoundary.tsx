@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 
-import { HEIGHT_MENU_BAR_REM } from "components/MenuBar";
+import { MENU_BAR_HEIGHT_REM } from "components/MenuBar";
 
 export type WindowDragBoundaryProps = {
   children: ReactNode;
@@ -16,7 +16,7 @@ const WindowDragBoundary: FC<WindowDragBoundaryProps> = ({ children }) => {
        * |_____|_____|_____|
        */
       className="absolute -left-full w-[300%] h-[200%]"
-      style={{ marginTop: `${HEIGHT_MENU_BAR_REM}rem` }}
+      style={{ marginTop: `${MENU_BAR_HEIGHT_REM}rem` }}
     >
       {children};
     </div>
