@@ -3,12 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "reducers/store";
 
 export enum ApplicationKeys {
+  FACETIME = "facetime",
+  ITERM = "iterm",
   LAUNCHPAD = "launchpad",
   NOTES = "notes",
-  VSCODE = "vscode",
-  ITERM = "iterm",
   SAFARI = "safari",
-  FACETIME = "facetime",
+  SIRI = "siri",
+  VSCODE = "vscode",
 }
 
 type ApplicationStatus = {
@@ -36,6 +37,10 @@ export const initialState: ApplicationState = {
     windowStatus: "normal",
   },
   [ApplicationKeys.SAFARI]: {
+    isOpen: false,
+    windowStatus: "normal",
+  },
+  [ApplicationKeys.SIRI]: {
     isOpen: false,
     windowStatus: "normal",
   },

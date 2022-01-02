@@ -9,6 +9,7 @@ import AppLaunchpad from "./images/app-launchpad.png";
 import AppMail from "./images/app-mail.png";
 import AppNotes from "./images/app-notes.png";
 import AppSafari from "./images/app-safari.png";
+import AppSiri from "./images/app-siri.png";
 import AppVSCode from "./images/app-vscode.png";
 import Button, { ButtonAppearance } from "base-components/Button";
 import Tooltip from "base-components/Tooltip";
@@ -51,6 +52,11 @@ const dockItems: Array<DockItem> = [
   {
     label: "FaceTime",
     imgSrc: AppFaceTime,
+    appKey: ApplicationKeys.FACETIME,
+  },
+  {
+    label: "Siri",
+    imgSrc: AppSiri,
     appKey: ApplicationKeys.FACETIME,
   },
   {
