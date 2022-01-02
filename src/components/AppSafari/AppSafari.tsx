@@ -57,10 +57,11 @@ const AppSafari: FC<Record<string, never>> = () => {
     }
   };
 
-  const placeholderClasses = {
-    "absolute h-full text-neutral-400 text-center pointer-events-none": true,
-    "transition-all w-full": !isFocused && value.length === 0,
-    "transition-none w-0": isFocused || value.length > 0,
+  const inputClasses = {
+    "h-full min-w-[12rem] bg-transparent rounded-lg text-neutral-500 text-xs leading-none tracking-wide pr-2 outline-none":
+      true,
+    "transition-all w-full": isFocused || value.length > 0,
+    "transition-none w-0": !isFocused && value.length === 0,
   };
 
   return (
@@ -117,12 +118,20 @@ const AppSafari: FC<Record<string, never>> = () => {
         </div>
 
         <div className="h-full flex basis-0 grow-[0.42]">
-          <div className="relative flex min-w-[15.5rem] w-full ml-2">
+          <label className="w-full h-full flex justify-center bg-gray-200 rounded-lg ml-2 focus-within:outline focus-within:outline-[3px] focus-within:outline-blue-400">
+            <div className="w-5 h-full flex items-center ml-2">
+              {value.length > 0 ? (
+                <BsGlobe2 className="w-3 h-3 text-neutral-500" />
+              ) : (
+                <MdSearch className="w-4 h-4 text-neutral-500" />
+              )}
+            </div>
             <input
               ref={inputRef}
               type="text"
-              className="w-full h-full rounded-lg bg-gray-200 text-neutral-500 text-xs leading-none tracking-wide pl-6"
+              className={classNames(inputClasses)}
               value={value}
+              placeholder="Search or enter website name"
               autoFocus={true}
               autoComplete="off"
               aria-label="address bar"
@@ -132,21 +141,7 @@ const AppSafari: FC<Record<string, never>> = () => {
               onChange={handleInputChange}
               onKeyPress={handleInputKeyPress}
             />
-            <div className={classNames(placeholderClasses)}>
-              <div className="h-full inline-flex items-center">
-                {value.length > 0 ? (
-                  <BsGlobe2 className="inline w-3 h-3 text-neutral-500 ml-2 mr-0.5" />
-                ) : (
-                  <MdSearch className="inline w-4 h-4 text-neutral-500 ml-2 mr-0.5" />
-                )}
-                {value.length === 0 && (
-                  <p className="text-xs leading-none tracking-wide whitespace-nowrap">
-                    Search or enter website name
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
+          </label>
         </div>
 
         <div className="h-full flex justify-end basis-0 grow-[0.29] space-x-1.5">
