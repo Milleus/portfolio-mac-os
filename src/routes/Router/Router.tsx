@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 import { Page } from "reducers/systemSlice";
 import { updateSystem } from "reducers";
@@ -11,6 +11,17 @@ import Sleep from "pages/Sleep";
 const Router: FC<Record<string, never>> = () => {
   const { activePage } = useAppSelector((state) => state.system);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const isSystemDarkMode = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? true
+      : false;
+    const rootClassList = document.documentElement.classList;
+
+    isSystemDarkMode ? rootClassList.add("dark") : rootClassList.remove("dark");
+    dispatch(updateSystem({ isDarkModeOn: isSystemDarkMode }));
+  }, [dispatch]);
 
   useInterval(() => {
     dispatch(updateSystem({ date: new Date().toISOString() }));

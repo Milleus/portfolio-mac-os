@@ -57,6 +57,9 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   };
 
   const handleDarkModeClick = () => {
+    const rootClassList = document.documentElement.classList;
+
+    isDarkModeOn ? rootClassList.remove("dark") : rootClassList.add("dark");
     dispatch(updateSystem({ isDarkModeOn: !isDarkModeOn }));
   };
 
