@@ -13,11 +13,11 @@ const Sleep: FC<Record<string, never>> = () => {
 
   return (
     <div
-      className="w-full h-full flex flex-col justify-center items-center bg-black"
+      className="w-full h-full flex flex-col justify-center items-center bg-black text-white"
       onClick={handleClick}
     >
-      <BsApple className="w-24 h-24 text-white mb-20" />
-      <span className="h-1.5 text-white cursor-pointer">Click to wake up</span>
+      <BsApple className="w-24 h-24 mb-20" />
+      <span className="h-1.5 cursor-pointer">Click to wake up</span>
     </div>
   );
 };

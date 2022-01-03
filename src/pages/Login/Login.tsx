@@ -52,13 +52,13 @@ const Login: FC<Record<string, never>> = () => {
 
   return (
     <div
-      className="w-full h-full overflow-hidden bg-center bg-cover flex flex-col justify-center items-center"
+      className="w-full h-full overflow-hidden bg-center bg-cover flex flex-col justify-center items-center text-white"
       onClick={handleLoginClick}
       style={{ backgroundImage: `url(${WallpaperMonterey})` }}
     >
       <div className="w-full flex justify-end mt-px mr-3">
         <Button appearance={ButtonAppearance.MENU}>
-          <BatteryIcon isValueVisible={false} />
+          <BatteryIcon isValueVisible={false} isForcedDarkMode={true} />
         </Button>
         {!isFirstLogIn && (
           <Button appearance={ButtonAppearance.MENU}>
@@ -83,11 +83,11 @@ const Login: FC<Record<string, never>> = () => {
           src={PhotoProfile}
           alt="profile"
         />
-        <p className="text-2xl text-white mt-7">Milleus</p>
+        <p className="text-2xl mt-7">Milleus</p>
         <div className="relative mt-3">
           <input
             type="password"
-            className="w-40 h-7 bg-white/30 backdrop-blur-lg rounded-full px-3.5 pl-3 pr-8 text-white text-sm outline-none placeholder:text-white/80 placeholder:text-xs placeholder:font-semibold"
+            className="w-40 h-7 bg-white/30 backdrop-blur-lg rounded-full px-3.5 pl-3 pr-8 text-sm outline-none placeholder:text-white/80 placeholder:text-xs placeholder:font-semibold"
             placeholder="Enter Password"
             value={value}
             autoFocus={true}
@@ -101,7 +101,7 @@ const Login: FC<Record<string, never>> = () => {
             <BsArrowRightCircle className="absolute top-0 right-0 w-7 h-7 p-0.5 text-white/80 cursor-pointer" />
           )}
         </div>
-        <span className="text-white mt-8 cursor-pointer">
+        <span className="mt-8 cursor-pointer">
           Click or press Enter to log in
         </span>
       </div>
@@ -116,9 +116,9 @@ const Login: FC<Record<string, never>> = () => {
                 className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
                 onClick={handleShutDownClick}
               >
-                <BsPower className="w-6 h-6 text-white" />
+                <BsPower className="w-6 h-6" />
               </Button>
-              <p className="text-white text-sm mt-2">Shut Down</p>
+              <p className="text-sm mt-2">Shut Down</p>
             </div>
             <div className="flex flex-col items-center">
               <Button
@@ -127,9 +127,9 @@ const Login: FC<Record<string, never>> = () => {
                 className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
                 onClick={handleRestartClick}
               >
-                <VscPlayCircle className="w-6 h-6 text-white -scale-x-100" />
+                <VscPlayCircle className="w-6 h-6 -scale-x-100" />
               </Button>
-              <p className="text-white text-sm mt-2">Restart</p>
+              <p className="text-sm mt-2">Restart</p>
             </div>
           </>
         )}
@@ -141,14 +141,12 @@ const Login: FC<Record<string, never>> = () => {
             onClick={handleSleepClick}
           >
             {isFirstLogIn ? (
-              <CgSleep className="w-6 h-6 text-white" />
+              <CgSleep className="w-6 h-6" />
             ) : (
-              <BsXCircle className="w-5 h-5 text-white" />
+              <BsXCircle className="w-5 h-5" />
             )}
           </Button>
-          <p className="text-white text-sm mt-2">
-            {isFirstLogIn ? "Sleep" : "Cancel"}
-          </p>
+          <p className="text-sm mt-2">{isFirstLogIn ? "Sleep" : "Cancel"}</p>
         </div>
       </div>
     </div>

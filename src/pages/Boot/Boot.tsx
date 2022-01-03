@@ -33,10 +33,10 @@ const Boot: FC<Record<string, never>> = () => {
 
   return (
     <div
-      className="w-full h-full flex flex-col justify-center items-center bg-black"
+      className="w-full h-full flex flex-col justify-center items-center bg-black text-white"
       onClick={handleClick}
     >
-      <BsApple className="w-24 h-24 text-white mb-20" />
+      <BsApple className="w-24 h-24 mb-20" />
       {isBooting ? (
         <div
           data-testid="boot-progress-bar"
@@ -49,9 +49,7 @@ const Boot: FC<Record<string, never>> = () => {
           ></div>
         </div>
       ) : (
-        <span className="h-1.5 text-white cursor-pointer">
-          Click to boot up
-        </span>
+        <span className="h-1.5 cursor-pointer">Click to boot up</span>
       )}
     </div>
   );
