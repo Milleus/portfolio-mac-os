@@ -43,7 +43,7 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
         className="w-3 h-3 rounded-full bg-red-500"
         onClick={handleCloseClick}
       >
-        <BsX className="w-3 h-3 invisible group-hover:visible" />
+        <BsX className="w-3 h-3 invisible text-gray-900 group-hover:visible" />
       </Button>
 
       <Button
@@ -51,7 +51,7 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
         className="w-3 h-3 rounded-full bg-amber-500"
         onClick={handleMinimizeClick}
       >
-        <CgMathMinus className="w-3 h-3 invisible group-hover:visible" />
+        <CgMathMinus className="w-3 h-3 invisible text-gray-900 group-hover:visible" />
       </Button>
 
       <Button
@@ -59,7 +59,7 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
         className="w-3 h-3 rounded-full bg-green-500"
         onClick={handleMaximizeClick}
       >
-        <CgArrowsExpandLeft className="w-3 h-3 invisible group-hover:visible p-0.5" />
+        <CgArrowsExpandLeft className="w-3 h-3 invisible text-gray-900 group-hover:visible p-0.5" />
       </Button>
     </div>
   );

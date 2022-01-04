@@ -176,7 +176,10 @@ const AppSafari: FC<Record<string, never>> = () => {
         </div>
       </WindowBar>
 
-      <div className="w-full h-full bg-gray-200">
+      <div
+        className="w-full bg-gray-200 overflow-y-auto"
+        style={{ height: "calc(100% - 3.25rem" }} // offset height of window bar
+      >
         {isSearched ? (
           <div>search results</div>
         ) : (

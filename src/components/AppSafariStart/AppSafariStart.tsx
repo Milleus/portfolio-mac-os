@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
+import { IoShieldHalfOutline } from "react-icons/io5";
 import classNames from "classnames";
 
 import Link from "base-components/Link";
@@ -126,7 +127,7 @@ const frequentlyVisitedItems: Array<LinkItem> = [
     link: "https://roadmap.sh",
   },
   {
-    label: "Notpron by David Munnich",
+    label: "Notpron by David Münnich",
     imgSrc: LinkNotpron,
     link: "http://notpron.org/notpron/",
   },
@@ -137,17 +138,21 @@ export type AppSafariStartProps = {
 };
 
 const AppSafariStart: FC<AppSafariStartProps> = ({ width }) => {
+  const randomTrackers = useMemo(() => Math.floor(Math.random() * 99) + 1, []);
+
   const sectionClasses = {
-    "grid gap-4": true,
-    "grid-cols-6": width <= 814,
-    "grid-cols-9": width > 814 && width <= 1330,
-    "grid-cols-12": width > 1330,
+    "grid gap-x-4": true,
+    "grid-cols-[repeat(6,_minmax(0,_4rem))]": width <= 814,
+    "grid-cols-[repeat(9,_minmax(0,_4rem))]": width > 814 && width <= 1330,
+    "grid-cols-[repeat(12,_minmax(0,_4rem))]": width > 1330,
   };
 
   return (
-    <div className="w-max h-full py-36 px-3 mx-auto">
-      <p className="text-xl font-extrabold tracking-wide mb-3.5">Favourites</p>
+    <div className="w-full h-max flex flex-col justify-center items-center text-neutral-700 px-3 mx-auto my-16">
       <div className={classNames(sectionClasses)}>
+        <p className="col-span-full text-xl font-extrabold tracking-wide mb-3.5">
+          Favourites
+        </p>
         {favouriteItems.map((item, index) => {
           return (
             <Link key={`favourites-${index}`} href={item.link}>
@@ -162,12 +167,10 @@ const AppSafariStart: FC<AppSafariStartProps> = ({ width }) => {
             </Link>
           );
         })}
-      </div>
 
-      <p className="text-xl font-extrabold tracking-wide mb-3.5">
-        Frequently Visited
-      </p>
-      <div className={classNames(sectionClasses)}>
+        <p className="col-span-full text-xl font-extrabold tracking-wide mb-3.5">
+          Frequently Visited
+        </p>
         {frequentlyVisitedItems.map((item, index) => {
           return (
             <Link key={`frequently-visited-${index}`} href={item.link}>
@@ -182,6 +185,24 @@ const AppSafariStart: FC<AppSafariStartProps> = ({ width }) => {
             </Link>
           );
         })}
+
+        <p className="col-span-full text-xl font-extrabold tracking-wide mt-8 mb-3.5">
+          Privacy Report
+        </p>
+        <div className="col-span-full flex items-center bg-gray-100 rounded-lg shadow-md p-5">
+          <div className="w-7 h-7">
+            <IoShieldHalfOutline
+              size={18}
+              className="w-7 h-7 text-neutral-500"
+            />
+          </div>
+          <p className="text-lg font-semi-bold ml-3">{randomTrackers}</p>
+          <p className="text-xs tracking-wide ml-5">
+            In the last seven days, Safari has prevented {randomTrackers}{" "}
+            trackers from profiling you and hidden your IP address from known
+            trackers.
+          </p>
+        </div>
       </div>
     </div>
   );
