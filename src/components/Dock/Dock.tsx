@@ -90,7 +90,7 @@ const Dock: FC<Record<string, never>> = () => {
 
   return (
     <ul
-      className="absolute z-40 bottom-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-white/30 backdrop-blur-lg rounded-2xl p-1"
+      className="absolute z-40 bottom-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-gray-50/30 backdrop-blur-lg rounded-2xl p-1 dark:bg-gray-900/30"
       style={{ height: `${DOCK_HEIGHT_REM}rem` }}
     >
       {dockItems.map((item, index) => {
@@ -111,7 +111,7 @@ const Dock: FC<Record<string, never>> = () => {
                     />
                   </Button>
                   {applicationState[item.appKey].isOpen && (
-                    <div className="absolute bottom-0 left-0 right-0 w-1 h-1 rounded-full bg-black mx-auto -mb-0.5"></div>
+                    <div className="absolute bottom-0 left-0 right-0 w-1 h-1 rounded-full bg-gray-900/70 mx-auto -mb-0.5 dark:bg-gray-50/70"></div>
                   )}
                 </>
               ) : (

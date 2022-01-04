@@ -11,12 +11,18 @@ import AppSafari from "components/AppSafari";
 import AppVSCode from "components/AppVSCode";
 import Dock from "components/Dock";
 import MenuBar from "components/MenuBar";
-import WallpaperMonterey from "./images/wallpaper-monterey.jpeg";
+import WallpaperMontereyDark from "./images/wallpaper-monterey-dark.jpeg";
+import WallpaperMontereyLight from "./images/wallpaper-monterey-light.jpeg";
 import WindowDragBoundary from "components/WindowDragBoundary";
 
 const Desktop: FC<Record<string, never>> = () => {
-  const { brightnessLevel, volumeLevel, isAudioPlaying, audioPlaylistIndex } =
-    useAppSelector((state) => state.system);
+  const {
+    isDarkModeOn,
+    brightnessLevel,
+    volumeLevel,
+    isAudioPlaying,
+    audioPlaylistIndex,
+  } = useAppSelector((state) => state.system);
   const { safari, vscode } = useAppSelector((state) => state.application);
   const dispatch = useAppDispatch();
 
@@ -39,7 +45,9 @@ const Desktop: FC<Record<string, never>> = () => {
     <div
       className="w-full h-full overflow-hidden bg-center bg-cover"
       style={{
-        backgroundImage: `url(${WallpaperMonterey})`,
+        backgroundImage: `url(${
+          isDarkModeOn ? WallpaperMontereyDark : WallpaperMontereyLight
+        })`,
         filter: `brightness(${brightnessLevel})`,
       }}
     >

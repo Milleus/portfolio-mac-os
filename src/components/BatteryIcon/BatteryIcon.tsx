@@ -29,8 +29,8 @@ const BatteryIcon: FC<BatteryIconProps> = ({
 
   const lightningChargeClasses = {
     "absolute top-1/2 left-1 -translate-y-1/2 w-3.5 h-3.5 stroke-1": true,
-    "stroke-purple-500 fill-white": isForcedDarkMode,
-    "stroke-purple-200 fill-gray-900 dark:stroke-purple-500 dark:fill-white":
+    "stroke-purple-500 fill-gray-50": isForcedDarkMode,
+    "stroke-purple-200 fill-gray-900 dark:stroke-purple-500 dark:fill-gray-50":
       !isForcedDarkMode,
   };
 

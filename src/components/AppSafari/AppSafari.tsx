@@ -77,13 +77,6 @@ const AppSafari: FC<Record<string, never>> = () => {
     "transition-none w-0": !isFocused && value.length === 0,
   };
 
-  const sectionClasses = {
-    "grid gap-4": true,
-    "grid-cols-6": width <= 814,
-    "grid-cols-9": width > 814 && width <= 1330,
-    "grid-cols-12": width > 1330,
-  };
-
   return (
     <Window
       appKey={ApplicationKeys.SAFARI}
@@ -93,7 +86,7 @@ const AppSafari: FC<Record<string, never>> = () => {
       minHeight={226}
       onWidthChange={handleWidthChange}
     >
-      <WindowBar className="h-[3.25rem] flex items-stretch bg-gray-100 border-b border-gray-300 py-3 pl-2 pr-3">
+      <WindowBar className="h-[3.25rem] flex items-stretch bg-gray-50 border-b border-gray-300 py-3 pl-2 pr-3">
         <div className="h-full flex justify-between basis-0 grow-[0.29]">
           <div className="flex">
             <WindowControls appKey={ApplicationKeys.SAFARI} />
@@ -187,7 +180,7 @@ const AppSafari: FC<Record<string, never>> = () => {
         {isSearched ? (
           <div>search results</div>
         ) : (
-          <AppSafariStart sectionClassName={classNames(sectionClasses)} />
+          <AppSafariStart width={width} />
         )}
       </div>
     </Window>

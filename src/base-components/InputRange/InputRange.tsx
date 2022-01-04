@@ -30,7 +30,7 @@ const InputRange: FC<InputRangeProps> = ({
   return (
     <div className="relative flex">
       {icon && (
-        <div className="absolute w-5 h-5 border border-transparent box-content flex justify-center items-center text-gray-400">
+        <div className="absolute w-5 h-5 border border-transparent box-content flex justify-center items-center text-gray-400 dark:text-gray-500">
           {icon}
         </div>
       )}

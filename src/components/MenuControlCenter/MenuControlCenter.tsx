@@ -100,9 +100,9 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
   };
 
   return (
-    <div className="absolute top-6 right-0 w-[19rem] bg-gray-200/50 backdrop-blur-lg p-2.5 m-1 rounded-2xl shadow-md">
+    <div className="absolute top-6 right-0 w-[19rem] bg-gray-200/50 backdrop-blur-lg p-2.5 m-1 rounded-2xl shadow-md dark:bg-gray-700/50">
       <div className="grid grid-cols-4 grid-rows-5 gap-2.5">
-        <div className="flex flex-col justify-around bg-gray-200/80 rounded-xl shadow-md col-span-2 row-span-2 p-3">
+        <div className="flex flex-col justify-around bg-gray-200/90 rounded-xl shadow-md col-span-2 row-span-2 p-3 dark:bg-gray-700/90">
           <div className="flex items-center space-x-2">
             <Button
               appearance={ButtonAppearance.TOGGLE}
@@ -113,7 +113,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div>
               <p className="text-xs font-semibold">Wi-Fi</p>
-              <p className="text-[0.65rem] leading-[1.1] text-gray-600">
+              <p className="text-[0.65rem] leading-[1.1] text-gray-600 dark:text-gray-300">
                 {isWifiOn ? "Home" : "Not connected"}
               </p>
             </div>
@@ -133,7 +133,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div>
               <p className="text-xs font-semibold">Bluetooth</p>
-              <p className="text-[0.65rem] leading-[1.1] text-gray-600">
+              <p className="text-[0.65rem] leading-[1.1] text-gray-600 dark:text-gray-300">
                 {isBluetoothOn ? "On" : "Off"}
               </p>
             </div>
@@ -149,14 +149,14 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div>
               <p className="text-xs font-semibold">AirDrop</p>
-              <p className="text-[0.65rem] leading-[1.1] text-gray-600">
+              <p className="text-[0.65rem] leading-[1.1] text-gray-600 dark:text-gray-300">
                 {isBluetoothOn && isAirDropOn ? "Contacts Only" : "Off"}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-gray-200/80 rounded-xl shadow-md col-span-2 p-3">
+        <div className="flex flex-col justify-center bg-gray-200/90 rounded-xl shadow-md col-span-2 p-3 dark:bg-gray-700/90">
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.TOGGLE}
@@ -167,7 +167,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <div className="ml-2">
               <p className="text-xs font-semibold">Dark Mode</p>
-              <p className="text-[0.65rem] leading-[1.1] text-gray-600">
+              <p className="text-[0.65rem] leading-[1.1] text-gray-600 dark:text-gray-300">
                 {isDarkModeOn ? "On" : "Off"}
               </p>
             </div>
@@ -176,7 +176,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
         <Button
           appearance={ButtonAppearance.DEFAULT}
-          className="flex-col bg-gray-200/80 rounded-xl shadow-md py-2"
+          className="flex-col bg-gray-200/90 rounded-xl shadow-md py-2 dark:bg-gray-700/90"
         >
           <BsBrightnessAltHigh className="w-6 h-6" />
           <p className="text-[0.65rem] leading-[1.1]">Keyboard Brightness</p>
@@ -184,7 +184,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
         <Button
           appearance={ButtonAppearance.DEFAULT}
-          className="flex-col bg-gray-200/80 rounded-xl shadow-md py-2"
+          className="flex-col bg-gray-200/90 rounded-xl shadow-md py-2 dark:bg-gray-700/90"
           onClick={handleFullScreenClick}
         >
           {isFullScreen ? (
@@ -200,7 +200,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           )}
         </Button>
 
-        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-md col-span-full px-3 py-1.5">
+        <div className="flex flex-col bg-gray-200/90 rounded-xl shadow-md col-span-full px-3 py-1.5 dark:bg-gray-700/90">
           <p className="text-xs font-semibold mb-1.5">Display</p>
           <InputRange
             value={brightnessLevel}
@@ -212,7 +212,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           />
         </div>
 
-        <div className="flex flex-col bg-gray-200/80 rounded-xl shadow-md col-span-full px-3 py-1.5">
+        <div className="flex flex-col bg-gray-200/90 rounded-xl shadow-md col-span-full px-3 py-1.5 dark:bg-gray-700/90">
           <p className="text-xs font-semibold mb-1.5">Sound</p>
           <InputRange
             value={volumeLevel}
@@ -224,7 +224,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           />
         </div>
 
-        <div className="flex flex-row justify-between bg-gray-200/80 rounded-xl shadow-md col-span-full px-3 py-1.5 space-x-4">
+        <div className="flex flex-row justify-between bg-gray-200/90 rounded-xl shadow-md col-span-full px-3 py-1.5 space-x-4 dark:bg-gray-700/90">
           <div className="flex items-center min-w-0 space-x-2">
             <img
               className="w-10 h-10 rounded"
@@ -235,7 +235,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
               <p className="truncate text-xs font-semibold">
                 {audioPlaylist[audioPlaylistIndex].title}
               </p>
-              <p className="truncate text-[0.65rem] leading-[1.1] text-gray-600">
+              <p className="truncate text-[0.65rem] leading-[1.1] text-gray-600 dark:text-gray-300">
                 {audioPlaylist[audioPlaylistIndex].artist}
               </p>
             </div>

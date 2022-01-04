@@ -10,10 +10,11 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import BatteryIcon from "components/BatteryIcon";
 import Button, { ButtonAppearance } from "base-components/Button";
 import PhotoProfile from "./images/photo-profile.jpeg";
-import WallpaperMonterey from "../Desktop/images/wallpaper-monterey.jpeg";
+import WallpaperMontereyDark from "../Desktop/images/wallpaper-monterey-dark.jpeg";
+import WallpaperMontereyLight from "../Desktop/images/wallpaper-monterey-light.jpeg";
 
 const Login: FC<Record<string, never>> = () => {
-  const { isFirstLogIn, date, isWifiOn } = useAppSelector(
+  const { isFirstLogIn, date, isWifiOn, isDarkModeOn } = useAppSelector(
     (state) => state.system
   );
   const dispatch = useAppDispatch();
@@ -52,9 +53,13 @@ const Login: FC<Record<string, never>> = () => {
 
   return (
     <div
-      className="w-full h-full overflow-hidden bg-center bg-cover flex flex-col justify-center items-center text-white"
+      className="w-full h-full overflow-hidden bg-center bg-cover flex flex-col justify-center items-center text-gray-50"
       onClick={handleLoginClick}
-      style={{ backgroundImage: `url(${WallpaperMonterey})` }}
+      style={{
+        backgroundImage: `url(${
+          isDarkModeOn ? WallpaperMontereyDark : WallpaperMontereyLight
+        })`,
+      }}
     >
       <div className="w-full flex justify-end mt-px mr-3">
         <Button appearance={ButtonAppearance.MENU}>
@@ -87,7 +92,7 @@ const Login: FC<Record<string, never>> = () => {
         <div className="relative mt-3">
           <input
             type="password"
-            className="w-40 h-7 bg-white/30 backdrop-blur-lg rounded-full px-3.5 pl-3 pr-8 text-sm outline-none placeholder:text-white/80 placeholder:text-xs placeholder:font-semibold"
+            className="w-40 h-7 bg-gray-50/30 backdrop-blur-lg rounded-full px-3.5 pl-3 pr-8 text-sm outline-none placeholder:text-gray-50/80 placeholder:text-xs placeholder:font-semibold"
             placeholder="Enter Password"
             value={value}
             autoFocus={true}
@@ -98,7 +103,7 @@ const Login: FC<Record<string, never>> = () => {
             onKeyPress={handleInputKeyPress}
           />
           {value.length > 0 && (
-            <BsArrowRightCircle className="absolute top-0 right-0 w-7 h-7 p-0.5 text-white/80 cursor-pointer" />
+            <BsArrowRightCircle className="absolute top-0 right-0 w-7 h-7 p-0.5 text-gray-50/80 cursor-pointer" />
           )}
         </div>
         <span className="mt-8 cursor-pointer">
@@ -113,7 +118,7 @@ const Login: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.DEFAULT}
                 ariaLabel="shut down"
-                className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
+                className="w-8 h-8 bg-gray-50/30 backdrop-blur-lg rounded-full"
                 onClick={handleShutDownClick}
               >
                 <BsPower className="w-6 h-6" />
@@ -124,7 +129,7 @@ const Login: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.DEFAULT}
                 ariaLabel="restart"
-                className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
+                className="w-8 h-8 bg-gray-50/30 backdrop-blur-lg rounded-full"
                 onClick={handleRestartClick}
               >
                 <VscPlayCircle className="w-6 h-6 -scale-x-100" />
@@ -137,7 +142,7 @@ const Login: FC<Record<string, never>> = () => {
           <Button
             appearance={ButtonAppearance.DEFAULT}
             ariaLabel="sleep"
-            className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
+            className="w-8 h-8 bg-gray-50/30 backdrop-blur-lg rounded-full"
             onClick={handleSleepClick}
           >
             {isFirstLogIn ? (

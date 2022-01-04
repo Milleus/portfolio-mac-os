@@ -10,9 +10,10 @@ const ToggleSwitch: FC<ToggleSwitchProps> = ({ isChecked, onChange }) => {
   const sliderClasses = {
     "absolute w-full h-full box-content border rounded-full transition-colors duration-100 cursor-pointer":
       true,
-    "before:absolute before:bg-white before:w-5 before:h-5 before:rounded-full before:transition-transform before:duration-100":
+    "before:absolute before:bg-gray-50 before:w-5 before:h-5 before:rounded-full before:transition-transform before:duration-100":
       true,
-    "bg-gray-300 border-gray-300": !isChecked,
+    "bg-gray-300 border-gray-300 dark:bg-gray-600 dark:border-gray-600":
+      !isChecked,
     "bg-blue-500 border-blue-500 before:translate-x-5": isChecked,
   };
 

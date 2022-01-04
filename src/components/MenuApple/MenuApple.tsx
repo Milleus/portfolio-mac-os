@@ -51,7 +51,7 @@ const MenuApple: FC<Record<string, never>> = () => {
   ];
 
   return (
-    <ul className="absolute top-6 left-0 w-60 bg-gray-200/80 backdrop-blur-lg p-1 mt-px rounded shadow-md">
+    <ul className="absolute top-6 left-0 w-60 bg-gray-200/90 backdrop-blur-lg p-1 mt-px rounded shadow-md dark:bg-gray-700/90">
       {menuAppleItems.map((item, index) => {
         return (
           <li key={`menu-apple-${index}`}>
@@ -63,7 +63,7 @@ const MenuApple: FC<Record<string, never>> = () => {
                 {item.label}
               </Button>
             ) : (
-              <hr className="border-gray-400 mx-2.5 my-1" />
+              <hr className="border-gray-400 mx-2.5 my-1 dark:border-gray-500" />
             )}
           </li>
         );

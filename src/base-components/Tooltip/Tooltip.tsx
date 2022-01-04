@@ -18,11 +18,11 @@ const Tooltip: FC<TooltipProps> = ({ children, content }) => {
   };
 
   const tooltipContentClasses = {
-    "absolute z-40 bg-gray-200 rounded shadow-md whitespace-nowrap text-sm leading-none px-3 py-1.5":
+    "absolute z-40 bg-gray-200 rounded shadow-md whitespace-nowrap text-sm leading-none px-3 py-1.5 dark:bg-gray-700":
       true,
     "before:absolute before:w-0 before:h-0 before:border-solid before:border-transparent before:border-8":
       true,
-    "-top-12 left-1/2 -translate-x-1/2 before:top-full before:left-1/2 before:-translate-x-1/2 before:border-t-gray-200":
+    "-top-12 left-1/2 -translate-x-1/2 before:top-full before:left-1/2 before:-translate-x-1/2 before:border-t-gray-200 dark:before:border-t-gray-700":
       true,
   };
 

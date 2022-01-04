@@ -1,4 +1,5 @@
 import { FC } from "react";
+import classNames from "classnames";
 
 import Link from "base-components/Link";
 import LinkBundlephobia from "./images/link-bundlephobia.png";
@@ -132,14 +133,21 @@ const frequentlyVisitedItems: Array<LinkItem> = [
 ];
 
 export type AppSafariStartProps = {
-  sectionClassName: string;
+  width: number;
 };
 
-const AppSafariStart: FC<AppSafariStartProps> = ({ sectionClassName }) => {
+const AppSafariStart: FC<AppSafariStartProps> = ({ width }) => {
+  const sectionClasses = {
+    "grid gap-4": true,
+    "grid-cols-6": width <= 814,
+    "grid-cols-9": width > 814 && width <= 1330,
+    "grid-cols-12": width > 1330,
+  };
+
   return (
     <div className="w-max h-full py-36 px-3 mx-auto">
       <p className="text-xl font-extrabold tracking-wide mb-3.5">Favourites</p>
-      <div className={sectionClassName}>
+      <div className={classNames(sectionClasses)}>
         {favouriteItems.map((item, index) => {
           return (
             <Link key={`favourites-${index}`} href={item.link}>
@@ -159,7 +167,7 @@ const AppSafariStart: FC<AppSafariStartProps> = ({ sectionClassName }) => {
       <p className="text-xl font-extrabold tracking-wide mb-3.5">
         Frequently Visited
       </p>
-      <div className={sectionClassName}>
+      <div className={classNames(sectionClasses)}>
         {frequentlyVisitedItems.map((item, index) => {
           return (
             <Link key={`frequently-visited-${index}`} href={item.link}>

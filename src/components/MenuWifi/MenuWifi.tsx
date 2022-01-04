@@ -15,7 +15,7 @@ const MenuWifi: FC<Record<string, never>> = () => {
   };
 
   return (
-    <div className="absolute top-6 right-0 w-72 bg-gray-200/80 backdrop-blur-lg rounded shadow-md p-1 mt-px">
+    <div className="absolute top-6 right-0 w-72 bg-gray-200/90 backdrop-blur-lg rounded shadow-md p-1 mt-px dark:bg-gray-700/90">
       <div className="flex justify-between items-center p-1.5">
         <span className="text-xs leading-none tracking-wide font-bold">
           Wi-Fi
@@ -23,18 +23,21 @@ const MenuWifi: FC<Record<string, never>> = () => {
         <ToggleSwitch isChecked={isWifiOn} onChange={handleWifiChange} />
       </div>
 
-      <hr className="border-gray-400 m-1.5" />
+      <hr className="border-gray-400 m-1.5 dark:border-gray-500" />
 
-      <p className="font-bold px-1.5 text-xs text-gray-600">
+      <p className="font-bold px-1.5 text-xs text-gray-600 dark:text-gray-300">
         Preferred Network
       </p>
 
-      <div className="flex justify-between items-center p-1.5 text-sm hover:bg-black/10 hover:rounded">
+      <div className="flex justify-between items-center p-1.5 text-sm rounded hover:bg-gray-900/10 dark:hover:bg-gray-50/10">
         <div className="flex items-center">
-          <MdWifi className="w-4.5 h-4.5 box-content bg-blue-500 p-1 rounded-full text-white" />
+          <MdWifi className="w-4.5 h-4.5 box-content bg-blue-500 p-1 rounded-full text-gray-50" />
           <span className="text-sm ml-2.5">Home</span>
         </div>
-        <BsFillLockFill size={12} className="text-gray-600" />
+        <BsFillLockFill
+          size={12}
+          className="text-gray-600 dark:text-gray-300"
+        />
       </div>
     </div>
   );
