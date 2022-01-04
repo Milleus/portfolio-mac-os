@@ -73,8 +73,8 @@ const AppSafari: FC<Record<string, never>> = () => {
   const inputClasses = {
     "h-full min-w-[12rem] bg-transparent rounded-lg text-neutral-500 text-xs leading-none tracking-wide pr-2 outline-none":
       true,
-    "transition-all w-full": isFocused || value.length > 0,
-    "transition-none w-0": !isFocused && value.length === 0,
+    "transition-none w-full": isFocused || value.length > 0,
+    "transition-all w-0": !isFocused && value.length === 0,
   };
 
   return (
