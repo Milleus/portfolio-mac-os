@@ -17,23 +17,30 @@ type ApplicationStatus = {
   windowStatus: "maximized" | "minimized" | "normal";
 };
 
-export type ApplicationState = { [key in ApplicationKeys]: ApplicationStatus };
+type Applications = {
+  [key in ApplicationKeys]: ApplicationStatus;
+};
+
+type ApplicationState = Applications & {
+  zStack: Array<ApplicationKeys>;
+};
 
 export const initialState: ApplicationState = {
+  zStack: [],
+  [ApplicationKeys.FACETIME]: {
+    isOpen: false,
+    windowStatus: "normal",
+  },
+  [ApplicationKeys.ITERM]: {
+    isOpen: false,
+    windowStatus: "normal",
+  },
   [ApplicationKeys.LAUNCHPAD]: {
     isOpen: false,
     windowStatus: "normal",
   },
   [ApplicationKeys.NOTES]: {
     isOpen: true,
-    windowStatus: "normal",
-  },
-  [ApplicationKeys.VSCODE]: {
-    isOpen: false,
-    windowStatus: "normal",
-  },
-  [ApplicationKeys.ITERM]: {
-    isOpen: false,
     windowStatus: "normal",
   },
   [ApplicationKeys.SAFARI]: {
@@ -44,7 +51,7 @@ export const initialState: ApplicationState = {
     isOpen: false,
     windowStatus: "normal",
   },
-  [ApplicationKeys.FACETIME]: {
+  [ApplicationKeys.VSCODE]: {
     isOpen: false,
     windowStatus: "normal",
   },
@@ -54,27 +61,30 @@ export const applicationSlice = createSlice({
   name: "application",
   initialState,
   reducers: {
-    updateApplication: (
-      state,
-      action: PayloadAction<{
-        appKey: ApplicationKeys;
-        status: Partial<ApplicationStatus>;
-      }>
-    ) => {
-      const { appKey, status } = action.payload;
+    updateZStack: (state, action: PayloadAction<ApplicationKeys>) => {
+      const appKey = action.payload;
+      const newZStack = state.zStack.filter((el) => el !== appKey);
+
+      newZStack.push(appKey);
 
       return {
         ...state,
-        [appKey]: {
-          ...state[appKey],
-          ...status,
-        },
+        zStack: newZStack,
+      };
+    },
+    updateApplication: (
+      state,
+      action: PayloadAction<Partial<ApplicationState>>
+    ) => {
+      return {
+        ...state,
+        ...action.payload,
       };
     },
   },
 });
 
-export const { updateApplication } = applicationSlice.actions;
+export const { updateZStack, updateApplication } = applicationSlice.actions;
 
 export const selectApplication = (state: RootState) => {
   return state.application;

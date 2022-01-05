@@ -8,7 +8,6 @@ import {
   useState,
 } from "react";
 import { Rnd, RndResizeCallback, RndDragCallback } from "react-rnd";
-import classNames from "classnames";
 
 import { ApplicationKeys, updateApplication } from "reducers/applicationSlice";
 import { convertRemToPixels } from "utilities";
@@ -109,14 +108,10 @@ const Window: FC<WindowProps> = ({
 
   const handleBarDoubleClick = () => {
     dispatch(
-      updateApplication({ appKey, status: { windowStatus: "maximized" } })
+      updateApplication({
+        [appKey]: { isOpen: true, windowStatus: "maximized" },
+      })
     );
-  };
-
-  const windowClasses = {
-    "absolute w-full h-full rounded-lg overflow-hidden shadow-md": true,
-    "z-30": !isMaximized,
-    "z-50": isMaximized,
   };
 
   return (
@@ -132,7 +127,12 @@ const Window: FC<WindowProps> = ({
       }}
       minWidth={minWidth ? minWidth : 320}
       minHeight={minHeight ? minHeight : 200}
-      className={classNames(windowClasses)}
+      className="absolute w-full h-full rounded-lg overflow-hidden shadow-md"
+      style={{
+        zIndex: isMaximized
+          ? 51 // higher than z-50
+          : applicationState.zStack.findIndex((el) => el === appKey),
+      }}
       dragHandleClassName={dragHandleClass}
       disableDragging={isMaximized}
       enableResizing={!isMaximized}

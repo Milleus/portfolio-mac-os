@@ -16,10 +16,7 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
 
   const handleCloseClick = () => {
     dispatch(
-      updateApplication({
-        appKey,
-        status: { isOpen: false, windowStatus: "normal" },
-      })
+      updateApplication({ [appKey]: { isOpen: false, windowStatus: "normal" } })
     );
   };
 
@@ -33,7 +30,7 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
         ? "normal"
         : "maximized";
 
-    dispatch(updateApplication({ appKey, status: { windowStatus } }));
+    dispatch(updateApplication({ [appKey]: { isOpen: true, windowStatus } }));
   };
 
   return (

@@ -1,6 +1,10 @@
 import { FC, MouseEvent } from "react";
 
-import { ApplicationKeys, updateApplication } from "reducers/applicationSlice";
+import {
+  ApplicationKeys,
+  updateApplication,
+  updateZStack,
+} from "reducers/applicationSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import AppFaceTime from "./images/app-facetime.png";
 import AppGitHub from "./images/app-github.png";
@@ -58,7 +62,7 @@ const dockItems: Array<DockItem> = [
   {
     label: "Siri",
     imgSrc: AppSiri,
-    appKey: ApplicationKeys.FACETIME,
+    appKey: ApplicationKeys.SIRI,
   },
   {
     label: "Mail",
@@ -79,18 +83,19 @@ const Dock: FC<Record<string, never>> = () => {
   const handleItemClick = (event: MouseEvent<HTMLButtonElement>) => {
     const appKey = event.currentTarget.getAttribute("data-id");
 
-    appKey &&
+    if (appKey) {
+      dispatch(updateZStack(appKey as ApplicationKeys));
       dispatch(
         updateApplication({
-          appKey: appKey as ApplicationKeys,
-          status: { isOpen: true, windowStatus: "normal" },
+          [appKey]: { isOpen: true, windowStatus: "normal" },
         })
       );
+    }
   };
 
   return (
     <ul
-      className="absolute z-40 bottom-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-gray-50/30 backdrop-blur-lg rounded-2xl p-1 dark:bg-gray-900/30"
+      className="absolute z-50 bottom-1.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-gray-50/30 backdrop-blur-lg rounded-2xl p-1 dark:bg-gray-900/30"
       style={{ height: `${DOCK_HEIGHT_REM}rem` }}
     >
       {dockItems.map((item, index) => {

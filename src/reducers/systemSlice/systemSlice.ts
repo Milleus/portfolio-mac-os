@@ -3,11 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "reducers/store";
 
 export enum Page {
+  BOOT_RESTART = "boot-restart",
+  BOOT_SHUT_DOWN = "boot-shut-down",
   DESKTOP = "desktop",
   LOGIN = "login",
   SLEEP = "sleep",
-  BOOT_RESTART = "boot-restart",
-  BOOT_SHUT_DOWN = "boot-shut-down",
 }
 
 type AudioTrack = {
@@ -32,7 +32,7 @@ export const audioPlaylist: Array<AudioTrack> = [
   },
 ];
 
-export type SystemState = {
+type SystemState = {
   activePage: Page;
   date: string;
   isFirstLogIn: boolean;

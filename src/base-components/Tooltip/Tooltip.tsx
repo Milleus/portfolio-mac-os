@@ -18,7 +18,7 @@ const Tooltip: FC<TooltipProps> = ({ children, content }) => {
   };
 
   const tooltipContentClasses = {
-    "absolute z-40 bg-gray-200 rounded shadow-md whitespace-nowrap text-sm leading-none px-3 py-1.5 dark:bg-gray-700":
+    "absolute z-50 bg-gray-200 rounded shadow-md whitespace-nowrap text-sm leading-none px-3 py-1.5 dark:bg-gray-700":
       true,
     "before:absolute before:w-0 before:h-0 before:border-solid before:border-transparent before:border-8":
       true,
