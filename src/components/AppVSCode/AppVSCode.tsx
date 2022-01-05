@@ -22,7 +22,7 @@ const AppVSCode: FC<Record<string, never>> = () => {
         <iframe
           className="w-full h-full"
           title="Visual Studio Code"
-          frameBorder={0}
+          frameBorder="0"
           src="https://github1s.com/Milleus/portfolio-mac-os/blob/main/README.md"
         />
       </div>

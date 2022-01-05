@@ -34,10 +34,6 @@ const MenuBar: FC<Record<string, never>> = () => {
     newId && setActiveMenuId(newId);
   };
 
-  const handleOutsideClick = () => {
-    setActiveMenuId(MenuId.NONE);
-  };
-
   let ref;
 
   switch (activeMenuId) {
@@ -57,7 +53,7 @@ const MenuBar: FC<Record<string, never>> = () => {
       ref = null;
   }
 
-  useOutsideClick(ref, handleOutsideClick);
+  useOutsideClick(ref, () => setActiveMenuId(MenuId.NONE));
 
   return (
     <div

@@ -200,7 +200,7 @@ const AppSafari: FC<Record<string, never>> = () => {
             <iframe
               className="w-full h-full"
               title="Safari Browser"
-              frameBorder={0}
+              frameBorder="0"
               src={`https://www.bing.com/search?q=${prevSearchValue}`}
             />
           )
