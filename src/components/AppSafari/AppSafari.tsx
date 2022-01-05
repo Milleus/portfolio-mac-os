@@ -2,7 +2,6 @@ import {
   BsChevronDown,
   BsChevronLeft,
   BsChevronRight,
-  BsGlobe2,
   BsLayoutSidebar,
 } from "react-icons/bs";
 import {
@@ -23,6 +22,8 @@ import { MdSearch } from "react-icons/md";
 import classNames from "classnames";
 
 import { ApplicationKeys } from "reducers/applicationSlice";
+import { useAppSelector } from "hooks";
+import AppSafariOffline from "components/AppSafariOffline";
 import AppSafariStart from "components/AppSafariStart";
 import Button, { ButtonAppearance } from "base-components/Button";
 import Window from "components/Window";
@@ -32,19 +33,26 @@ import WindowControls from "components/WindowControls";
 const SAFARI_DEFAULT_WIDTH_PX = 1024;
 
 const AppSafari: FC<Record<string, never>> = () => {
-  const [value, setValue] = useState<string>("");
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [isSearched, setIsSearched] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { isWifiOn } = useAppSelector((state) => state.system);
   const [width, setWidth] = useState<number>(SAFARI_DEFAULT_WIDTH_PX);
+  const [isStartPage, setIsStartPage] = useState<boolean>(true);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [prevSearchValue, setPrevSearchValue] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleWidthChange = (width: number) => {
     setWidth(width);
   };
 
   const handleBrowserBack = () => {
-    setValue("");
-    setIsSearched(false);
+    setInputValue("");
+    setIsStartPage(true);
+  };
+
+  const handleBrowserForward = () => {
+    setInputValue(prevSearchValue);
+    setIsStartPage(false);
   };
 
   const handleInputFocus = () => {
@@ -60,21 +68,29 @@ const AppSafari: FC<Record<string, never>> = () => {
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    setInputValue(event.target.value);
   };
 
   const handleInputKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      setIsSearched(true);
+      setPrevSearchValue(inputValue);
+      setIsStartPage(false);
       inputRef.current && inputRef.current.blur();
     }
+  };
+
+  const inputWrapperClasses = {
+    "w-full h-full flex justify-center rounded-lg border border-gray-300 ml-2 focus-within:outline focus-within:outline-[3px] focus-within:outline-blue-400":
+      true,
+    "bg-gray-200": isStartPage && isWifiOn,
+    "bg-gray-50": !isStartPage || !isWifiOn,
   };
 
   const inputClasses = {
     "h-full min-w-[12rem] bg-transparent rounded-lg text-neutral-500 text-xs leading-none tracking-wide pr-2 outline-none":
       true,
-    "transition-none w-full": isFocused || value.length > 0,
-    "transition-all w-0": !isFocused && value.length === 0,
+    "transition-none w-full": isFocused || inputValue.length > 0,
+    "transition-all w-0": !isFocused && inputValue.length === 0,
   };
 
   return (
@@ -107,7 +123,7 @@ const AppSafari: FC<Record<string, never>> = () => {
 
             <Button
               appearance={ButtonAppearance.TRANSPARENT}
-              isActive={isSearched}
+              isActive={!isStartPage}
               className="ml-2"
               onClick={handleBrowserBack}
             >
@@ -116,8 +132,9 @@ const AppSafari: FC<Record<string, never>> = () => {
 
             <Button
               appearance={ButtonAppearance.TRANSPARENT}
-              isActive={false}
+              isActive={isStartPage && prevSearchValue.length > 0}
               className="ml-2"
+              onClick={handleBrowserForward}
             >
               <BsChevronRight className="w-4 h-4 stroke-1" />
             </Button>
@@ -133,19 +150,15 @@ const AppSafari: FC<Record<string, never>> = () => {
         </div>
 
         <div className="h-full flex basis-0 grow-[0.42]">
-          <label className="w-full h-full flex justify-center bg-gray-200 rounded-lg ml-2 focus-within:outline focus-within:outline-[3px] focus-within:outline-blue-400">
+          <label className={classNames(inputWrapperClasses)}>
             <div className="w-5 h-full flex items-center ml-2">
-              {value.length > 0 ? (
-                <BsGlobe2 className="w-3 h-3 text-neutral-500" />
-              ) : (
-                <MdSearch className="w-4 h-4 text-neutral-500" />
-              )}
+              <MdSearch className="w-4 h-4 text-neutral-500" />
             </div>
             <input
               ref={inputRef}
               type="text"
               className={classNames(inputClasses)}
-              value={value}
+              value={inputValue}
               placeholder="Search or enter website name"
               autoFocus={true}
               autoComplete="off"
@@ -180,10 +193,19 @@ const AppSafari: FC<Record<string, never>> = () => {
         className="w-full bg-gray-200 overflow-y-auto"
         style={{ height: "calc(100% - 3.25rem" }} // offset height of window bar
       >
-        {isSearched ? (
-          <div>search results</div>
+        {isWifiOn ? (
+          isStartPage ? (
+            <AppSafariStart width={width} />
+          ) : (
+            <iframe
+              className="w-full h-full"
+              title="Safari Browser"
+              frameBorder={0}
+              src={`https://www.bing.com/search?q=${prevSearchValue}`}
+            />
+          )
         ) : (
-          <AppSafariStart width={width} />
+          <AppSafariOffline />
         )}
       </div>
     </Window>
