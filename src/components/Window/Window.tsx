@@ -9,7 +9,11 @@ import {
 } from "react";
 import { Rnd, RndResizeCallback, RndDragCallback } from "react-rnd";
 
-import { ApplicationKeys, updateApplication } from "reducers/applicationSlice";
+import {
+  ApplicationKeys,
+  updateApplication,
+  updateZStack,
+} from "reducers/applicationSlice";
 import { convertRemToPixels } from "utilities";
 import { DOCK_HEIGHT_REM } from "components/Dock";
 import { MENU_BAR_HEIGHT_REM } from "components/MenuBar";
@@ -106,6 +110,10 @@ const Window: FC<WindowProps> = ({
     });
   };
 
+  const handleMouseDown = () => {
+    dispatch(updateZStack(appKey));
+  };
+
   const handleBarDoubleClick = () => {
     dispatch(
       updateApplication({
@@ -139,6 +147,7 @@ const Window: FC<WindowProps> = ({
       onDragStop={handleDragStop}
       onResize={handleResize}
       onResizeStop={handleResizeStop}
+      onMouseDown={handleMouseDown}
     >
       {Children.map(children, (child) => {
         if (!isValidElement(child) || typeof child.type !== "function") {
