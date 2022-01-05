@@ -204,7 +204,7 @@ const AppSafariStart: FC<AppSafariStartProps> = ({ width }) => {
               className="w-7 h-7 text-neutral-500"
             />
           </div>
-          <p className="text-lg font-semi-bold ml-3">{randomTrackers}</p>
+          <p className="text-lg ml-3">{randomTrackers}</p>
           <p className="text-xs tracking-wide ml-5">
             In the last seven days, Safari has prevented {randomTrackers}{" "}
             trackers from profiling you and hidden your IP address from known

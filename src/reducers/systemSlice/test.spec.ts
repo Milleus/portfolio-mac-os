@@ -10,27 +10,27 @@ describe("SystemSlice", () => {
   });
 
   it.each`
-    previousIndex | expectedIndex
-    ${0}          | ${1}
-    ${1}          | ${0}
+    prevIndex | expectedIndex
+    ${0}      | ${1}
+    ${1}      | ${0}
   `(
     "should handle audio playlist index increment",
-    ({ previousIndex, expectedIndex }) => {
-      const previousState = {
+    ({ prevIndex, expectedIndex }) => {
+      const prevState = {
         ...initialState,
-        audioPlaylistIndex: previousIndex,
+        audioPlaylistIndex: prevIndex,
       };
-      expect(reducer(previousState, incrementAudioPlaylistIndex())).toEqual({
-        ...previousState,
+      expect(reducer(prevState, incrementAudioPlaylistIndex())).toEqual({
+        ...prevState,
         audioPlaylistIndex: expectedIndex,
       });
     }
   );
 
   it("should handle system update", () => {
-    const previousState = initialState;
-    expect(reducer(previousState, updateSystem({ isWifiOn: false }))).toEqual({
-      ...previousState,
+    const prevState = initialState;
+    expect(reducer(prevState, updateSystem({ isWifiOn: false }))).toEqual({
+      ...prevState,
       isWifiOn: false,
     });
   });

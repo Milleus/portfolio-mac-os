@@ -11,36 +11,36 @@ describe("ApplicationSlice", () => {
   });
 
   it.each`
-    previousZStack                                      | appKey                    | expectedZStack
+    prevZStack                                          | appKey                    | expectedZStack
     ${[]}                                               | ${ApplicationKeys.SAFARI} | ${[ApplicationKeys.SAFARI]}
     ${[ApplicationKeys.VSCODE]}                         | ${ApplicationKeys.VSCODE} | ${[ApplicationKeys.VSCODE]}
     ${[ApplicationKeys.VSCODE]}                         | ${ApplicationKeys.SAFARI} | ${[ApplicationKeys.VSCODE, ApplicationKeys.SAFARI]}
     ${[ApplicationKeys.VSCODE, ApplicationKeys.SAFARI]} | ${ApplicationKeys.VSCODE} | ${[ApplicationKeys.SAFARI, ApplicationKeys.VSCODE]}
   `(
     "should handle z stack update",
-    ({ previousZStack, appKey, expectedZStack }) => {
-      const previousState = {
+    ({ prevZStack, appKey, expectedZStack }) => {
+      const prevState = {
         ...initialState,
-        zStack: previousZStack,
+        zStack: prevZStack,
       };
-      expect(reducer(previousState, updateZStack(appKey))).toEqual({
-        ...previousState,
+      expect(reducer(prevState, updateZStack(appKey))).toEqual({
+        ...prevState,
         zStack: expectedZStack,
       });
     }
   );
 
   it("should handle application update", () => {
-    const previousState = initialState;
+    const prevState = initialState;
     expect(
       reducer(
-        previousState,
+        prevState,
         updateApplication({
           [ApplicationKeys.SAFARI]: { isOpen: true, windowStatus: "maximized" },
         })
       )
     ).toEqual({
-      ...previousState,
+      ...prevState,
       [ApplicationKeys.SAFARI]: { isOpen: true, windowStatus: "maximized" },
     });
   });

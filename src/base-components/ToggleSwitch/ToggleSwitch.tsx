@@ -8,7 +8,7 @@ export type ToggleSwitchProps = {
 
 const ToggleSwitch: FC<ToggleSwitchProps> = ({ isChecked, onChange }) => {
   const sliderClasses = {
-    "absolute w-full h-full box-content border rounded-full transition-colors duration-100 cursor-pointer":
+    "absolute w-full h-full box-content rounded-full shadow-inner transition-colors duration-100 cursor-pointer":
       true,
     "before:absolute before:bg-gray-50 before:w-5 before:h-5 before:rounded-full before:transition-transform before:duration-100":
       true,
