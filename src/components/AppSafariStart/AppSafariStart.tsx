@@ -155,13 +155,17 @@ const AppSafariStart: FC<AppSafariStartProps> = ({ width }) => {
         </p>
         {favouriteItems.map((item, index) => {
           return (
-            <Link key={`favourites-${index}`} href={item.link}>
+            <Link
+              key={`favourites-${index}`}
+              href={item.link}
+              className="mb-1.5"
+            >
               <img
                 src={item.imgSrc}
                 alt={`${item.label} link`}
                 className="w-16 h-16 rounded-lg shadow-md"
               />
-              <p className="w-16 h-8 text-xs text-center break-words line-clamp-2 my-1.5">
+              <p className="w-16 h-8 text-xs text-center break-words line-clamp-2 mt-1.5">
                 {item.label}
               </p>
             </Link>
@@ -173,13 +177,17 @@ const AppSafariStart: FC<AppSafariStartProps> = ({ width }) => {
         </p>
         {frequentlyVisitedItems.map((item, index) => {
           return (
-            <Link key={`frequently-visited-${index}`} href={item.link}>
+            <Link
+              key={`frequently-visited-${index}`}
+              href={item.link}
+              className="mb-1.5"
+            >
               <img
                 src={item.imgSrc}
                 alt={`${item.label} link`}
                 className="w-16 h-16 rounded-lg shadow-md"
               />
-              <p className="w-16 h-8 text-xs text-center break-words line-clamp-2 my-1.5">
+              <p className="w-16 h-8 text-xs text-center break-words line-clamp-2 mt-1.5">
                 {item.label}
               </p>
             </Link>

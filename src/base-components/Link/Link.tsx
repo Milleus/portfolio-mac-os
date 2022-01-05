@@ -3,11 +3,17 @@ import { FC, ReactNode } from "react";
 export type LinkProps = {
   children: ReactNode;
   href?: string;
+  className?: string;
 };
 
-const Link: FC<LinkProps> = ({ children, href }) => {
+const Link: FC<LinkProps> = ({ children, href, className }) => {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
+    <a
+      href={href}
+      className={className}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       {children}
     </a>
   );
