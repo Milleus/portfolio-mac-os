@@ -14,6 +14,7 @@ import MenuBar from "components/MenuBar";
 import WallpaperMontereyDark from "./images/wallpaper-monterey-dark.jpeg";
 import WallpaperMontereyLight from "./images/wallpaper-monterey-light.jpeg";
 import WindowDragBoundary from "components/WindowDragBoundary";
+import AppNotes from "components/AppNotes";
 
 const Desktop: FC<Record<string, never>> = () => {
   const {
@@ -23,7 +24,9 @@ const Desktop: FC<Record<string, never>> = () => {
     isAudioPlaying,
     audioPlaylistIndex,
   } = useAppSelector((state) => state.system);
-  const { safari, vscode } = useAppSelector((state) => state.application);
+  const { notes, safari, vscode } = useAppSelector(
+    (state) => state.application
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -54,6 +57,7 @@ const Desktop: FC<Record<string, never>> = () => {
       <MenuBar />
 
       <WindowDragBoundary>
+        {notes.isOpen && <AppNotes />}
         {safari.isOpen && <AppSafari />}
         {vscode.isOpen && <AppVSCode />}
       </WindowDragBoundary>
