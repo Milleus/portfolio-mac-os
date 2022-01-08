@@ -33,6 +33,7 @@ const Button: FC<ButtonProps> = ({
   let buttonClasses: Mapping;
   let handleMouseDown: MouseEventHandler | undefined;
   let handleDoubleClick: MouseEventHandler | undefined;
+  let handleClick: MouseEventHandler | undefined = onClick;
   let disabled: boolean | undefined = !onClick;
 
   switch (appearance) {
@@ -73,13 +74,16 @@ const Button: FC<ButtonProps> = ({
         "text-neutral-400 cursor-default": !isEnabled && !isActive,
         "text-neutral-500 bg-gray-900/10": isActive,
       };
+
       const stopPropagation = (event: MouseEvent<HTMLButtonElement>) => {
-        // prevents drag / double click
         event.stopPropagation();
       };
 
+      // disabled buttons allow parent elements to be clickable.
+      // since the parent element is the window bar, it would allow dragging and double click which we want to prevent.
       handleMouseDown = stopPropagation;
       handleDoubleClick = stopPropagation;
+      handleClick = isEnabled ? onClick : undefined;
       disabled = undefined;
       break;
   }
@@ -91,7 +95,7 @@ const Button: FC<ButtonProps> = ({
       data-id={dataId}
       onMouseDown={handleMouseDown}
       onDoubleClick={handleDoubleClick}
-      onClick={onClick}
+      onClick={handleClick}
       disabled={disabled}
     >
       {children}
