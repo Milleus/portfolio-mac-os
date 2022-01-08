@@ -72,7 +72,7 @@ const AppSafari: FC<Record<string, never>> = () => {
   };
 
   const handleInputKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (inputValue.length > 0 && event.key === "Enter") {
       setPrevSearchValue(inputValue);
       setIsStartPage(false);
       inputRef.current && inputRef.current.blur();
