@@ -199,10 +199,7 @@ const AppSafariStart: FC<AppSafariStartProps> = ({ width }) => {
         </p>
         <div className="col-span-full flex items-center bg-gray-100 rounded-lg shadow-md p-5">
           <div className="w-7 h-7">
-            <IoShieldHalfOutline
-              size={18}
-              className="w-7 h-7 text-neutral-500"
-            />
+            <IoShieldHalfOutline className="w-7 h-7 text-neutral-500" />
           </div>
           <p className="text-lg ml-3">{randomTrackers}</p>
           <p className="text-xs tracking-wide ml-5">

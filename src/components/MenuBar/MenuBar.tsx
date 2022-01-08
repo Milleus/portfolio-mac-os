@@ -64,7 +64,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         <div className="flex relative" ref={menuAppleRef}>
           <Button
             ariaLabel="apple menu"
-            appearance={ButtonAppearance.MENU}
+            appearance={ButtonAppearance.MENU_BAR}
             isActive={activeMenuId === MenuId.APPLE}
             dataId={MenuId.APPLE}
             onClick={handleItemClick}
@@ -74,20 +74,20 @@ const MenuBar: FC<Record<string, never>> = () => {
           {activeMenuId === MenuId.APPLE && <MenuApple />}
         </div>
 
-        <Button appearance={ButtonAppearance.MENU}>
+        <Button appearance={ButtonAppearance.MENU_BAR}>
           <span className="font-bold mx-1">Finder</span>
         </Button>
       </div>
 
       <div className="flex">
-        <Button appearance={ButtonAppearance.MENU}>
+        <Button appearance={ButtonAppearance.MENU_BAR}>
           <BatteryIcon isValueVisible={true} />
         </Button>
 
         <div className="flex relative" ref={menuWifiRef}>
           <Button
             ariaLabel="wifi menu"
-            appearance={ButtonAppearance.MENU}
+            appearance={ButtonAppearance.MENU_BAR}
             isActive={activeMenuId === MenuId.WIFI}
             dataId={MenuId.WIFI}
             onClick={handleItemClick}
@@ -103,7 +103,7 @@ const MenuBar: FC<Record<string, never>> = () => {
 
         <Button
           ariaLabel="spotlight"
-          appearance={ButtonAppearance.MENU}
+          appearance={ButtonAppearance.MENU_BAR}
           isActive={false}
           dataId={MenuId.SPOTLIGHT}
           onClick={handleItemClick}
@@ -114,7 +114,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         <div className="flex" ref={menuControlCenterRef}>
           <Button
             ariaLabel="control center menu"
-            appearance={ButtonAppearance.MENU}
+            appearance={ButtonAppearance.MENU_BAR}
             isActive={activeMenuId === MenuId.CONTROL_CENTER}
             dataId={MenuId.CONTROL_CENTER}
             onClick={handleItemClick}
@@ -124,7 +124,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           {activeMenuId === MenuId.CONTROL_CENTER && <MenuControlCenter />}
         </div>
 
-        <Button appearance={ButtonAppearance.MENU}>
+        <Button appearance={ButtonAppearance.MENU_BAR}>
           <span className="mx-1">{format(new Date(date), "eee d MMM")}</span>
           <span className="min-w-0 w-16 mr-1">
             {format(new Date(date), "h:mm aa")}

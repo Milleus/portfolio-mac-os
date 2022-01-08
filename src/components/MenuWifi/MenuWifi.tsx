@@ -1,5 +1,5 @@
-import { BsFillLockFill } from "react-icons/bs";
 import { FC } from "react";
+import { IoLockClosed } from "react-icons/io5";
 import { MdWifi } from "react-icons/md";
 
 import { updateSystem } from "reducers/systemSlice";
@@ -34,10 +34,7 @@ const MenuWifi: FC<Record<string, never>> = () => {
           <MdWifi className="w-4.5 h-4.5 box-content bg-blue-500 p-1 rounded-full text-gray-50" />
           <span className="text-sm ml-2.5">Home</span>
         </div>
-        <BsFillLockFill
-          size={12}
-          className="text-gray-600 dark:text-gray-300"
-        />
+        <IoLockClosed className="w-3 h-3 text-gray-600 dark:text-gray-300" />
       </div>
     </div>
   );

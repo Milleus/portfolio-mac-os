@@ -1,18 +1,19 @@
 import { FC, MouseEvent, MouseEventHandler, ReactNode } from "react";
-import classNames from "classnames";
+import classNames, { Mapping } from "classnames";
 
 export enum ButtonAppearance {
   DEFAULT,
-  MENU,
+  MENU_BAR,
   MENU_ITEM,
   TOGGLE,
-  TRANSPARENT,
+  WINDOW_BAR,
 }
 
 export type ButtonProps = {
   appearance: ButtonAppearance;
   children: ReactNode;
   isActive?: boolean;
+  isEnabled?: boolean;
   ariaLabel?: string;
   className?: string;
   dataId?: string;
@@ -23,12 +24,16 @@ const Button: FC<ButtonProps> = ({
   appearance,
   children,
   isActive,
+  isEnabled,
   ariaLabel,
   className,
   dataId,
   onClick,
 }) => {
-  let buttonClasses;
+  let buttonClasses: Mapping;
+  let handleMouseDown: MouseEventHandler | undefined;
+  let handleDoubleClick: MouseEventHandler | undefined;
+  let disabled: boolean | undefined = !onClick;
 
   switch (appearance) {
     case ButtonAppearance.DEFAULT:
@@ -37,7 +42,7 @@ const Button: FC<ButtonProps> = ({
       };
       break;
 
-    case ButtonAppearance.MENU:
+    case ButtonAppearance.MENU_BAR:
       buttonClasses = {
         "flex items-center rounded px-1.5 text-sm cursor-default": true,
         "active:bg-gray-900/10 dark:active:bg-gray-50/10": onClick,
@@ -61,28 +66,33 @@ const Button: FC<ButtonProps> = ({
       };
       break;
 
-    case ButtonAppearance.TRANSPARENT:
+    case ButtonAppearance.WINDOW_BAR:
       buttonClasses = {
-        "h-full flex justify-center items-center p-1.5": true,
-        "text-neutral-500 hover:bg-gray-900/10 hover:rounded": isActive,
-        "text-neutral-400": !isActive,
+        "h-full flex justify-center items-center rounded p-1.5": true,
+        "text-neutral-500 hover:bg-gray-900/10": isEnabled && !isActive,
+        "text-neutral-400 cursor-default": !isEnabled && !isActive,
+        "text-neutral-500 bg-gray-900/10": isActive,
       };
+      const stopPropagation = (event: MouseEvent<HTMLButtonElement>) => {
+        // prevents drag / double click
+        event.stopPropagation();
+      };
+
+      handleMouseDown = stopPropagation;
+      handleDoubleClick = stopPropagation;
+      disabled = undefined;
       break;
   }
-
-  const stopPropagation = (event: MouseEvent<HTMLButtonElement>) => {
-    // prevents drag / double click
-    event.stopPropagation();
-  };
 
   return (
     <button
       className={classNames(buttonClasses, className)}
       aria-label={ariaLabel}
       data-id={dataId}
-      onMouseDown={stopPropagation}
-      onDoubleClick={stopPropagation}
+      onMouseDown={handleMouseDown}
+      onDoubleClick={handleDoubleClick}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

@@ -106,45 +106,35 @@ const AppSafari: FC<Record<string, never>> = () => {
         <div className="h-full flex justify-between basis-0 grow-[0.29]">
           <div className="flex">
             <WindowControls appKey={ApplicationKeys.SAFARI} />
-
             <Button
-              appearance={ButtonAppearance.TRANSPARENT}
-              isActive={true}
+              appearance={ButtonAppearance.WINDOW_BAR}
+              isEnabled={true}
               className="ml-5"
             >
               <BsLayoutSidebar className="w-5 h-4.5" />
             </Button>
-
             <div className="w-px h-5 bg-gray-200 my-auto"></div>
-
-            <Button appearance={ButtonAppearance.TRANSPARENT} isActive={true}>
+            <Button appearance={ButtonAppearance.WINDOW_BAR} isEnabled={true}>
               <BsChevronDown className="w-2 h-2 stroke-2" />
             </Button>
-
             <Button
-              appearance={ButtonAppearance.TRANSPARENT}
-              isActive={!isStartPage}
+              appearance={ButtonAppearance.WINDOW_BAR}
+              isEnabled={!isStartPage}
               className="ml-2"
               onClick={handleBrowserBack}
             >
               <BsChevronLeft className="w-4 h-4 stroke-1" />
             </Button>
-
             <Button
-              appearance={ButtonAppearance.TRANSPARENT}
-              isActive={isStartPage && prevSearchValue.length > 0}
+              appearance={ButtonAppearance.WINDOW_BAR}
+              isEnabled={isStartPage && prevSearchValue.length > 0}
               className="ml-2"
               onClick={handleBrowserForward}
             >
               <BsChevronRight className="w-4 h-4 stroke-1" />
             </Button>
           </div>
-
-          <Button
-            appearance={ButtonAppearance.TRANSPARENT}
-            isActive={false}
-            className="ml-5"
-          >
+          <Button appearance={ButtonAppearance.WINDOW_BAR} className="ml-5">
             <IoShieldHalfOutline className="w-4.5 h-4.5" />
           </Button>
         </div>
@@ -173,17 +163,13 @@ const AppSafari: FC<Record<string, never>> = () => {
         </div>
 
         <div className="h-full flex justify-end basis-0 grow-[0.29] space-x-1.5">
-          <Button
-            appearance={ButtonAppearance.TRANSPARENT}
-            isActive={false}
-            className="ml-3"
-          >
+          <Button appearance={ButtonAppearance.WINDOW_BAR} className="ml-3">
             <IoShareOutline className="w-5 h-5" />
           </Button>
-          <Button appearance={ButtonAppearance.TRANSPARENT} isActive={true}>
+          <Button appearance={ButtonAppearance.WINDOW_BAR} isEnabled={true}>
             <IoAddOutline className="w-5 h-5" />
           </Button>
-          <Button appearance={ButtonAppearance.TRANSPARENT} isActive={true}>
+          <Button appearance={ButtonAppearance.WINDOW_BAR} isEnabled={true}>
             <IoGridOutline className="w-4 h-4" />
           </Button>
         </div>

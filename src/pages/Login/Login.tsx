@@ -62,11 +62,11 @@ const Login: FC<Record<string, never>> = () => {
       }}
     >
       <div className="w-full flex justify-end mt-px mr-3">
-        <Button appearance={ButtonAppearance.MENU}>
+        <Button appearance={ButtonAppearance.MENU_BAR}>
           <BatteryIcon isValueVisible={false} isForcedDarkMode={true} />
         </Button>
         {!isFirstLogIn && (
-          <Button appearance={ButtonAppearance.MENU}>
+          <Button appearance={ButtonAppearance.MENU_BAR}>
             {isWifiOn ? (
               <MdWifi className="w-4.5 h-4.5" />
             ) : (
@@ -74,7 +74,7 @@ const Login: FC<Record<string, never>> = () => {
             )}
           </Button>
         )}
-        <Button appearance={ButtonAppearance.MENU}>
+        <Button appearance={ButtonAppearance.MENU_BAR}>
           <span className="mx-1">{format(new Date(date), "eee d MMM")}</span>
           <span className="min-w-0 w-16">
             {format(new Date(date), "h:mm aa")}

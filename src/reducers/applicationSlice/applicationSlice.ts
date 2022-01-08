@@ -26,7 +26,7 @@ type ApplicationState = Applications & {
 };
 
 export const initialState: ApplicationState = {
-  zStack: [],
+  zStack: [ApplicationKeys.NOTES],
   [ApplicationKeys.FACETIME]: {
     isOpen: false,
     windowStatus: "normal",
