@@ -103,7 +103,7 @@ const AppSafari: FC<Record<string, never>> = () => {
       onWidthChange={handleWidthChange}
     >
       <WindowBar className="h-[3.25rem] flex items-stretch bg-gray-50 border-b border-gray-300 py-3 pl-2 pr-3">
-        <div className="h-full flex justify-between basis-0 grow-[0.29]">
+        <div className="h-full flex justify-between basis-0 grow-[29]">
           <div className="flex">
             <WindowControls appKey={ApplicationKeys.SAFARI} />
             <Button
@@ -139,7 +139,7 @@ const AppSafari: FC<Record<string, never>> = () => {
           </Button>
         </div>
 
-        <div className="h-full flex basis-0 grow-[0.42]">
+        <div className="h-full flex basis-0 grow-[42]">
           <label className={classNames(inputWrapperClasses)}>
             <div className="w-5 h-full flex items-center ml-2">
               <MdSearch className="w-4 h-4 text-neutral-500" />
@@ -162,14 +162,22 @@ const AppSafari: FC<Record<string, never>> = () => {
           </label>
         </div>
 
-        <div className="h-full flex justify-end basis-0 grow-[0.29] space-x-1.5">
+        <div className="h-full flex justify-end basis-0 grow-[29]">
           <Button appearance={ButtonAppearance.WINDOW_BAR} className="ml-3">
             <IoShareOutline className="w-5 h-5" />
           </Button>
-          <Button appearance={ButtonAppearance.WINDOW_BAR} isEnabled={true}>
-            <IoAddOutline className="w-5 h-5" />
+          <Button
+            appearance={ButtonAppearance.WINDOW_BAR}
+            isEnabled={true}
+            className="ml-1.5"
+          >
+            <IoAddOutline className="w-5 h-5 ml" />
           </Button>
-          <Button appearance={ButtonAppearance.WINDOW_BAR} isEnabled={true}>
+          <Button
+            appearance={ButtonAppearance.WINDOW_BAR}
+            isEnabled={true}
+            className="ml-1.5"
+          >
             <IoGridOutline className="w-4 h-4" />
           </Button>
         </div>

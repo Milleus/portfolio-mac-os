@@ -25,7 +25,7 @@ const MenuWifi: FC<Record<string, never>> = () => {
 
       <hr className="border-gray-400 m-1.5 dark:border-gray-500" />
 
-      <p className="font-bold px-1.5 text-xs text-gray-600 dark:text-gray-300">
+      <p className="font-bold text-xs text-gray-600 px-1.5 dark:text-gray-300">
         Preferred Network
       </p>
 

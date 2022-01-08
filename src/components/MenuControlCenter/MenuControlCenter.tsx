@@ -103,7 +103,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
     <div className="absolute top-6 right-0 w-[19rem] bg-gray-200/50 backdrop-blur-lg p-2.5 m-1 rounded-2xl shadow-md dark:bg-gray-700/50">
       <div className="grid grid-cols-4 grid-rows-5 gap-2.5">
         <div className="flex flex-col justify-around bg-gray-200/90 rounded-xl shadow-md col-span-2 row-span-2 p-3 dark:bg-gray-700/90">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.TOGGLE}
               isActive={isWifiOn}
@@ -111,7 +111,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             >
               <MdWifi className="w-4.5 h-4.5" />
             </Button>
-            <div>
+            <div className="ml-2">
               <p className="text-xs font-semibold">Wi-Fi</p>
               <p className="text-[0.65rem] leading-[1.1] text-gray-600 dark:text-gray-300">
                 {isWifiOn ? "Home" : "Not connected"}
@@ -119,7 +119,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.TOGGLE}
               isActive={isBluetoothOn}
@@ -131,7 +131,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
                 <MdBluetoothDisabled className="w-4.5 h-4.5" />
               )}
             </Button>
-            <div>
+            <div className="ml-2">
               <p className="text-xs font-semibold">Bluetooth</p>
               <p className="text-[0.65rem] leading-[1.1] text-gray-600 dark:text-gray-300">
                 {isBluetoothOn ? "On" : "Off"}
@@ -139,7 +139,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.TOGGLE}
               isActive={isBluetoothOn && isAirDropOn}
@@ -147,7 +147,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             >
               <MdWifiTethering className="w-4.5 h-4.5" />
             </Button>
-            <div>
+            <div className="ml-2">
               <p className="text-xs font-semibold">AirDrop</p>
               <p className="text-[0.65rem] leading-[1.1] text-gray-600 dark:text-gray-300">
                 {isBluetoothOn && isAirDropOn ? "Contacts Only" : "Off"}
@@ -224,14 +224,14 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           />
         </div>
 
-        <div className="flex flex-row justify-between bg-gray-200/90 rounded-xl shadow-md col-span-full px-3 py-1.5 space-x-4 dark:bg-gray-700/90">
-          <div className="flex items-center min-w-0 space-x-2">
+        <div className="flex flex-row justify-between bg-gray-200/90 rounded-xl shadow-md col-span-full px-3 py-1.5 dark:bg-gray-700/90">
+          <div className="flex items-center min-w-0">
             <img
               className="w-10 h-10 rounded"
               src={audioPlaylist[audioPlaylistIndex].coverSrc}
               alt="cover art"
             />
-            <div className="overflow-hidden">
+            <div className="overflow-hidden ml-2">
               <p className="truncate text-xs font-semibold">
                 {audioPlaylist[audioPlaylistIndex].title}
               </p>
@@ -241,7 +241,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center ml-4">
             <Button
               appearance={ButtonAppearance.DEFAULT}
               onClick={handleAudioPlayPauseClick}
@@ -255,6 +255,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             <Button
               appearance={ButtonAppearance.DEFAULT}
               onClick={handlAudioSkipForwardClick}
+              className="ml-2"
             >
               <IoPlayForward className="w-4.5 h-4.5" />
             </Button>

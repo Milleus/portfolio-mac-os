@@ -34,7 +34,7 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
   };
 
   return (
-    <div className="flex items-center ml-3 space-x-2 group">
+    <div className="flex items-center ml-3 group">
       <Button
         appearance={ButtonAppearance.DEFAULT}
         className="w-3 h-3 rounded-full bg-red-500"
@@ -45,7 +45,7 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
 
       <Button
         appearance={ButtonAppearance.DEFAULT}
-        className="w-3 h-3 rounded-full bg-amber-500"
+        className="w-3 h-3 rounded-full bg-amber-500 ml-2"
         onClick={handleMinimizeClick}
       >
         <CgMathMinus className="w-3 h-3 invisible text-gray-900 group-hover:visible" />
@@ -53,7 +53,7 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
 
       <Button
         appearance={ButtonAppearance.DEFAULT}
-        className="w-3 h-3 rounded-full bg-green-500"
+        className="w-3 h-3 rounded-full bg-green-500 ml-2"
         onClick={handleMaximizeClick}
       >
         <CgArrowsExpandLeft className="w-3 h-3 invisible text-gray-900 group-hover:visible p-0.5" />
