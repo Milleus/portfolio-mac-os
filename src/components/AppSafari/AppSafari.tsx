@@ -23,8 +23,7 @@ import classNames from "classnames";
 
 import { ApplicationKeys } from "reducers/applicationSlice";
 import { useAppSelector } from "hooks";
-import AppSafariOffline from "components/AppSafariOffline";
-import AppSafariStart from "components/AppSafariStart";
+import AppSafariContent from "components/AppSafariContent";
 import Button, { ButtonAppearance } from "base-components/Button";
 import Window from "components/Window";
 import WindowBar from "components/WindowBar";
@@ -185,22 +184,14 @@ const AppSafari: FC<Record<string, never>> = () => {
 
       <div
         className="w-full bg-gray-200 overflow-y-auto"
-        style={{ height: "calc(100% - 3.25rem" }} // offset height of window bar
+        style={{ height: "calc(100% - 3.25rem)" }} // offset height of window bar
       >
-        {isWifiOn ? (
-          isStartPage ? (
-            <AppSafariStart width={width} />
-          ) : (
-            <iframe
-              className="w-full h-full"
-              title="Safari Browser"
-              frameBorder="0"
-              src={`https://www.bing.com/search?q=${prevSearchValue}`}
-            />
-          )
-        ) : (
-          <AppSafariOffline />
-        )}
+        <AppSafariContent
+          isWifiOn={isWifiOn}
+          isStartPage={isStartPage}
+          prevSearchValue={prevSearchValue}
+          width={width}
+        />
       </div>
     </Window>
   );
