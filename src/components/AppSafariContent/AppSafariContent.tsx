@@ -17,6 +17,7 @@ import LinkNotpron from "./images/link-notpron.png";
 import LinkProjectFugu from "./images/link-project-fugu.png";
 import LinkReddit from "./images/link-reddit.png";
 import LinkTailwindCSS from "./images/link-tailwind-css.png";
+import LinkTelegram from "./images/link-telegram.png";
 import LinkTwitch from "./images/link-twitch.png";
 import LinkTwitter from "./images/link-twitter.png";
 import LinkYouTube from "./images/link-youtube.png";
@@ -47,6 +48,11 @@ const favouriteItems: Array<LinkItem> = [
     label: "Twitter",
     imgSrc: LinkTwitter,
     link: "https://twitter.com/milleus",
+  },
+  {
+    label: "Telegram",
+    imgSrc: LinkTelegram,
+    link: "https://t.me/milleus",
   },
   {
     label: "Gmail",

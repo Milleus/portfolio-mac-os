@@ -82,7 +82,7 @@ const Login: FC<Record<string, never>> = () => {
         </Button>
       </div>
 
-      <div className="flex flex-col justify-center items-center grow mt-12">
+      <div className="h-full flex flex-col justify-center items-center mt-12">
         <img
           className="w-36 h-36 rounded-full"
           src={PhotoProfile}
