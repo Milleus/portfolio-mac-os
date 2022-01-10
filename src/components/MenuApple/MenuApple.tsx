@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from "react";
+import { FC, MouseEvent } from "react";
 
 import { Page, updateSystem } from "reducers/systemSlice";
 import { useAppDispatch } from "hooks";
@@ -6,49 +6,38 @@ import Button, { ButtonAppearance } from "base-components/Button";
 
 type MenuAppleItem = {
   label: string | null;
-  onClick?: MouseEventHandler;
+  page?: Page;
 };
+
+const menuAppleItems: Array<MenuAppleItem> = [
+  { label: "About This Mac" },
+  { label: null },
+  { label: "System Preferences..." },
+  { label: "App Store..." },
+  { label: null },
+  { label: "Recent Items" },
+  { label: null },
+  { label: "Force Quit..." },
+  { label: null },
+  { label: "Sleep", page: Page.SLEEP },
+  { label: "Restart...", page: Page.BOOT_RESTART },
+  { label: "Shut Down...", page: Page.BOOT_SHUT_DOWN },
+  { label: null },
+  { label: "Lock Screen", page: Page.LOGIN },
+  { label: "Log Out Milleus...", page: Page.LOGIN },
+];
 
 const MenuApple: FC<Record<string, never>> = () => {
   const dispatch = useAppDispatch();
 
-  const handleSleepClick = () => {
-    dispatch(updateSystem({ activePage: Page.SLEEP, isAudioPlaying: false }));
-  };
+  const handleItemClick = (event: MouseEvent<HTMLButtonElement>) => {
+    const page = event.currentTarget.getAttribute("data-id");
 
-  const handleRestartClick = () => {
-    dispatch(
-      updateSystem({ activePage: Page.BOOT_RESTART, isAudioPlaying: false })
-    );
+    page &&
+      dispatch(
+        updateSystem({ activePage: page as Page, isAudioPlaying: false })
+      );
   };
-
-  const handleShutDownClick = () => {
-    dispatch(
-      updateSystem({ activePage: Page.BOOT_SHUT_DOWN, isAudioPlaying: false })
-    );
-  };
-
-  const handleLockScreenClick = () => {
-    dispatch(updateSystem({ activePage: Page.LOGIN, isAudioPlaying: false }));
-  };
-
-  const menuAppleItems: Array<MenuAppleItem> = [
-    { label: "About This Mac" },
-    { label: null },
-    { label: "System Preferences..." },
-    { label: "App Store..." },
-    { label: null },
-    { label: "Recent Items" },
-    { label: null },
-    { label: "Force Quit..." },
-    { label: null },
-    { label: "Sleep", onClick: handleSleepClick },
-    { label: "Restart...", onClick: handleRestartClick },
-    { label: "Shut Down...", onClick: handleShutDownClick },
-    { label: null },
-    { label: "Lock Screen", onClick: handleLockScreenClick },
-    { label: "Log Out Milleus...", onClick: handleLockScreenClick },
-  ];
 
   return (
     <ul className="absolute top-6 left-0 w-60 bg-gray-200/90 backdrop-blur-lg p-1 mt-px rounded shadow-md dark:bg-gray-700/90">
@@ -58,7 +47,8 @@ const MenuApple: FC<Record<string, never>> = () => {
             {item.label ? (
               <Button
                 appearance={ButtonAppearance.MENU_ITEM}
-                onClick={item.onClick}
+                dataId={item.page}
+                onClick={handleItemClick}
               >
                 {item.label}
               </Button>
