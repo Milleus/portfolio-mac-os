@@ -7,6 +7,7 @@ import {
 } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAudio } from "hooks/useAudio";
+import AppNotes from "components/AppNotes";
 import AppSafari from "components/AppSafari";
 import AppVSCode from "components/AppVSCode";
 import Dock from "components/Dock";
@@ -14,7 +15,6 @@ import MenuBar from "components/MenuBar";
 import WallpaperMontereyDark from "./images/wallpaper-monterey-dark.jpeg";
 import WallpaperMontereyLight from "./images/wallpaper-monterey-light.jpeg";
 import WindowDragBoundary from "components/WindowDragBoundary";
-import AppNotes from "components/AppNotes";
 
 const Desktop: FC<Record<string, never>> = () => {
   const {
