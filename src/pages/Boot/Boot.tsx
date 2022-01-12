@@ -4,11 +4,19 @@ import { FC, useState } from "react";
 import { Page, updateSystem } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector, useInterval } from "hooks";
 
+enum BootStatus {
+  NOT_BOOTED,
+  BOOTING,
+  BOOTED,
+}
+
 const Boot: FC<Record<string, never>> = () => {
   const { activePage } = useAppSelector((state) => state.system);
   const dispatch = useAppDispatch();
-  const [isBooting, setIsBooting] = useState<boolean>(
-    activePage === Page.BOOT_RESTART ? true : false
+  const [bootStatus, setBootStatus] = useState<BootStatus>(
+    activePage === Page.BOOT_RESTART
+      ? BootStatus.BOOTING
+      : BootStatus.NOT_BOOTED
   );
   const [bootProgress, setBootProgress] = useState<number>(0);
 
@@ -19,16 +27,19 @@ const Boot: FC<Record<string, never>> = () => {
   };
 
   const handleClick = () => {
-    !isBooting && setIsBooting(true);
+    bootStatus === BootStatus.NOT_BOOTED && setBootStatus(BootStatus.BOOTING);
   };
 
   useInterval(
     () => {
-      bootProgress >= 100
-        ? handlePageLoad()
-        : setBootProgress(bootProgress + 1);
+      if (bootProgress >= 100) {
+        setBootStatus(BootStatus.BOOTED);
+        handlePageLoad();
+      } else {
+        setBootProgress(bootProgress + 1);
+      }
     },
-    isBooting ? 40 : null
+    bootStatus === BootStatus.BOOTING ? 40 : null
   );
 
   return (
@@ -37,7 +48,9 @@ const Boot: FC<Record<string, never>> = () => {
       onClick={handleClick}
     >
       <BsApple className="w-24 h-24 mb-20" />
-      {isBooting ? (
+      {bootStatus === BootStatus.NOT_BOOTED ? (
+        <span className="h-1.5 cursor-pointer">Click to boot up</span>
+      ) : (
         <div
           data-testid="boot-progress-bar"
           className="w-60 h-1.5 bg-white/20 rounded-full overflow-hidden"
@@ -48,8 +61,6 @@ const Boot: FC<Record<string, never>> = () => {
             style={{ width: `${bootProgress.toString()}%` }}
           ></div>
         </div>
-      ) : (
-        <span className="h-1.5 cursor-pointer">Click to boot up</span>
       )}
     </div>
   );
