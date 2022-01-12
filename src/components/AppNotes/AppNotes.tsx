@@ -31,16 +31,19 @@ const AppNotes: FC<Record<string, never>> = () => {
     >
       <WindowBar className="h-[3.25rem] flex bg-white">
         <div className="w-[12.25rem] flex shrink-0 bg-gray-300 py-3 px-2">
-          <WindowControls appKey={ApplicationKeys.NOTES} />
+          <WindowControls appKey={ApplicationKeys.NOTES} isActive={true} />
         </div>
 
         <div className="w-full flex bg-white border-b border-b-transparent text-neutral-500 transition duration-500 hover:border-b-neutral-200 hover:bg-gray-50">
           <div className="w-1/4 flex justify-between border-r border-r-neutral-200 py-3 px-2">
             <div className="flex rounded ml-1.5 hover:bg-gray-900/10">
-              <Button appearance={ButtonAppearance.WINDOW_BAR} isActive={true}>
+              <Button
+                appearance={ButtonAppearance.WINDOW_BAR_TOGGLE}
+                isToggled={true}
+              >
                 <IoListOutline className="w-5 h-5" />
               </Button>
-              <Button appearance={ButtonAppearance.WINDOW_BAR}>
+              <Button appearance={ButtonAppearance.WINDOW_BAR_TOGGLE}>
                 <IoGridOutline className="w-4 h-4 ml-1.5" />
               </Button>
             </div>
@@ -64,7 +67,6 @@ const AppNotes: FC<Record<string, never>> = () => {
             <div className="flex">
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
-                isEnabled={true}
                 className="ml-1.5 text-lg font-light"
               >
                 Aa

@@ -106,7 +106,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.TOGGLE}
-              isActive={isWifiOn}
+              isToggled={isWifiOn}
               onClick={handleWifiClick}
             >
               <MdWifi className="w-4.5 h-4.5" />
@@ -122,7 +122,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.TOGGLE}
-              isActive={isBluetoothOn}
+              isToggled={isBluetoothOn}
               onClick={handleBluetoothClick}
             >
               {isBluetoothOn ? (
@@ -142,7 +142,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.TOGGLE}
-              isActive={isBluetoothOn && isAirDropOn}
+              isToggled={isBluetoothOn && isAirDropOn}
               onClick={handleAirDropClick}
             >
               <MdWifiTethering className="w-4.5 h-4.5" />
@@ -160,7 +160,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
           <div className="flex items-center">
             <Button
               appearance={ButtonAppearance.TOGGLE}
-              isActive={isDarkModeOn}
+              isToggled={isDarkModeOn}
               onClick={handleDarkModeClick}
             >
               <MdDarkMode className="w-4.5 h-4.5" />

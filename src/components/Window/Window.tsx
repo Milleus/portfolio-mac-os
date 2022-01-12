@@ -82,6 +82,18 @@ const Window: FC<WindowProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMaximized]);
 
+  const handleClick = () => {
+    // not using mouse down due to stop propagation
+    dispatch(updateActiveTitle(appKey));
+    dispatch(updateZStack(appKey));
+  };
+
+  const handleDragStart: RndDragCallback = (_e, _d) => {
+    // not using mouse down due to stop propagation
+    dispatch(updateActiveTitle(appKey));
+    dispatch(updateZStack(appKey));
+  };
+
   const handleDragStop: RndDragCallback = (_e, d) => {
     setPositionSize({ ...positionSize, x: d.x, y: d.y });
   };
@@ -108,11 +120,6 @@ const Window: FC<WindowProps> = ({
       width: ref.offsetWidth,
       height: ref.offsetHeight,
     });
-  };
-
-  const handleMouseDown = () => {
-    dispatch(updateActiveTitle(appKey));
-    dispatch(updateZStack(appKey));
   };
 
   const handleBarDoubleClick = () => {
@@ -143,10 +150,11 @@ const Window: FC<WindowProps> = ({
       dragHandleClassName={dragHandleClass}
       disableDragging={isMaximized}
       enableResizing={!isMaximized}
+      onClick={handleClick}
+      onDragStart={handleDragStart}
       onDragStop={handleDragStop}
       onResize={handleResize}
       onResizeStop={handleResizeStop}
-      onMouseDown={handleMouseDown}
     >
       {Children.map(children, (child) => {
         if (!isValidElement(child) || typeof child.type !== "function") {

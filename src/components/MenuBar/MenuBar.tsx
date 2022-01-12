@@ -66,7 +66,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           <Button
             ariaLabel="apple menu"
             appearance={ButtonAppearance.MENU_BAR}
-            isActive={activeMenuId === MenuId.APPLE}
+            isToggled={activeMenuId === MenuId.APPLE}
             dataId={MenuId.APPLE}
             onClick={handleItemClick}
           >
@@ -89,7 +89,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           <Button
             ariaLabel="wifi menu"
             appearance={ButtonAppearance.MENU_BAR}
-            isActive={activeMenuId === MenuId.WIFI}
+            isToggled={activeMenuId === MenuId.WIFI}
             dataId={MenuId.WIFI}
             onClick={handleItemClick}
           >
@@ -105,7 +105,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         <Button
           ariaLabel="spotlight"
           appearance={ButtonAppearance.MENU_BAR}
-          isActive={false}
+          isToggled={false}
           dataId={MenuId.SPOTLIGHT}
           onClick={handleItemClick}
         >
@@ -116,7 +116,7 @@ const MenuBar: FC<Record<string, never>> = () => {
           <Button
             ariaLabel="control center menu"
             appearance={ButtonAppearance.MENU_BAR}
-            isActive={activeMenuId === MenuId.CONTROL_CENTER}
+            isToggled={activeMenuId === MenuId.CONTROL_CENTER}
             dataId={MenuId.CONTROL_CENTER}
             onClick={handleItemClick}
           >

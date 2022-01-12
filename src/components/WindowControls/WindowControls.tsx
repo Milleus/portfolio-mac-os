@@ -1,6 +1,7 @@
 import { BsX } from "react-icons/bs";
 import { CgArrowsExpandLeft, CgMathMinus } from "react-icons/cg";
 import { FC } from "react";
+import classNames from "classnames";
 
 import {
   ApplicationKeys,
@@ -11,9 +12,10 @@ import Button, { ButtonAppearance } from "base-components/Button";
 
 export type WindowControlsProps = {
   appKey: ApplicationKeys;
+  isActive: boolean;
 };
 
-const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
+const WindowControls: FC<WindowControlsProps> = ({ appKey, isActive }) => {
   const applicationState = useAppSelector((state) => state.application);
   const dispatch = useAppDispatch();
 
@@ -39,30 +41,51 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
     dispatch(updateApplicationStatus({ appKey, status: { windowStatus } }));
   };
 
+  const redButtonClasses = {
+    "w-3 h-3 border border-gray-300 rounded-full text-gray-900 group-hover:bg-red-500":
+      true,
+    "bg-neutral-200": !isActive,
+    "bg-red-500": isActive,
+  };
+
+  const amberButtonClasses = {
+    "w-3 h-3 border border-gray-300 rounded-full text-gray-900 ml-2 group-hover:bg-amber-500":
+      true,
+    "bg-neutral-200": !isActive,
+    "bg-amber-500": isActive,
+  };
+
+  const greenButtonClasses = {
+    "w-3 h-3 border border-gray-300 rounded-full text-gray-900 ml-2 group-hover:bg-green-500":
+      true,
+    "bg-neutral-200": !isActive,
+    "bg-green-500": isActive,
+  };
+
   return (
     <div className="flex items-center ml-3 group">
       <Button
         appearance={ButtonAppearance.DEFAULT}
-        className="w-3 h-3 rounded-full bg-red-500"
+        className={classNames(redButtonClasses)}
         onClick={handleCloseClick}
       >
-        <BsX className="w-3 h-3 invisible text-gray-900 group-hover:visible" />
+        <BsX className="w-full h-full invisible group-hover:visible" />
       </Button>
 
       <Button
         appearance={ButtonAppearance.DEFAULT}
-        className="w-3 h-3 rounded-full bg-amber-500 ml-2"
+        className={classNames(amberButtonClasses)}
         onClick={handleMinimizeClick}
       >
-        <CgMathMinus className="w-3 h-3 invisible text-gray-900 group-hover:visible" />
+        <CgMathMinus className="w-full h-full invisible group-hover:visible" />
       </Button>
 
       <Button
         appearance={ButtonAppearance.DEFAULT}
-        className="w-3 h-3 rounded-full bg-green-500 ml-2"
+        className={classNames(greenButtonClasses)}
         onClick={handleMaximizeClick}
       >
-        <CgArrowsExpandLeft className="w-3 h-3 invisible text-gray-900 group-hover:visible p-0.5" />
+        <CgArrowsExpandLeft className="w-full h-full invisible p-0.5 group-hover:visible" />
       </Button>
     </div>
   );

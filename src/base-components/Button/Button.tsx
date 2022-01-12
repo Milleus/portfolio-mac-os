@@ -7,13 +7,15 @@ export enum ButtonAppearance {
   MENU_ITEM,
   TOGGLE,
   WINDOW_BAR,
+  WINDOW_BAR_TOGGLE,
 }
 
 export type ButtonProps = {
   appearance: ButtonAppearance;
   children: ReactNode;
-  isActive?: boolean;
+  isToggled?: boolean;
   isEnabled?: boolean;
+  isActive?: boolean;
   ariaLabel?: string;
   className?: string;
   dataId?: string;
@@ -23,16 +25,15 @@ export type ButtonProps = {
 const Button: FC<ButtonProps> = ({
   appearance,
   children,
-  isActive,
+  isToggled,
   isEnabled,
+  isActive,
   ariaLabel,
   className,
   dataId,
   onClick,
 }) => {
   let buttonClasses: Mapping = {};
-  let handleMouseDown: MouseEventHandler | undefined;
-  let handleDoubleClick: MouseEventHandler | undefined;
   let handleClick: MouseEventHandler | undefined = onClick;
   let disabled: boolean | undefined = !onClick;
 
@@ -41,7 +42,7 @@ const Button: FC<ButtonProps> = ({
       buttonClasses = {
         "flex items-center rounded px-1.5 text-sm cursor-default": true,
         "active:bg-gray-900/10 dark:active:bg-gray-50/10": onClick,
-        "bg-gray-900/10 dark:bg-gray-50/10": isActive,
+        "bg-gray-900/10 dark:bg-gray-50/10": isToggled,
       };
       break;
 
@@ -55,43 +56,52 @@ const Button: FC<ButtonProps> = ({
     case ButtonAppearance.TOGGLE:
       buttonClasses = {
         "p-1 rounded-full": true,
-        "bg-blue-500 text-gray-50": isActive,
+        "bg-blue-500 text-gray-50": isToggled,
         "bg-gray-300 text-gray-900 dark:bg-gray-600 dark:text-gray-50":
-          !isActive,
+          !isToggled,
       };
       break;
 
     case ButtonAppearance.WINDOW_BAR:
       buttonClasses = {
         "h-full flex justify-center items-center rounded p-1.5": true,
-        "text-neutral-500 hover:bg-gray-900/10": isEnabled && !isActive,
-        "text-neutral-400 cursor-default": !isEnabled && !isActive,
-        "text-neutral-500 bg-gray-900/10": isActive,
+        "text-neutral-500 hover:bg-gray-900/10": isActive && isEnabled,
+        "text-neutral-400 hover:bg-gray-900/10": !isActive && isEnabled,
+        "text-neutral-400 cursor-default": isActive && !isEnabled,
+        "text-neutral-300 cursor-default": !isActive && !isEnabled,
       };
-
-      const stopPropagation = (event: MouseEvent<HTMLButtonElement>) => {
-        event.stopPropagation();
-      };
-
-      // disabled buttons allow parent elements to be clickable.
-      // since the parent element is the window bar, it would allow dragging and double click which we want to prevent.
-      handleMouseDown = stopPropagation;
-      handleDoubleClick = stopPropagation;
-      handleClick = isEnabled ? onClick : undefined;
+      // prevent drag and double click on window bar
       disabled = undefined;
+      handleClick = isEnabled ? onClick : undefined;
+      break;
+
+    case ButtonAppearance.WINDOW_BAR_TOGGLE:
+      buttonClasses = {
+        "h-full flex justify-center items-center rounded p-1.5 text-neutral-500":
+          true,
+        "bg-gray-900/10": isToggled,
+      };
+      // prevent drag and double click on window bar
+      disabled = undefined;
+      handleClick = isEnabled ? onClick : undefined;
       break;
 
     case ButtonAppearance.DEFAULT:
       break;
   }
 
+  const stopPropagation = (event: MouseEvent<HTMLButtonElement>) => {
+    // prevent drag and double click on window bar
+    event.stopPropagation();
+  };
+
   return (
     <button
       className={classNames(buttonClasses, className)}
       aria-label={ariaLabel}
       data-id={dataId}
-      onMouseDown={handleMouseDown}
-      onDoubleClick={handleDoubleClick}
+      onMouseDown={stopPropagation}
+      onDoubleClick={stopPropagation}
       onClick={handleClick}
       disabled={disabled}
     >

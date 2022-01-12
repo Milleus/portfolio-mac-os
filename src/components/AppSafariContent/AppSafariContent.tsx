@@ -166,7 +166,7 @@ const AppSafariContent: FC<AppSafariContentProps> = ({
 
     return (
       <div
-        className="w-full bg-gray-200/90 backdrop-blur-lg overflow-y-auto"
+        className="w-full bg-neutral-200/90 backdrop-blur-lg overflow-y-auto"
         style={style}
       >
         <div className="w-full h-max flex flex-col justify-center items-center text-neutral-700 px-3 mx-auto my-16">
@@ -218,7 +218,7 @@ const AppSafariContent: FC<AppSafariContentProps> = ({
             <p className="col-span-full text-xl font-extrabold tracking-wide mt-8 mb-3.5">
               Privacy Report
             </p>
-            <div className="col-span-full flex items-center bg-gray-100 rounded-lg shadow-md p-5">
+            <div className="col-span-full flex items-center bg-neutral-100 rounded-lg shadow-md p-5">
               <div className="w-7 h-7">
                 <IoShieldHalfOutline className="w-7 h-7 text-neutral-500" />
               </div>

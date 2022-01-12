@@ -33,12 +33,14 @@ const SAFARI_DEFAULT_WIDTH_PX = 1024;
 
 const AppSafari: FC<Record<string, never>> = () => {
   const { isWifiOn } = useAppSelector((state) => state.system);
+  const { activeTitle, safari } = useAppSelector((state) => state.application);
   const [width, setWidth] = useState<number>(SAFARI_DEFAULT_WIDTH_PX);
   const [isStartPage, setIsStartPage] = useState<boolean>(true);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [prevSearchValue, setPrevSearchValue] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const isAppActive = activeTitle === safari.shortLabel;
 
   const handleWidthChange = (width: number) => {
     setWidth(width);
@@ -78,11 +80,18 @@ const AppSafari: FC<Record<string, never>> = () => {
     }
   };
 
-  const inputWrapperClasses = {
-    "w-full h-full flex justify-center rounded-lg border border-gray-300 ml-2 focus-within:outline focus-within:outline-[3px] focus-within:outline-blue-400":
+  const windowBarClasses = {
+    "h-[3.25rem] flex items-stretch border-b border-neutral-300 py-3 pl-2 pr-3":
       true,
-    "bg-gray-200": isStartPage && isWifiOn,
-    "bg-gray-50": !isStartPage || !isWifiOn,
+    "bg-neutral-50": isAppActive,
+    "bg-neutral-100": !isAppActive,
+  };
+
+  const inputWrapperClasses = {
+    "w-full h-full flex justify-center rounded-lg border ml-2 focus-within:outline focus-within:outline-[3px] focus-within:outline-blue-400":
+      true,
+    "bg-neutral-200 border-neutral-200": isStartPage && isWifiOn,
+    "bg-neutral-50 border-neutral-300": !isStartPage || !isWifiOn,
   };
 
   const inputClasses = {
@@ -101,24 +110,33 @@ const AppSafari: FC<Record<string, never>> = () => {
       minHeight={226}
       onWidthChange={handleWidthChange}
     >
-      <WindowBar className="h-[3.25rem] flex items-stretch bg-gray-50 border-b border-gray-300 py-3 pl-2 pr-3">
+      <WindowBar className={classNames(windowBarClasses)}>
         <div className="h-full flex justify-between basis-0 grow-[29]">
           <div className="flex">
-            <WindowControls appKey={ApplicationKeys.SAFARI} />
+            <WindowControls
+              appKey={ApplicationKeys.SAFARI}
+              isActive={isAppActive}
+            />
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}
               isEnabled={true}
+              isActive={isAppActive}
               className="ml-5"
             >
               <BsLayoutSidebar className="w-5 h-4.5" />
             </Button>
-            <div className="w-px h-5 bg-gray-200 my-auto"></div>
-            <Button appearance={ButtonAppearance.WINDOW_BAR} isEnabled={true}>
+            <div className="w-px h-5 bg-neutral-200 my-auto"></div>
+            <Button
+              appearance={ButtonAppearance.WINDOW_BAR}
+              isEnabled={true}
+              isActive={isAppActive}
+            >
               <BsChevronDown className="w-2 h-2 stroke-2" />
             </Button>
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}
               isEnabled={!isStartPage}
+              isActive={isAppActive}
               className="ml-2"
               onClick={handleBrowserBack}
             >
@@ -127,13 +145,18 @@ const AppSafari: FC<Record<string, never>> = () => {
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}
               isEnabled={isStartPage && prevSearchValue.length > 0}
+              isActive={isAppActive}
               className="ml-2"
               onClick={handleBrowserForward}
             >
               <BsChevronRight className="w-4 h-4 stroke-1" />
             </Button>
           </div>
-          <Button appearance={ButtonAppearance.WINDOW_BAR} className="ml-5">
+          <Button
+            appearance={ButtonAppearance.WINDOW_BAR}
+            isActive={isAppActive}
+            className="ml-5"
+          >
             <IoShieldHalfOutline className="w-4.5 h-4.5" />
           </Button>
         </div>
@@ -162,12 +185,17 @@ const AppSafari: FC<Record<string, never>> = () => {
         </div>
 
         <div className="h-full flex justify-end basis-0 grow-[29]">
-          <Button appearance={ButtonAppearance.WINDOW_BAR} className="ml-3">
+          <Button
+            appearance={ButtonAppearance.WINDOW_BAR}
+            isActive={isAppActive}
+            className="ml-3"
+          >
             <IoShareOutline className="w-5 h-5" />
           </Button>
           <Button
             appearance={ButtonAppearance.WINDOW_BAR}
             isEnabled={true}
+            isActive={isAppActive}
             className="ml-1.5"
           >
             <IoAddOutline className="w-5 h-5 ml" />
@@ -175,6 +203,7 @@ const AppSafari: FC<Record<string, never>> = () => {
           <Button
             appearance={ButtonAppearance.WINDOW_BAR}
             isEnabled={true}
+            isActive={isAppActive}
             className="ml-1.5"
           >
             <IoGridOutline className="w-4 h-4" />
