@@ -4,13 +4,27 @@ import { ApplicationKeys } from "reducers/applicationSlice";
 import Window from "components/Window";
 import WindowBar from "components/WindowBar";
 import WindowControls from "components/WindowControls";
+import { useAppSelector } from "hooks";
+import classNames from "classnames";
 
 const AppVSCode: FC<Record<string, never>> = () => {
+  const { activeTitle, vscode } = useAppSelector((state) => state.application);
+  const isAppActive = activeTitle === vscode.shortLabel;
+
+  const windowBarClasses = {
+    "relative h-6 flex items-stretch": true,
+    "bg-neutral-700 text-gray-300": isAppActive,
+    "bg-neutral-800 text-gray-400": !isAppActive,
+  };
+
   return (
     <Window appKey={ApplicationKeys.VSCODE}>
-      <WindowBar className="relative h-6 flex items-stretch bg-neutral-700">
-        <WindowControls appKey={ApplicationKeys.VSCODE} isActive={true} />
-        <p className="absolute pointer-events-none w-full h-full flex justify-center items-center text-gray-300 text-xs">
+      <WindowBar className={classNames(windowBarClasses)}>
+        <WindowControls
+          appKey={ApplicationKeys.VSCODE}
+          isActive={isAppActive}
+        />
+        <p className="absolute w-full h-full flex justify-center items-center text-xs pointer-events-none">
           Visual Studio Code
         </p>
       </WindowBar>
