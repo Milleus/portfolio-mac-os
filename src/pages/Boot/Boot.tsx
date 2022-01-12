@@ -2,6 +2,7 @@ import { BsApple } from "react-icons/bs";
 import { FC, useState } from "react";
 
 import { Page, updateSystem } from "reducers/systemSlice";
+import { resetApplicationState } from "reducers/applicationSlice";
 import { useAppDispatch, useAppSelector, useInterval } from "hooks";
 
 enum BootStatus {
@@ -23,6 +24,7 @@ const Boot: FC<Record<string, never>> = () => {
   const handlePageLoad = () => {
     setTimeout(() => {
       dispatch(updateSystem({ isFirstLogIn: true, activePage: Page.LOGIN }));
+      dispatch(resetApplicationState());
     }, 1000);
   };
 
