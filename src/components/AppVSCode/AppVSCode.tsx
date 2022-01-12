@@ -15,17 +15,13 @@ const AppVSCode: FC<Record<string, never>> = () => {
         </p>
       </WindowBar>
 
-      <div
-        className="w-full bg-neutral-800"
+      <iframe
+        className="w-full h-full bg-neutral-800"
         style={{ height: "calc(100% - 1.5rem)" }} // offset height of window bar
-      >
-        <iframe
-          className="w-full h-full"
-          title="Visual Studio Code"
-          frameBorder="0"
-          src="https://github1s.com/Milleus/portfolio-mac-os/blob/main/README.md"
-        />
-      </div>
+        title="Visual Studio Code"
+        frameBorder="0"
+        src="https://github1s.com/Milleus/portfolio-mac-os/blob/main/README.md"
+      />
     </Window>
   );
 };

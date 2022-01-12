@@ -1,4 +1,11 @@
-import { FC, MouseEvent, useEffect, useMemo, useState } from "react";
+import {
+  CSSProperties,
+  FC,
+  MouseEvent,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { format } from "date-fns";
 import { IoFolderOutline, IoLockClosed } from "react-icons/io5";
 import classNames from "classnames";
@@ -58,7 +65,11 @@ const noteItems: Array<NoteItem> = [
   },
 ];
 
-const AppNotesContent: FC<Record<string, never>> = () => {
+export type AppNotesContentProps = {
+  style: CSSProperties;
+};
+
+const AppNotesContent: FC<AppNotesContentProps> = ({ style }) => {
   const [folderId, setFolderId] = useState<FolderId>(FolderId.PROFILE);
   const [itemId, setItemId] = useState<number>(0);
   const [markdownContent, setMarkdownContent] = useState<string>("");
@@ -107,7 +118,7 @@ const AppNotesContent: FC<Record<string, never>> = () => {
   };
 
   return (
-    <>
+    <div className="w-full flex bg-white" style={style}>
       <div className="w-[12.25rem] shrink-0 bg-gray-300 py-1 px-2">
         <p className="w-full px-1.5 text-xs text-gray-600">iCloud</p>
         {Object.values(FolderId).map((id, index) => {
@@ -202,7 +213,7 @@ const AppNotesContent: FC<Record<string, never>> = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

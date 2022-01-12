@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { CSSProperties, FC, useMemo } from "react";
 import { IoShieldHalfOutline } from "react-icons/io5";
 import classNames from "classnames";
 
@@ -144,6 +144,7 @@ export type AppSafariContentProps = {
   isStartPage: boolean;
   prevSearchValue: string;
   width: number;
+  style: CSSProperties;
 };
 
 const AppSafariContent: FC<AppSafariContentProps> = ({
@@ -151,6 +152,7 @@ const AppSafariContent: FC<AppSafariContentProps> = ({
   isStartPage,
   prevSearchValue,
   width,
+  style,
 }) => {
   const randomTrackers = useMemo(() => Math.floor(Math.random() * 99) + 1, []);
 
@@ -163,65 +165,70 @@ const AppSafariContent: FC<AppSafariContentProps> = ({
     };
 
     return (
-      <div className="w-full h-max flex flex-col justify-center items-center text-neutral-700 px-3 mx-auto my-16">
-        <div className={classNames(sectionClasses)}>
-          <p className="col-span-full text-xl font-extrabold tracking-wide mb-3.5">
-            Favourites
-          </p>
-          {favouriteItems.map((item, index) => {
-            return (
-              <Link
-                key={`favourites-${index}`}
-                href={item.link}
-                className="mb-1.5"
-              >
-                <img
-                  src={item.imgSrc}
-                  alt={`${item.label} link`}
-                  className="w-16 h-16 rounded-lg shadow-md"
-                />
-                <p className="w-16 h-8 text-xs text-center break-words line-clamp-2 mt-1.5">
-                  {item.label}
-                </p>
-              </Link>
-            );
-          })}
-
-          <p className="col-span-full text-xl font-extrabold tracking-wide mb-3.5">
-            Frequently Visited
-          </p>
-          {frequentlyVisitedItems.map((item, index) => {
-            return (
-              <Link
-                key={`frequently-visited-${index}`}
-                href={item.link}
-                className="mb-1.5"
-              >
-                <img
-                  src={item.imgSrc}
-                  alt={`${item.label} link`}
-                  className="w-16 h-16 rounded-lg shadow-md"
-                />
-                <p className="w-16 h-8 text-xs text-center break-words line-clamp-2 mt-1.5">
-                  {item.label}
-                </p>
-              </Link>
-            );
-          })}
-
-          <p className="col-span-full text-xl font-extrabold tracking-wide mt-8 mb-3.5">
-            Privacy Report
-          </p>
-          <div className="col-span-full flex items-center bg-gray-100 rounded-lg shadow-md p-5">
-            <div className="w-7 h-7">
-              <IoShieldHalfOutline className="w-7 h-7 text-neutral-500" />
-            </div>
-            <p className="text-lg ml-3">{randomTrackers}</p>
-            <p className="text-xs tracking-wide ml-5">
-              In the last seven days, Safari has prevented {randomTrackers}{" "}
-              trackers from profiling you and hidden your IP address from known
-              trackers.
+      <div
+        className="w-full bg-gray-200/90 backdrop-blur-lg overflow-y-auto"
+        style={style}
+      >
+        <div className="w-full h-max flex flex-col justify-center items-center text-neutral-700 px-3 mx-auto my-16">
+          <div className={classNames(sectionClasses)}>
+            <p className="col-span-full text-xl font-extrabold tracking-wide mb-3.5">
+              Favourites
             </p>
+            {favouriteItems.map((item, index) => {
+              return (
+                <Link
+                  key={`favourites-${index}`}
+                  href={item.link}
+                  className="mb-1.5"
+                >
+                  <img
+                    src={item.imgSrc}
+                    alt={`${item.label} link`}
+                    className="w-16 h-16 rounded-lg shadow-md"
+                  />
+                  <p className="w-16 h-8 text-xs text-center break-words line-clamp-2 mt-1.5">
+                    {item.label}
+                  </p>
+                </Link>
+              );
+            })}
+
+            <p className="col-span-full text-xl font-extrabold tracking-wide mb-3.5">
+              Frequently Visited
+            </p>
+            {frequentlyVisitedItems.map((item, index) => {
+              return (
+                <Link
+                  key={`frequently-visited-${index}`}
+                  href={item.link}
+                  className="mb-1.5"
+                >
+                  <img
+                    src={item.imgSrc}
+                    alt={`${item.label} link`}
+                    className="w-16 h-16 rounded-lg shadow-md"
+                  />
+                  <p className="w-16 h-8 text-xs text-center break-words line-clamp-2 mt-1.5">
+                    {item.label}
+                  </p>
+                </Link>
+              );
+            })}
+
+            <p className="col-span-full text-xl font-extrabold tracking-wide mt-8 mb-3.5">
+              Privacy Report
+            </p>
+            <div className="col-span-full flex items-center bg-gray-100 rounded-lg shadow-md p-5">
+              <div className="w-7 h-7">
+                <IoShieldHalfOutline className="w-7 h-7 text-neutral-500" />
+              </div>
+              <p className="text-lg ml-3">{randomTrackers}</p>
+              <p className="text-xs tracking-wide ml-5">
+                In the last seven days, Safari has prevented {randomTrackers}{" "}
+                trackers from profiling you and hidden your IP address from
+                known trackers.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -231,7 +238,8 @@ const AppSafariContent: FC<AppSafariContentProps> = ({
   const renderSearchPage = () => {
     return (
       <iframe
-        className="w-full h-full"
+        className="w-full h-full bg-white"
+        style={style}
         title="Safari Browser"
         frameBorder="0"
         src={`https://www.bing.com/search?q=${prevSearchValue}`}
@@ -241,7 +249,10 @@ const AppSafariContent: FC<AppSafariContentProps> = ({
 
   const renderOfflinePage = () => {
     return (
-      <div className="w-full h-full bg-neutral-100 flex flex-col justify-center items-center">
+      <div
+        className="w-full flex flex-col justify-center items-center bg-neutral-100"
+        style={style}
+      >
         <div className="w-1/2 text-center">
           <p className="text-[1.75rem] text-neutral-500 leading-tight font-bold mb-3">
             You Are Not Connected to the Internet

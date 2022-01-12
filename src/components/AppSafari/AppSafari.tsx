@@ -182,17 +182,13 @@ const AppSafari: FC<Record<string, never>> = () => {
         </div>
       </WindowBar>
 
-      <div
-        className="w-full bg-gray-200 overflow-y-auto"
+      <AppSafariContent
+        isWifiOn={isWifiOn}
+        isStartPage={isStartPage}
+        prevSearchValue={prevSearchValue}
+        width={width}
         style={{ height: "calc(100% - 3.25rem)" }} // offset height of window bar
-      >
-        <AppSafariContent
-          isWifiOn={isWifiOn}
-          isStartPage={isStartPage}
-          prevSearchValue={prevSearchValue}
-          width={width}
-        />
-      </div>
+      />
     </Window>
   );
 };

@@ -134,12 +134,9 @@ const AppNotes: FC<Record<string, never>> = () => {
         </div>
       </WindowBar>
 
-      <div
-        className="w-full flex bg-white"
-        style={{ height: "calc(100% - 3.25rem" }} // offset height of window bar
-      >
-        <AppNotesContent />
-      </div>
+      <AppNotesContent
+        style={{ height: "calc(100% - 3.25rem)" }} // offset height of window bar
+      />
     </Window>
   );
 };
