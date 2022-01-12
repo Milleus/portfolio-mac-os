@@ -176,7 +176,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
         <Button
           appearance={ButtonAppearance.DEFAULT}
-          className="flex-col bg-gray-200/90 rounded-xl shadow-md py-2 dark:bg-gray-700/90"
+          className="flex flex-col items-center bg-gray-200/90 rounded-xl shadow-md py-2 dark:bg-gray-700/90"
         >
           <BsBrightnessAltHigh className="w-6 h-6" />
           <p className="text-[0.65rem] leading-[1.1]">Keyboard Brightness</p>
@@ -184,7 +184,7 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
         <Button
           appearance={ButtonAppearance.DEFAULT}
-          className="flex-col bg-gray-200/90 rounded-xl shadow-md py-2 dark:bg-gray-700/90"
+          className="flex flex-col items-center bg-gray-200/90 rounded-xl shadow-md py-2 dark:bg-gray-700/90"
           onClick={handleFullScreenClick}
         >
           {isFullScreen ? (
@@ -254,8 +254,8 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
             </Button>
             <Button
               appearance={ButtonAppearance.DEFAULT}
-              onClick={handlAudioSkipForwardClick}
               className="ml-2"
+              onClick={handlAudioSkipForwardClick}
             >
               <IoPlayForward className="w-4.5 h-4.5" />
             </Button>

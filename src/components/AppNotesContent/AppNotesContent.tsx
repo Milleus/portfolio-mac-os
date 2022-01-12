@@ -123,7 +123,7 @@ const AppNotesContent: FC<AppNotesContentProps> = ({ style }) => {
         <p className="w-full px-1.5 text-xs text-gray-600">iCloud</p>
         {Object.values(FolderId).map((id, index) => {
           const folderClasses = {
-            "w-full rounded py-1.5 px-2": true,
+            "flex w-full rounded py-1.5 px-2": true,
             "bg-yellow-500 text-white": id === currentFocus,
             "bg-gray-900/10": id !== currentFocus && id === folderId,
           };

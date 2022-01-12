@@ -111,6 +111,7 @@ const Dock: FC<Record<string, never>> = () => {
                 <>
                   <Button
                     appearance={ButtonAppearance.DEFAULT}
+                    className="flex items-center"
                     dataId={item.appKey}
                     onClick={handleItemClick}
                   >

@@ -118,7 +118,7 @@ const Login: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.DEFAULT}
                 ariaLabel="shut down"
-                className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
+                className="flex justify-center items-center w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
                 onClick={handleShutDownClick}
               >
                 <BsPower className="w-6 h-6" />
@@ -129,7 +129,7 @@ const Login: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.DEFAULT}
                 ariaLabel="restart"
-                className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
+                className="flex justify-center items-center w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
                 onClick={handleRestartClick}
               >
                 <VscPlayCircle className="w-6 h-6 -scale-x-100" />
@@ -142,7 +142,7 @@ const Login: FC<Record<string, never>> = () => {
           <Button
             appearance={ButtonAppearance.DEFAULT}
             ariaLabel="sleep"
-            className="w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
+            className="flex justify-center items-center w-8 h-8 bg-white/30 backdrop-blur-lg rounded-full"
             onClick={handleSleepClick}
           >
             {isFirstLogIn ? (

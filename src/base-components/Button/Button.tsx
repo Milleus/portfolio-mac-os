@@ -30,19 +30,13 @@ const Button: FC<ButtonProps> = ({
   dataId,
   onClick,
 }) => {
-  let buttonClasses: Mapping;
+  let buttonClasses: Mapping = {};
   let handleMouseDown: MouseEventHandler | undefined;
   let handleDoubleClick: MouseEventHandler | undefined;
   let handleClick: MouseEventHandler | undefined = onClick;
   let disabled: boolean | undefined = !onClick;
 
   switch (appearance) {
-    case ButtonAppearance.DEFAULT:
-      buttonClasses = {
-        "flex justify-center items-center": true,
-      };
-      break;
-
     case ButtonAppearance.MENU_BAR:
       buttonClasses = {
         "flex items-center rounded px-1.5 text-sm cursor-default": true,
@@ -85,6 +79,9 @@ const Button: FC<ButtonProps> = ({
       handleDoubleClick = stopPropagation;
       handleClick = isEnabled ? onClick : undefined;
       disabled = undefined;
+      break;
+
+    case ButtonAppearance.DEFAULT:
       break;
   }
 
