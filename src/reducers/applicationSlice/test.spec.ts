@@ -1,7 +1,8 @@
 import reducer, {
   ApplicationKeys,
   initialState,
-  updateApplication,
+  updateActiveTitle,
+  updateApplicationStatus,
   updateZStack,
 } from ".";
 
@@ -11,37 +12,50 @@ describe("ApplicationSlice", () => {
   });
 
   it.each`
-    prevZStack                                          | appKey                    | expectedZStack
-    ${[]}                                               | ${ApplicationKeys.SAFARI} | ${[ApplicationKeys.SAFARI]}
-    ${[ApplicationKeys.VSCODE]}                         | ${ApplicationKeys.VSCODE} | ${[ApplicationKeys.VSCODE]}
-    ${[ApplicationKeys.VSCODE]}                         | ${ApplicationKeys.SAFARI} | ${[ApplicationKeys.VSCODE, ApplicationKeys.SAFARI]}
-    ${[ApplicationKeys.VSCODE, ApplicationKeys.SAFARI]} | ${ApplicationKeys.VSCODE} | ${[ApplicationKeys.SAFARI, ApplicationKeys.VSCODE]}
-  `(
-    "should handle z stack update",
-    ({ prevZStack, appKey, expectedZStack }) => {
-      const prevState = {
-        ...initialState,
-        zStack: prevZStack,
-      };
-      expect(reducer(prevState, updateZStack(appKey))).toEqual({
-        ...prevState,
-        zStack: expectedZStack,
-      });
-    }
-  );
+    prevActiveTitle | payload                  | expected
+    ${"Safari"}     | ${null}                  | ${"Finder"}
+    ${"Safari"}     | ${ApplicationKeys.NOTES} | ${"Notes"}
+  `("should update active title", ({ prevActiveTitle, payload, expected }) => {
+    const prevState = { ...initialState, activeTitle: prevActiveTitle };
 
-  it("should handle application update", () => {
+    expect(reducer(prevState, updateActiveTitle(payload))).toEqual({
+      ...initialState,
+      activeTitle: expected,
+    });
+  });
+
+  it.each`
+    prevZStack                                        | payload                   | expected
+    ${[]}                                             | ${ApplicationKeys.SIRI}   | ${[ApplicationKeys.SIRI]}
+    ${[ApplicationKeys.VSCODE]}                       | ${ApplicationKeys.VSCODE} | ${[ApplicationKeys.VSCODE]}
+    ${[ApplicationKeys.VSCODE]}                       | ${ApplicationKeys.SIRI}   | ${[ApplicationKeys.VSCODE, ApplicationKeys.SIRI]}
+    ${[ApplicationKeys.VSCODE, ApplicationKeys.SIRI]} | ${ApplicationKeys.VSCODE} | ${[ApplicationKeys.SIRI, ApplicationKeys.VSCODE]}
+  `("should update z stack", ({ prevZStack, payload, expected }) => {
+    const prevState = { ...initialState, zStack: prevZStack };
+
+    expect(reducer(prevState, updateZStack(payload))).toEqual({
+      ...prevState,
+      zStack: expected,
+    });
+  });
+
+  it("should update application status", () => {
     const prevState = initialState;
+
     expect(
       reducer(
         prevState,
-        updateApplication({
-          [ApplicationKeys.SAFARI]: { isOpen: true, windowStatus: "maximized" },
+        updateApplicationStatus({
+          appKey: ApplicationKeys.SAFARI,
+          status: { windowStatus: "maximized" },
         })
       )
     ).toEqual({
       ...prevState,
-      [ApplicationKeys.SAFARI]: { isOpen: true, windowStatus: "maximized" },
+      [ApplicationKeys.SAFARI]: {
+        ...prevState[ApplicationKeys.SAFARI],
+        windowStatus: "maximized",
+      },
     });
   });
 });

@@ -2,7 +2,8 @@ import { FC, MouseEvent } from "react";
 
 import {
   ApplicationKeys,
-  updateApplication,
+  updateActiveTitle,
+  updateApplicationStatus,
   updateZStack,
 } from "reducers/applicationSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
@@ -45,7 +46,7 @@ const dockItems: Array<DockItem> = [
     appKey: ApplicationKeys.VSCODE,
   },
   {
-    label: "ITerm",
+    label: "iTerm",
     imgSrc: AppITerm,
     appKey: ApplicationKeys.ITERM,
   },
@@ -84,10 +85,14 @@ const Dock: FC<Record<string, never>> = () => {
     const appKey = event.currentTarget.getAttribute("data-id");
 
     if (appKey) {
-      dispatch(updateZStack(appKey as ApplicationKeys));
+      const newKey = appKey as ApplicationKeys;
+
+      dispatch(updateActiveTitle(newKey));
+      dispatch(updateZStack(newKey));
       dispatch(
-        updateApplication({
-          [appKey]: { isOpen: true, windowStatus: "normal" },
+        updateApplicationStatus({
+          appKey: newKey,
+          status: { isOpen: true },
         })
       );
     }

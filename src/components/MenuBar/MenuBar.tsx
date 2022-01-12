@@ -22,6 +22,7 @@ enum MenuId {
 
 const MenuBar: FC<Record<string, never>> = () => {
   const { date, isWifiOn } = useAppSelector((state) => state.system);
+  const { activeTitle } = useAppSelector((state) => state.application);
   const [activeMenuId, setActiveMenuId] = useState<string>(MenuId.NONE);
   const menuAppleRef = useRef<HTMLDivElement>(null);
   const menuWifiRef = useRef<HTMLDivElement>(null);
@@ -75,7 +76,7 @@ const MenuBar: FC<Record<string, never>> = () => {
         </div>
 
         <Button appearance={ButtonAppearance.MENU_BAR}>
-          <span className="font-bold mx-1">Finder</span>
+          <span className="font-bold mx-1">{activeTitle}</span>
         </Button>
       </div>
 

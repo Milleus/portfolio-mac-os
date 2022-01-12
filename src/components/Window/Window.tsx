@@ -11,7 +11,8 @@ import { Rnd, RndResizeCallback, RndDragCallback } from "react-rnd";
 
 import {
   ApplicationKeys,
-  updateApplication,
+  updateActiveTitle,
+  updateApplicationStatus,
   updateZStack,
 } from "reducers/applicationSlice";
 import { convertRemToPixels } from "utilities";
@@ -25,8 +26,6 @@ type PositionSize = {
   width: number;
   height: number;
 };
-
-export const dragHandleClass = "drag-handle";
 
 export type WindowProps = {
   appKey: ApplicationKeys;
@@ -55,6 +54,7 @@ const Window: FC<WindowProps> = ({
   const menuBarHeightPx = convertRemToPixels(MENU_BAR_HEIGHT_REM);
   const dockHeightPx = convertRemToPixels(DOCK_HEIGHT_REM);
   const isMaximized = applicationState[appKey].windowStatus === "maximized";
+  const dragHandleClass = "drag-handle";
 
   const [positionSize, setPositionSize] = useState<PositionSize>({
     width: initWidth,
@@ -111,14 +111,13 @@ const Window: FC<WindowProps> = ({
   };
 
   const handleMouseDown = () => {
+    dispatch(updateActiveTitle(appKey));
     dispatch(updateZStack(appKey));
   };
 
   const handleBarDoubleClick = () => {
     dispatch(
-      updateApplication({
-        [appKey]: { isOpen: true, windowStatus: "maximized" },
-      })
+      updateApplicationStatus({ appKey, status: { windowStatus: "maximized" } })
     );
   };
 

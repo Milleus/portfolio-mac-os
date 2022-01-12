@@ -2,7 +2,10 @@ import { BsX } from "react-icons/bs";
 import { CgArrowsExpandLeft, CgMathMinus } from "react-icons/cg";
 import { FC } from "react";
 
-import { ApplicationKeys, updateApplication } from "reducers/applicationSlice";
+import {
+  ApplicationKeys,
+  updateApplicationStatus,
+} from "reducers/applicationSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
 
@@ -16,7 +19,10 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
 
   const handleCloseClick = () => {
     dispatch(
-      updateApplication({ [appKey]: { isOpen: false, windowStatus: "normal" } })
+      updateApplicationStatus({
+        appKey,
+        status: { isOpen: false, windowStatus: "normal" },
+      })
     );
   };
 
@@ -30,7 +36,7 @@ const WindowControls: FC<WindowControlsProps> = ({ appKey }) => {
         ? "normal"
         : "maximized";
 
-    dispatch(updateApplication({ [appKey]: { isOpen: true, windowStatus } }));
+    dispatch(updateApplicationStatus({ appKey, status: { windowStatus } }));
   };
 
   return (
