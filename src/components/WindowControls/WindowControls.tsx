@@ -12,13 +12,11 @@ import Button, { ButtonAppearance } from "base-components/Button";
 
 export type WindowControlsProps = {
   appKey: ApplicationKeys;
-  isActive: boolean;
   buttonClassName?: string;
 };
 
 const WindowControls: FC<WindowControlsProps> = ({
   appKey,
-  isActive,
   buttonClassName,
 }) => {
   const applicationState = useAppSelector((state) => state.application);
@@ -47,21 +45,18 @@ const WindowControls: FC<WindowControlsProps> = ({
   };
 
   const redButtonClasses = {
-    "w-3 h-3 box-content rounded-full text-gray-900 bg-red-500 group-hover:grayscale-0":
+    "w-3 h-3 box-content rounded-full text-gray-900 bg-red-500 group-hover:bg-red-500":
       true,
-    grayscale: !isActive,
   };
 
   const amberButtonClasses = {
-    "w-3 h-3 box-content rounded-full text-gray-900 bg-amber-500 ml-1.5 group-hover:grayscale-0":
+    "w-3 h-3 box-content rounded-full text-gray-900 bg-amber-500 ml-1.5 group-hover:bg-amber-500":
       true,
-    grayscale: !isActive,
   };
 
   const greenButtonClasses = {
-    "w-3 h-3 box-content rounded-full text-gray-900 bg-green-500 ml-1.5 group-hover:grayscale-0":
+    "w-3 h-3 box-content rounded-full text-gray-900 bg-green-500 ml-1.5 group-hover:bg-green-500":
       true,
-    grayscale: !isActive,
   };
 
   return (

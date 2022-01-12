@@ -31,7 +31,7 @@ const AppNotes: FC<Record<string, never>> = () => {
     >
       <WindowBar className="h-[3.25rem] flex bg-white">
         <div className="w-[12.25rem] flex shrink-0 bg-gray-300 py-3 px-2">
-          <WindowControls appKey={ApplicationKeys.NOTES} isActive={true} />
+          <WindowControls appKey={ApplicationKeys.NOTES} />
         </div>
 
         <div className="w-full flex bg-white border-b border-b-transparent text-neutral-500 transition duration-500 hover:border-b-neutral-200 hover:bg-gray-50">
