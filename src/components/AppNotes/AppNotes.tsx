@@ -29,13 +29,13 @@ const AppNotes: FC<Record<string, never>> = () => {
       minWidth={651}
       minHeight={226}
     >
-      <WindowBar className="h-[3.25rem] flex">
+      <WindowBar className="h-[3.25rem] flex bg-white">
         <div className="w-[12.25rem] flex shrink-0 bg-gray-300 py-3 px-2">
           <WindowControls appKey={ApplicationKeys.NOTES} />
         </div>
 
-        <div className="w-full flex bg-white text-neutral-500 group">
-          <div className="w-1/4 flex justify-between bg-white border-b border-r border-b-white border-r-neutral-200 py-3 px-2 transition-colors duration-500 group-hover:bg-gray-50 group-hover:border-b-neutral-200">
+        <div className="w-full flex bg-white border-b border-b-transparent text-neutral-500 transition duration-500 hover:border-b-neutral-200 hover:bg-gray-50">
+          <div className="w-1/4 flex justify-between border-r border-r-neutral-200 py-3 px-2">
             <div className="flex rounded ml-1.5 hover:bg-gray-900/10">
               <Button appearance={ButtonAppearance.WINDOW_BAR} isActive={true}>
                 <IoListOutline className="w-5 h-5" />
@@ -53,7 +53,7 @@ const AppNotes: FC<Record<string, never>> = () => {
             </Button>
           </div>
 
-          <div className="w-3/4 flex justify-between bg-white border-b border-b-white py-3 px-2 transition-colors duration-500 group-hover:bg-gray-50 group-hover:border-b-neutral-200">
+          <div className="w-3/4 flex justify-between py-3 px-2">
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}
               isEnabled={true}
@@ -135,7 +135,7 @@ const AppNotes: FC<Record<string, never>> = () => {
       </WindowBar>
 
       <div
-        className="w-full flex"
+        className="w-full flex bg-white"
         style={{ height: "calc(100% - 3.25rem" }} // offset height of window bar
       >
         <AppNotesContent />
