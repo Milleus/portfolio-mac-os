@@ -81,26 +81,33 @@ const AppSafari: FC<Record<string, never>> = () => {
   };
 
   const windowBarClasses = {
-    "h-[3.25rem] flex items-stretch border-b border-neutral-300 py-3 pl-2 pr-3":
+    "h-[3.25rem] flex items-stretch border-b border-neutral-300 py-3 pl-2 pr-3 dark:border-neutral-900":
       true,
-    "bg-neutral-50": isAppActive,
-    "bg-neutral-100": !isAppActive,
+    "bg-neutral-50 dark:bg-neutral-700": isAppActive,
+    "bg-neutral-100 dark:bg-neutral-800": !isAppActive,
   };
 
   const windowControlButtonClasses = {
-    "border border-gray-300": true,
-    "bg-neutral-200": !isAppActive,
+    "bg-neutral-200 dark:bg-neutral-600": !isAppActive,
   };
 
   const inputWrapperClasses = {
     "w-full h-full flex justify-center rounded-lg border ml-2 focus-within:outline focus-within:outline-[3px] focus-within:outline-blue-400":
       true,
-    "bg-neutral-200 border-neutral-200": isStartPage && isWifiOn,
-    "bg-neutral-50 border-neutral-300": !isStartPage || !isWifiOn,
+    "bg-neutral-200 border-neutral-200 dark:bg-neutral-800 dark:border-neutral-800":
+      isStartPage && isWifiOn && isAppActive,
+    "bg-neutral-300 border-neutral-300 dark:bg-neutral-900 dark:border-neutral-900":
+      isStartPage && isWifiOn && !isAppActive,
+    "bg-neutral-50 border-neutral-300 dark:bg-neutral-700 dark:border-neutral-600":
+      (!isStartPage || !isWifiOn) && isAppActive,
+    "bg-neutral-100 border-neutral-300 dark:bg-neutral-800 dark:border-neutral-600":
+      (!isStartPage || !isWifiOn) && !isAppActive,
   };
 
   const inputClasses = {
-    "h-full min-w-[12rem] bg-transparent rounded-lg text-neutral-500 text-xs leading-none tracking-wide pr-2 outline-none":
+    "h-full min-w-[12rem] bg-transparent rounded-lg text-xs leading-none tracking-wide pr-2 outline-none":
+      true,
+    "text-neutral-500 placeholder-neutral-400 dark:text-neutral-50 dark:placeholder-neutral-500":
       true,
     "transition-none w-full": isFocused || inputValue.length > 0,
     "transition-all w-0": !isFocused && inputValue.length === 0,
@@ -130,7 +137,7 @@ const AppSafari: FC<Record<string, never>> = () => {
             >
               <BsLayoutSidebar className="w-5 h-4.5" />
             </Button>
-            <div className="w-px h-5 bg-neutral-200 my-auto"></div>
+            <div className="w-px h-5 bg-neutral-200 my-auto dark:bg-neutral-600"></div>
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}
               isEnabled={true}
@@ -169,7 +176,7 @@ const AppSafari: FC<Record<string, never>> = () => {
         <div className="h-full flex basis-0 grow-[42]">
           <label className={classNames(inputWrapperClasses)}>
             <div className="w-5 h-full flex items-center ml-2">
-              <MdSearch className="w-4 h-4 text-neutral-500" />
+              <MdSearch className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
             </div>
             <input
               ref={inputRef}

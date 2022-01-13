@@ -45,17 +45,17 @@ const WindowControls: FC<WindowControlsProps> = ({
   };
 
   const redButtonClasses = {
-    "w-3 h-3 box-content rounded-full text-gray-900 bg-red-500 group-hover:bg-red-500":
+    "w-3 h-3 rounded-full text-gray-900 bg-red-500 group-hover:bg-red-500":
       true,
   };
 
   const amberButtonClasses = {
-    "w-3 h-3 box-content rounded-full text-gray-900 bg-amber-500 ml-1.5 group-hover:bg-amber-500":
+    "w-3 h-3 rounded-full text-gray-900 bg-amber-500 ml-2 group-hover:bg-amber-500":
       true,
   };
 
   const greenButtonClasses = {
-    "w-3 h-3 box-content rounded-full text-gray-900 bg-green-500 ml-1.5 group-hover:bg-green-500":
+    "w-3 h-3 rounded-full text-gray-900 bg-green-500 ml-2 group-hover:bg-green-500":
       true,
   };
 

@@ -65,10 +65,14 @@ const Button: FC<ButtonProps> = ({
     case ButtonAppearance.WINDOW_BAR:
       buttonClasses = {
         "h-full flex justify-center items-center rounded p-1.5": true,
-        "text-neutral-500 hover:bg-gray-900/10": isActive && isEnabled,
-        "text-neutral-400 hover:bg-gray-900/10": !isActive && isEnabled,
-        "text-neutral-400 cursor-default": isActive && !isEnabled,
-        "text-neutral-300 cursor-default": !isActive && !isEnabled,
+        "text-neutral-500 hover:bg-gray-900/10 dark:text-neutral-400 dark:hover:bg-gray-50/10":
+          isActive && isEnabled,
+        "text-neutral-400 hover:bg-gray-900/10 dark:text-neutral-500 dark:hover:bg-gray-50/10":
+          !isActive && isEnabled,
+        "text-neutral-400 cursor-default dark:text-neutral-500":
+          isActive && !isEnabled,
+        "text-neutral-300 cursor-default dark:text-neutral-600":
+          !isActive && !isEnabled,
       };
       // prevent drag and double click on window bar
       disabled = undefined;

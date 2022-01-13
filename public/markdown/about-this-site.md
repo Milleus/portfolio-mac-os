@@ -17,7 +17,7 @@ System:
 
 Control Center:
 
-- [x] Toggle light/dark mode (Notes and Safari app do not have different themes yet)
+- [x] Toggle light/dark mode (Notes app does not have different themes yet)
 - [x] Toggle full screen mode using [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API).
 - [x] Control brightness.
 - [x] Control volume.
