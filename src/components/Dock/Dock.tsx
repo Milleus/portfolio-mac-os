@@ -10,7 +10,6 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import AppFaceTime from "./images/app-facetime.png";
 import AppGitHub from "./images/app-github.png";
 import AppITerm from "./images/app-iterm.png";
-import AppLaunchpad from "./images/app-launchpad.png";
 import AppMail from "./images/app-mail.png";
 import AppNotes from "./images/app-notes.png";
 import AppSafari from "./images/app-safari.png";
@@ -30,11 +29,6 @@ type DockItem = {
 };
 
 const dockItems: Array<DockItem> = [
-  {
-    label: "Launchpad",
-    imgSrc: AppLaunchpad,
-    appKey: ApplicationKeys.LAUNCHPAD,
-  },
   {
     label: "Notes",
     imgSrc: AppNotes,

@@ -5,7 +5,6 @@ import { RootState } from "reducers/store";
 export enum ApplicationKeys {
   FACETIME = "facetime",
   ITERM = "iterm",
-  LAUNCHPAD = "launchpad",
   NOTES = "notes",
   SAFARI = "safari",
   SIRI = "siri",
@@ -37,11 +36,6 @@ export const initialState: ApplicationState = {
   },
   [ApplicationKeys.ITERM]: {
     shortLabel: "iTerm2",
-    isOpen: false,
-    windowStatus: "normal",
-  },
-  [ApplicationKeys.LAUNCHPAD]: {
-    shortLabel: "Finder",
     isOpen: false,
     windowStatus: "normal",
   },
