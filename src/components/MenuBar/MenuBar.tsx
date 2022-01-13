@@ -81,7 +81,10 @@ const MenuBar: FC<Record<string, never>> = () => {
       </div>
 
       <div className="flex">
-        <Button appearance={ButtonAppearance.MENU_BAR}>
+        <Button
+          ariaLabel="battery status"
+          appearance={ButtonAppearance.MENU_BAR}
+        >
           <BatteryIcon isValueVisible={true} />
         </Button>
 

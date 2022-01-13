@@ -62,11 +62,17 @@ const Login: FC<Record<string, never>> = () => {
       }}
     >
       <div className="w-full flex justify-end mt-px mr-3">
-        <Button appearance={ButtonAppearance.MENU_BAR}>
+        <Button
+          ariaLabel="battery status"
+          appearance={ButtonAppearance.MENU_BAR}
+        >
           <BatteryIcon isValueVisible={false} isForcedDarkMode={true} />
         </Button>
         {!isFirstLogIn && (
-          <Button appearance={ButtonAppearance.MENU_BAR}>
+          <Button
+            ariaLabel="wifi status"
+            appearance={ButtonAppearance.MENU_BAR}
+          >
             {isWifiOn ? (
               <MdWifi className="w-4.5 h-4.5" />
             ) : (
@@ -85,6 +91,8 @@ const Login: FC<Record<string, never>> = () => {
       <div className="h-full flex flex-col justify-center items-center mt-12">
         <img
           className="w-36 h-36 rounded-full"
+          width="144"
+          height="144"
           src={PhotoProfile}
           alt="profile"
         />

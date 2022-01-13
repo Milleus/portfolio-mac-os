@@ -1,6 +1,7 @@
 import reducer, {
   ApplicationKeys,
   initialState,
+  resetApplicationState,
   updateActiveTitle,
   updateApplicationStatus,
   updateZStack,
@@ -57,5 +58,11 @@ describe("ApplicationSlice", () => {
         windowStatus: "maximized",
       },
     });
+  });
+
+  it("should reset application state", () => {
+    const prevState = { ...initialState, activeTitle: "Safari" };
+
+    expect(reducer(prevState, resetApplicationState())).toEqual(initialState);
   });
 });

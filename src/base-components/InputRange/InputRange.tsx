@@ -36,6 +36,7 @@ const InputRange: FC<InputRangeProps> = ({
       )}
       <input
         ref={inputRef}
+        data-testid="input-range"
         type="range"
         className="input-range"
         value={value}

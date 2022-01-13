@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "reducers/store";
-
 export enum ApplicationKeys {
   FACETIME = "facetime",
   ITERM = "iterm",
@@ -119,9 +117,5 @@ export const {
   updateApplicationStatus,
   resetApplicationState,
 } = applicationSlice.actions;
-
-export const selectApplication = (state: RootState) => {
-  return state.application;
-};
 
 export default applicationSlice.reducer;

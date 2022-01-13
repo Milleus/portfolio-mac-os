@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "reducers/store";
-
 export enum Page {
   BOOT_RESTART = "boot-restart",
   BOOT_SHUT_DOWN = "boot-shut-down",
@@ -88,9 +86,5 @@ export const systemSlice = createSlice({
 
 export const { incrementAudioPlaylistIndex, updateSystem } =
   systemSlice.actions;
-
-export const selectSystem = (state: RootState) => {
-  return state.system;
-};
 
 export default systemSlice.reducer;
