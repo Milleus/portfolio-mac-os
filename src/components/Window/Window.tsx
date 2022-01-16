@@ -141,7 +141,7 @@ const Window: FC<WindowProps> = ({
       }}
       minWidth={minWidth ? minWidth : 320}
       minHeight={minHeight ? minHeight : 200}
-      className="absolute w-full h-full rounded-lg overflow-hidden shadow-md"
+      className="absolute w-full h-full rounded-lg overflow-hidden shadow-md dark:border dark:border-gray-500"
       style={{
         zIndex: isMaximized
           ? 51 // higher than z-50

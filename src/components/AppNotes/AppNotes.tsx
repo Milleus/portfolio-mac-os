@@ -29,14 +29,14 @@ const AppNotes: FC<Record<string, never>> = () => {
       minWidth={651}
       minHeight={226}
     >
-      <WindowBar className="h-[3.25rem] flex bg-white">
-        <div className="w-[12.25rem] flex shrink-0 bg-gray-300 py-3 px-2">
+      <WindowBar className="h-[3.25rem] flex bg-white dark:bg-black">
+        <div className="w-[12.25rem] flex shrink-0 bg-gray-300 border-r border-neutral-200 py-3 px-2 dark:bg-zinc-800 dark:border-black">
           <WindowControls appKey={ApplicationKeys.NOTES} />
         </div>
 
-        <div className="w-full flex bg-white border-b border-b-transparent text-neutral-500 transition duration-500 hover:border-b-neutral-200 hover:bg-gray-50">
-          <div className="w-1/4 flex justify-between border-r border-r-neutral-200 py-3 px-2">
-            <div className="flex rounded ml-1.5 hover:bg-gray-900/10">
+        <div className="w-full flex bg-white border-b border-b-transparent text-neutral-500 hover:transition hover:duration-500 hover:border-b-neutral-200 hover:bg-gray-50 dark:bg-stone-800 dark:hover:border-b-black dark:hover:bg-neutral-800">
+          <div className="w-1/4 flex justify-between border-r border-r-neutral-200 py-3 px-2 dark:border-r-black">
+            <div className="flex rounded ml-1.5 hover:bg-gray-900/10 dark:hover:bg-gray-50/10">
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR_TOGGLE}
                 isToggled={true}
