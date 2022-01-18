@@ -12,12 +12,14 @@ System:
 - [x] Simulate clock behaviour (updates every 1 minute).
 - [x] Set light/dark mode based on system preference, if available.
 - [x] Display actual battery status of device using [Battery Status API](https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API), if available.
-- [x] Open/close/maximize + drag and resize applications.
-- [ ] Minimize applications.
+- [x] Open/close applications.
+- [ ] Maximize/minimize applications (partial completion).
+- [x] Drag/resize applications.
+- [x] Handle layering of applications.
 
 Control Center:
 
-- [x] Toggle light/dark mode (Notes app does not have different themes yet)
+- [x] Toggle light/dark mode.
 - [x] Toggle full screen mode using [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API).
 - [x] Control brightness.
 - [x] Control volume.
@@ -25,14 +27,17 @@ Control Center:
 
 Notes app:
 
-- [x] View different notes (markdown files).
+- [ ] Mimic actual app behaviour/styling when window is resized or inactive (partial completion).
+- [x] View different notes (markdown files) in different folders.
 
 VSCode app:
 
+- [x] Mimic actual app behaviour/styling when window is resized or inactive.
 - [x] View code repository (iframe to [github1s.com](https://github1s.com/)).
 
 Safari app:
 
+- [x] Mimic actual app behaviour/styling when window is resized or inactive.
 - [x] Display clickable links on 'Start' page.
 - [x] Search user input in address bar (iframe to Bing search results).
 - [x] Display 'No Internet' page if Wifi is toggled off.
@@ -51,6 +56,7 @@ FaceTime app:
 
 ITerm app:
 
+- [ ] Mimic actual app behaviour/styling when window is resized or inactive.
 - [ ] Accept user input to execute linux commands.
 
 ## Features in Consideration
