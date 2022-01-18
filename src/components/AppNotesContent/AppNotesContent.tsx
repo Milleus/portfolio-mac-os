@@ -12,10 +12,6 @@ import classNames from "classnames";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import {
-  NOTES_BREAKPOINT_SM_WIDTH_PX,
-  NOTES_BREAKPOINT_XS_WIDTH_PX,
-} from "components/AppNotes";
 import Button, { ButtonAppearance } from "base-components/Button";
 
 enum FolderId {
@@ -69,11 +65,18 @@ const noteItems: Array<NoteItem> = [
 ];
 
 export type AppNotesContentProps = {
+  notesBreakpointXsPx: number;
+  notesBreakpointSmPx: number;
   width: number;
   style: CSSProperties;
 };
 
-const AppNotesContent: FC<AppNotesContentProps> = ({ width, style }) => {
+const AppNotesContent: FC<AppNotesContentProps> = ({
+  notesBreakpointXsPx,
+  notesBreakpointSmPx,
+  width,
+  style,
+}) => {
   const [folderId, setFolderId] = useState<FolderId>(FolderId.PROFILE);
   const [itemId, setItemId] = useState<number>(0);
   const [markdownContent, setMarkdownContent] = useState<string>("");
@@ -121,16 +124,13 @@ const AppNotesContent: FC<AppNotesContentProps> = ({ width, style }) => {
     setCurrentFocus(Number(itemId));
   };
 
-  // const isLeftBarShown = width >= NOTES_BREAKPOINT_XS_WIDTH_PX;
-
   const leftBarClasses = {
     "flex flex-col py-1 px-2": true,
     "w-[12.25rem] shrink-0 bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
-      width >= NOTES_BREAKPOINT_SM_WIDTH_PX,
+      width >= notesBreakpointSmPx,
     "w-full max-w-[12.25rem] bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
-      width < NOTES_BREAKPOINT_SM_WIDTH_PX &&
-      width >= NOTES_BREAKPOINT_XS_WIDTH_PX,
-    hidden: width < NOTES_BREAKPOINT_XS_WIDTH_PX,
+      width < notesBreakpointSmPx && width >= notesBreakpointXsPx,
+    hidden: width < notesBreakpointXsPx,
   };
 
   return (
@@ -226,7 +226,7 @@ const AppNotesContent: FC<AppNotesContentProps> = ({ width, style }) => {
             );
           })}
         </div>
-        <div className="w-full min-w-[402px] bg-white text-neutral-700 py-2.5 px-2 overflow-auto dark:bg-neutral-800 dark:text-neutral-200">
+        <div className="w-full min-w-[25.125rem] bg-white text-neutral-700 py-2.5 px-2 overflow-auto dark:bg-neutral-800 dark:text-neutral-200">
           <p className="text-center text-xs text-neutral-500 mb-1">
             {format(new Date(notes[itemId].date), "d MMMM yyyy 'at' h:mm aa")}
           </p>

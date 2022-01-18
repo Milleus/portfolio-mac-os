@@ -15,6 +15,7 @@ import { RiUserAddLine } from "react-icons/ri";
 import classNames from "classnames";
 
 import { ApplicationKeys } from "reducers/applicationSlice";
+import { convertRemToPixels } from "utilities";
 import AppNotesContent from "components/AppNotesContent";
 import Button, { ButtonAppearance } from "base-components/Button";
 import Window from "components/Window";
@@ -22,12 +23,15 @@ import WindowBar from "components/WindowBar";
 import WindowControls from "components/WindowControls";
 
 const NOTES_DEFAULT_WIDTH_PX = 1024;
-export const NOTES_BREAKPOINT_XS_WIDTH_PX = 750;
-export const NOTES_BREAKPOINT_SM_WIDTH_PX = 795;
-const NOTES_BREAKPOINT_MD_WIDTH_PX = 863;
+const NOTES_BREAKPOINT_XS_REM = 46.875;
+const NOTES_BREAKPOINT_SM_REM = 49.6875;
+const NOTES_BREAKPOINT_MD_REM = 53.9375;
 
 const AppNotes: FC<Record<string, never>> = () => {
   const [width, setWidth] = useState<number>(NOTES_DEFAULT_WIDTH_PX);
+  const notesBreakpointXsPx = convertRemToPixels(NOTES_BREAKPOINT_XS_REM);
+  const notesBreakpointSmPx = convertRemToPixels(NOTES_BREAKPOINT_SM_REM);
+  const notesBreakpointMdPx = convertRemToPixels(NOTES_BREAKPOINT_MD_REM);
 
   const handleWidthChange = (width: number) => {
     setWidth(width);
@@ -36,20 +40,19 @@ const AppNotes: FC<Record<string, never>> = () => {
   const leftBarClasses = {
     "flex py-3 px-2": true,
     "w-[12.25rem] shrink-0 bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
-      width >= NOTES_BREAKPOINT_SM_WIDTH_PX,
+      width >= notesBreakpointSmPx,
     "w-full max-w-[12.25rem] bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
-      width < NOTES_BREAKPOINT_SM_WIDTH_PX &&
-      width >= NOTES_BREAKPOINT_XS_WIDTH_PX,
+      width < notesBreakpointSmPx && width >= notesBreakpointXsPx,
     "border-b border-b-neutral-200 bg-gray-50 dark:bg-stone-800 dark:border-b-black dark:bg-neutral-800":
-      width < NOTES_BREAKPOINT_XS_WIDTH_PX,
+      width < notesBreakpointXsPx,
   };
 
   const midAndRightBarClasses = {
     "w-full flex border-b border-b-transparent text-neutral-500": true,
     "bg-white hover:transition hover:duration-500 hover:border-b-neutral-200 hover:bg-gray-50 dark:bg-stone-800 dark:hover:border-b-black dark:hover:bg-neutral-800":
-      width >= NOTES_BREAKPOINT_MD_WIDTH_PX,
+      width >= notesBreakpointMdPx,
     "border-b-neutral-200 bg-gray-50 dark:bg-stone-800 dark:border-b-black dark:bg-neutral-800":
-      width < NOTES_BREAKPOINT_MD_WIDTH_PX,
+      width < notesBreakpointMdPx,
   };
 
   return (
@@ -169,6 +172,8 @@ const AppNotes: FC<Record<string, never>> = () => {
       </WindowBar>
 
       <AppNotesContent
+        notesBreakpointXsPx={notesBreakpointXsPx}
+        notesBreakpointSmPx={notesBreakpointSmPx}
         width={width}
         style={{ height: "calc(100% - 3.25rem)" }} // offset height of window bar
       />
