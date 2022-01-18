@@ -1,5 +1,5 @@
 import { BsChevronDown } from "react-icons/bs";
-import { FC } from "react";
+import { FC, useState } from "react";
 import {
   IoCreateOutline,
   IoGridOutline,
@@ -12,6 +12,7 @@ import {
 import { IoIosLink } from "react-icons/io";
 import { MdChecklist, MdOutlineTableRows, MdSearch } from "react-icons/md";
 import { RiUserAddLine } from "react-icons/ri";
+import classNames from "classnames";
 
 import { ApplicationKeys } from "reducers/applicationSlice";
 import AppNotesContent from "components/AppNotesContent";
@@ -20,22 +21,53 @@ import Window from "components/Window";
 import WindowBar from "components/WindowBar";
 import WindowControls from "components/WindowControls";
 
+const NOTES_DEFAULT_WIDTH_PX = 1024;
+export const NOTES_BREAKPOINT_XS_WIDTH_PX = 750;
+export const NOTES_BREAKPOINT_SM_WIDTH_PX = 795;
+const NOTES_BREAKPOINT_MD_WIDTH_PX = 863;
+
 const AppNotes: FC<Record<string, never>> = () => {
+  const [width, setWidth] = useState<number>(NOTES_DEFAULT_WIDTH_PX);
+
+  const handleWidthChange = (width: number) => {
+    setWidth(width);
+  };
+
+  const leftBarClasses = {
+    "flex py-3 px-2": true,
+    "w-[12.25rem] shrink-0 bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
+      width >= NOTES_BREAKPOINT_SM_WIDTH_PX,
+    "w-full max-w-[12.25rem] bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
+      width < NOTES_BREAKPOINT_SM_WIDTH_PX &&
+      width >= NOTES_BREAKPOINT_XS_WIDTH_PX,
+    "border-b border-b-neutral-200 bg-gray-50 dark:bg-stone-800 dark:border-b-black dark:bg-neutral-800":
+      width < NOTES_BREAKPOINT_XS_WIDTH_PX,
+  };
+
+  const midAndRightBarClasses = {
+    "w-full flex border-b border-b-transparent text-neutral-500": true,
+    "bg-white hover:transition hover:duration-500 hover:border-b-neutral-200 hover:bg-gray-50 dark:bg-stone-800 dark:hover:border-b-black dark:hover:bg-neutral-800":
+      width >= NOTES_BREAKPOINT_MD_WIDTH_PX,
+    "border-b-neutral-200 bg-gray-50 dark:bg-stone-800 dark:border-b-black dark:bg-neutral-800":
+      width < NOTES_BREAKPOINT_MD_WIDTH_PX,
+  };
+
   return (
     <Window
       appKey={ApplicationKeys.NOTES}
-      defaultWidth={1024}
+      defaultWidth={NOTES_DEFAULT_WIDTH_PX}
       defaultHeight={576}
-      minWidth={651}
+      minWidth={678}
       minHeight={226}
+      onWidthChange={handleWidthChange}
     >
       <WindowBar className="h-[3.25rem] flex bg-white dark:bg-black">
-        <div className="w-[12.25rem] flex shrink-0 bg-gray-300 border-r border-neutral-200 py-3 px-2 dark:bg-zinc-800 dark:border-black">
+        <div className={classNames(leftBarClasses)}>
           <WindowControls appKey={ApplicationKeys.NOTES} />
         </div>
 
-        <div className="w-full flex bg-white border-b border-b-transparent text-neutral-500 hover:transition hover:duration-500 hover:border-b-neutral-200 hover:bg-gray-50 dark:bg-stone-800 dark:hover:border-b-black dark:hover:bg-neutral-800">
-          <div className="w-1/4 flex justify-between border-r border-r-neutral-200 py-3 px-2 dark:border-r-black">
+        <div className={classNames(midAndRightBarClasses)}>
+          <div className="w-full max-w-[12.25rem] flex justify-between border-r border-r-neutral-200 py-3 px-2 dark:border-r-black">
             <div className="flex rounded ml-1.5 hover:bg-gray-900/10 dark:hover:bg-gray-50/10">
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR_TOGGLE}
@@ -56,7 +88,7 @@ const AppNotes: FC<Record<string, never>> = () => {
             </Button>
           </div>
 
-          <div className="w-3/4 flex justify-between py-3 px-2">
+          <div className="flex justify-between grow py-3 px-2">
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}
               isEnabled={true}
@@ -64,7 +96,7 @@ const AppNotes: FC<Record<string, never>> = () => {
             >
               <IoCreateOutline className="w-5 h-5" />
             </Button>
-            <div className="flex">
+            <div className="flex mx-3">
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
                 className="ml-1.5 text-lg font-light"
@@ -137,6 +169,7 @@ const AppNotes: FC<Record<string, never>> = () => {
       </WindowBar>
 
       <AppNotesContent
+        width={width}
         style={{ height: "calc(100% - 3.25rem)" }} // offset height of window bar
       />
     </Window>
