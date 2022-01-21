@@ -12,15 +12,17 @@ import Button, { ButtonAppearance } from "base-components/Button";
 
 export type WindowControlsProps = {
   appKey: ApplicationKeys;
-  buttonClassName?: string;
+  inactiveColor?: string;
 };
 
 const WindowControls: FC<WindowControlsProps> = ({
   appKey,
-  buttonClassName,
+  inactiveColor = "bg-neutral-500",
 }) => {
   const applicationState = useAppSelector((state) => state.application);
   const dispatch = useAppDispatch();
+  const isAppActive =
+    applicationState.activeTitle === applicationState[appKey].shortLabel;
 
   const handleCloseClick = () => {
     dispatch(
@@ -45,25 +47,28 @@ const WindowControls: FC<WindowControlsProps> = ({
   };
 
   const redButtonClasses = {
-    "w-3 h-3 rounded-full text-gray-900 bg-red-500 group-hover:bg-red-500":
-      true,
+    "w-3 h-3 rounded-full text-gray-900 group-hover:bg-red-500": true,
+    "bg-red-500": isAppActive,
+    [inactiveColor]: !isAppActive,
   };
 
   const amberButtonClasses = {
-    "w-3 h-3 rounded-full text-gray-900 bg-amber-500 ml-2 group-hover:bg-amber-500":
-      true,
+    "w-3 h-3 rounded-full text-gray-900 ml-2 group-hover:bg-amber-500": true,
+    "bg-amber-500": isAppActive,
+    [inactiveColor]: !isAppActive,
   };
 
   const greenButtonClasses = {
-    "w-3 h-3 rounded-full text-gray-900 bg-green-500 ml-2 group-hover:bg-green-500":
-      true,
+    "w-3 h-3 rounded-full text-gray-900 ml-2 group-hover:bg-green-500": true,
+    "bg-green-500": isAppActive,
+    [inactiveColor]: !isAppActive,
   };
 
   return (
     <div className="flex items-center ml-3 group">
       <Button
         appearance={ButtonAppearance.DEFAULT}
-        className={classNames(redButtonClasses, buttonClassName)}
+        className={classNames(redButtonClasses)}
         onClick={handleCloseClick}
       >
         <BsX className="w-full h-full invisible group-hover:visible" />
@@ -71,7 +76,7 @@ const WindowControls: FC<WindowControlsProps> = ({
 
       <Button
         appearance={ButtonAppearance.DEFAULT}
-        className={classNames(amberButtonClasses, buttonClassName)}
+        className={classNames(amberButtonClasses)}
         onClick={handleMinimizeClick}
       >
         <CgMathMinus className="w-full h-full invisible group-hover:visible" />
@@ -79,7 +84,7 @@ const WindowControls: FC<WindowControlsProps> = ({
 
       <Button
         appearance={ButtonAppearance.DEFAULT}
-        className={classNames(greenButtonClasses, buttonClassName)}
+        className={classNames(greenButtonClasses)}
         onClick={handleMaximizeClick}
       >
         <CgArrowsExpandLeft className="w-full h-full invisible p-0.5 group-hover:visible" />

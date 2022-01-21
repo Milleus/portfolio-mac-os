@@ -87,10 +87,6 @@ const AppSafari: FC<Record<string, never>> = () => {
     "bg-neutral-100 dark:bg-neutral-800": !isAppActive,
   };
 
-  const windowControlButtonClasses = {
-    "bg-neutral-200 dark:bg-neutral-600": !isAppActive,
-  };
-
   const inputWrapperClasses = {
     "w-full h-full flex justify-center rounded-lg border ml-2 focus-within:outline focus-within:outline-[3px] focus-within:outline-blue-400":
       true,
@@ -127,7 +123,7 @@ const AppSafari: FC<Record<string, never>> = () => {
           <div className="flex">
             <WindowControls
               appKey={ApplicationKeys.SAFARI}
-              buttonClassName={classNames(windowControlButtonClasses)}
+              inactiveColor="bg-neutral-200 dark:bg-neutral-600"
             />
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}

@@ -17,16 +17,12 @@ const AppVSCode: FC<Record<string, never>> = () => {
     "bg-neutral-800 text-gray-400": !isAppActive,
   };
 
-  const windowControlButtonClasses = {
-    "bg-neutral-500": !isAppActive,
-  };
-
   return (
     <Window appKey={ApplicationKeys.VSCODE}>
       <WindowBar className={classNames(windowBarClasses)}>
         <WindowControls
           appKey={ApplicationKeys.VSCODE}
-          buttonClassName={classNames(windowControlButtonClasses)}
+          inactiveColor="bg-neutral-500"
         />
         <p className="absolute w-full h-full flex justify-center items-center text-xs pointer-events-none">
           Visual Studio Code
