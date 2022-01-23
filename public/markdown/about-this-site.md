@@ -16,6 +16,7 @@ System:
 - [ ] Maximize/minimize applications (partial completion).
 - [x] Drag/resize applications.
 - [x] Handle layering of applications.
+- [ ] Configure to be mobile responsive.
 
 Control Center:
 
@@ -48,7 +49,8 @@ Spotlight app:
 
 Siri app:
 
-- [ ] Accept user speech input and respond using [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
+- [ ] Accept user speech input and convert to text using [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
+- [ ] Execute speech commands, e.g. "Open Notes" should open Notes app.
 
 FaceTime app:
 

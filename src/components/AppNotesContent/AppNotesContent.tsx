@@ -31,18 +31,18 @@ type NoteItem = {
 const noteItems: Array<NoteItem> = [
   {
     id: FolderId.PROFILE,
-    label: "About Me",
-    date: "2022-01-10T18:57:58.370Z",
-    mdSrc: "markdown/about-me.md",
-    preview: "Hi there! o/",
-  },
-  {
-    id: FolderId.PROFILE,
     label: "About This Site",
     date: "2022-01-10T22:36:00.296Z",
     mdSrc: "markdown/about-this-site.md",
     preview:
       "This website was developed using React, React Redux, Tailwind CSS and TypeScript.",
+  },
+  {
+    id: FolderId.PROFILE,
+    label: "About Me",
+    date: "2022-01-10T18:57:58.370Z",
+    mdSrc: "markdown/about-me.md",
+    preview: "Hi there! o/",
   },
   {
     id: FolderId.PROJECT,
