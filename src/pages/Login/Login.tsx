@@ -101,7 +101,7 @@ const Login: FC<Record<string, never>> = () => {
           <input
             type="password"
             className="w-40 h-7 bg-white/30 backdrop-blur-lg rounded-full px-3.5 pl-3 pr-8 text-sm outline-none placeholder:text-white/80 placeholder:text-xs placeholder:font-semibold"
-            placeholder="Enter Password"
+            placeholder="Click or press Enter"
             value={value}
             autoFocus={true}
             autoComplete="off"
