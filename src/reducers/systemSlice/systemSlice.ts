@@ -17,16 +17,16 @@ type AudioTrack = {
 
 export const audioPlaylist: Array<AudioTrack> = [
   {
-    title: "Sea Shanty 2",
-    artist: "OSRSBeatz",
-    audioSrc: "music/audio-sea-shanty-2.mp3",
-    coverSrc: "music/cover-sea-shanty-2.jpeg",
-  },
-  {
     title: "Wii Shop Channel Trap",
     artist: "OSRSBeatz",
     audioSrc: "music/audio-wii-shop-channel-trap.mp3",
     coverSrc: "music/cover-wii-shop-channel-trap.jpeg",
+  },
+  {
+    title: "Sea Shanty 2",
+    artist: "OSRSBeatz",
+    audioSrc: "music/audio-sea-shanty-2.mp3",
+    coverSrc: "music/cover-sea-shanty-2.jpeg",
   },
 ];
 
