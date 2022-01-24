@@ -13,8 +13,8 @@ const AppSiri: FC<Record<string, never>> = () => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isFirstSpeech, setIsFirstSpeech] = useState<boolean>(true);
   const [isHelperShown, setIsHelperShown] = useState<boolean>(false);
-  const resultsRef = useRef<HTMLDivElement>(null);
-  const previewRef = useRef<HTMLDivElement>(null);
+  const pastSpeechRef = useRef<HTMLDivElement>(null);
+  const previewSpeechRef = useRef<HTMLDivElement>(null);
 
   const SpeechRecognition =
     (window as any).webkitSpeechRecognition ||
@@ -24,26 +24,26 @@ const AppSiri: FC<Record<string, never>> = () => {
   }, [SpeechRecognition]);
 
   useEffect(() => {
-    const { current: results } = resultsRef;
-    const { current: preview } = previewRef;
+    const { current: pastSpeech } = pastSpeechRef;
+    const { current: previewSpeech } = previewSpeechRef;
 
-    if (recognition && preview && results) {
+    if (recognition && previewSpeech && pastSpeech) {
       recognition.interimResults = true;
 
       recognition.onresult = (event: any) => {
-        const speechResult = event.results[0][0].transcript;
+        const diagnostic = event.results[0][0].transcript;
         const isFinal = event.results[0].isFinal;
 
-        preview.textContent = speechResult;
+        previewSpeech.textContent = diagnostic;
         isFirstSpeech && setIsFirstSpeech(false);
 
         if (isFinal) {
           const p = document.createElement("p");
 
-          p.textContent = speechResult;
-          results.appendChild(p);
+          p.textContent = diagnostic;
+          pastSpeech.appendChild(p);
 
-          preview.textContent = "";
+          previewSpeech.textContent = "";
         }
       };
 
@@ -101,7 +101,11 @@ const AppSiri: FC<Record<string, never>> = () => {
       )}
 
       <div className="flex flex-col items-center p-2.5">
-        {isFirstSpeech && <p className="text-xs">What can I help you with?</p>}
+        {isFirstSpeech && (
+          <div className="text-xs">
+            <p>What can I help you with?</p>
+          </div>
+        )}
         {isHelperShown && (
           <ul className="w-full">
             <li>"Open Notes"</li>
@@ -109,8 +113,8 @@ const AppSiri: FC<Record<string, never>> = () => {
             <li>"Play/Pause Music"</li>
           </ul>
         )}
-        <div ref={resultsRef} className="w-full"></div>
-        <div ref={previewRef} className="w-full"></div>
+        <div ref={pastSpeechRef} className="w-full"></div>
+        <div ref={previewSpeechRef} className="w-full"></div>
         <Button
           appearance={ButtonAppearance.DEFAULT}
           ariaLabel="activate siri"
