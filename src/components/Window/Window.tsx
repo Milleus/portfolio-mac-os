@@ -28,6 +28,7 @@ export type WindowProps = {
   defaultHeight?: number;
   minWidth?: number;
   minHeight?: number;
+  isAspectRatioLocked?: boolean;
   className?: string;
   onWidthChange?: (width: number) => void;
 };
@@ -39,6 +40,7 @@ const Window: FC<WindowProps> = ({
   defaultHeight,
   minWidth,
   minHeight,
+  isAspectRatioLocked,
   className,
   onWidthChange,
 }) => {
@@ -131,7 +133,7 @@ const Window: FC<WindowProps> = ({
       minWidth={minWidth ? minWidth : 320}
       minHeight={minHeight ? minHeight : 200}
       className={classNames(
-        "absolute w-full h-full rounded-lg overflow-hidden",
+        "absolute w-full h-full rounded-lg overflow-hidden shadow-md dark:border dark:border-gray-500",
         className
       )}
       style={{
@@ -142,6 +144,7 @@ const Window: FC<WindowProps> = ({
       dragHandleClassName={DRAG_HANDLE_CLASS}
       disableDragging={isMaximized}
       enableResizing={!isMaximized}
+      lockAspectRatio={isAspectRatioLocked}
       onClick={handleClick}
       onDragStart={handleDragStart}
       onDragStop={handleDragStop}

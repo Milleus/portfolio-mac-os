@@ -4,6 +4,8 @@ This website was developed using [React](https://reactjs.org/), [React Redux](ht
 
 It is hosted on [GitHub Pages](https://pages.github.com/) and the source code can be found [here](https://github.com/Milleus/portfolio-mac-os).
 
+Depending on your browser, certain features may not work as the browser API is either not supported yet or is deprecated. For a better experience, use the latest Google Chrome.
+
 ## Features
 
 System:
@@ -11,7 +13,7 @@ System:
 - [x] Simulate macOS sleep, restart, shutdown and lock screen behaviour.
 - [x] Simulate clock behaviour (updates every 1 minute).
 - [x] Set light/dark mode based on system preference, if available.
-- [x] Display actual battery status of device using [Battery Status API](https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API), if available.
+- [x] Display actual battery status of device using [Battery Status API](https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API), if browser supported.
 - [x] Open/close applications.
 - [ ] Maximize/minimize applications (partial completion).
 - [x] Drag/resize applications.
@@ -21,7 +23,7 @@ System:
 Control Center:
 
 - [x] Toggle light/dark mode.
-- [x] Toggle full screen mode using [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API).
+- [x] Toggle full screen mode using [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API), if browser supported.
 - [x] Control brightness.
 - [x] Control volume.
 - [x] Play, pause and skip music.
@@ -49,12 +51,12 @@ Spotlight app:
 
 Siri app:
 
-- [ ] Accept user speech input and convert to text using [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
+- [ ] Accept user speech input and convert to text using [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API), if browser supported.
 - [ ] Execute speech commands, e.g. "Open Notes" should open Notes app.
 
 FaceTime app:
 
-- [ ] Simulate a FaceTime call using [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices).
+- [x] Simulate camera streaming of FaceTime app using [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices), if browser supported.
 
 ITerm app:
 

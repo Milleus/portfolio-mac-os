@@ -7,6 +7,7 @@ import {
 } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useAudio } from "hooks/useAudio";
+import AppFaceTime from "components/AppFaceTime";
 import AppNotes from "components/AppNotes";
 import AppSafari from "components/AppSafari";
 import AppVSCode from "components/AppVSCode";
@@ -24,7 +25,7 @@ const Desktop: FC<Record<string, never>> = () => {
     isAudioPlaying,
     audioPlaylistIndex,
   } = useAppSelector((state) => state.system);
-  const { notes, safari, vscode } = useAppSelector(
+  const { facetime, notes, safari, vscode } = useAppSelector(
     (state) => state.application
   );
   const dispatch = useAppDispatch();
@@ -57,6 +58,7 @@ const Desktop: FC<Record<string, never>> = () => {
       <MenuBar />
 
       <WindowDragBoundary>
+        {facetime.isOpen && <AppFaceTime />}
         {notes.isOpen && <AppNotes />}
         {safari.isOpen && <AppSafari />}
         {vscode.isOpen && <AppVSCode />}
