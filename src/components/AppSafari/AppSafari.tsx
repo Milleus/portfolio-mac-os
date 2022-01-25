@@ -118,11 +118,15 @@ const AppSafari: FC<Record<string, never>> = () => {
       minHeight={226}
       onWidthChange={handleWidthChange}
     >
-      <WindowBar className={classNames(windowBarClasses)}>
+      <WindowBar
+        appKey={ApplicationKeys.SAFARI}
+        className={classNames(windowBarClasses)}
+      >
         <div className="h-full flex justify-between basis-0 grow-[29]">
           <div className="flex">
             <WindowControls
               appKey={ApplicationKeys.SAFARI}
+              isActive={isAppActive}
               inactiveColor="bg-neutral-200 dark:bg-neutral-600"
             />
             <Button

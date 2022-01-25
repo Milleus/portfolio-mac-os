@@ -38,7 +38,7 @@ const AppNotes: FC<Record<string, never>> = () => {
   };
 
   const leftBarClasses = {
-    "flex py-3 px-2": true,
+    "flex px-2 py-3": true,
     "w-[12.25rem] shrink-0 bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
       width >= notesBreakpointSmPx,
     "w-full max-w-[12.25rem] bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
@@ -64,9 +64,12 @@ const AppNotes: FC<Record<string, never>> = () => {
       minHeight={226}
       onWidthChange={handleWidthChange}
     >
-      <WindowBar className="h-[3.25rem] flex bg-white dark:bg-black">
+      <WindowBar
+        appKey={ApplicationKeys.NOTES}
+        className="h-[3.25rem] flex bg-white dark:bg-black"
+      >
         <div className={classNames(leftBarClasses)}>
-          <WindowControls appKey={ApplicationKeys.NOTES} />
+          <WindowControls appKey={ApplicationKeys.NOTES} isActive={true} />
         </div>
 
         <div className={classNames(midAndRightBarClasses)}>

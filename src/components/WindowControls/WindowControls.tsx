@@ -5,32 +5,27 @@ import classNames from "classnames";
 
 import {
   ApplicationKeys,
-  updateApplicationStatus,
+  closeApplication,
+  minMaxApplication,
 } from "reducers/applicationSlice";
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppDispatch } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
 
 export type WindowControlsProps = {
   appKey: ApplicationKeys;
+  isActive: boolean;
   inactiveColor?: string;
 };
 
 const WindowControls: FC<WindowControlsProps> = ({
   appKey,
+  isActive,
   inactiveColor = "bg-neutral-500",
 }) => {
-  const applicationState = useAppSelector((state) => state.application);
   const dispatch = useAppDispatch();
-  const isAppActive =
-    applicationState.activeTitle === applicationState[appKey].shortLabel;
 
   const handleCloseClick = () => {
-    dispatch(
-      updateApplicationStatus({
-        appKey,
-        status: { isOpen: false, windowStatus: "normal" },
-      })
-    );
+    dispatch(closeApplication(appKey));
   };
 
   const handleMinimizeClick = () => {
@@ -38,30 +33,25 @@ const WindowControls: FC<WindowControlsProps> = ({
   };
 
   const handleMaximizeClick = () => {
-    const windowStatus =
-      applicationState[appKey].windowStatus === "maximized"
-        ? "normal"
-        : "maximized";
-
-    dispatch(updateApplicationStatus({ appKey, status: { windowStatus } }));
+    dispatch(minMaxApplication(appKey));
   };
 
   const redButtonClasses = {
     "w-3 h-3 rounded-full text-gray-900 group-hover:bg-red-500": true,
-    "bg-red-500": isAppActive,
-    [inactiveColor]: !isAppActive,
+    "bg-red-500": isActive,
+    [inactiveColor]: !isActive,
   };
 
   const amberButtonClasses = {
     "w-3 h-3 rounded-full text-gray-900 ml-2 group-hover:bg-amber-500": true,
-    "bg-amber-500": isAppActive,
-    [inactiveColor]: !isAppActive,
+    "bg-amber-500": isActive,
+    [inactiveColor]: !isActive,
   };
 
   const greenButtonClasses = {
     "w-3 h-3 rounded-full text-gray-900 ml-2 group-hover:bg-green-500": true,
-    "bg-green-500": isAppActive,
-    [inactiveColor]: !isAppActive,
+    "bg-green-500": isActive,
+    [inactiveColor]: !isActive,
   };
 
   return (

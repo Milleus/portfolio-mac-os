@@ -2,8 +2,8 @@ import { FC, MouseEvent } from "react";
 
 import {
   ApplicationKeys,
+  openApplication,
   updateActiveTitle,
-  updateApplicationStatus,
   updateZStack,
 } from "reducers/applicationSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
@@ -83,12 +83,7 @@ const Dock: FC<Record<string, never>> = () => {
 
       dispatch(updateActiveTitle(newKey));
       dispatch(updateZStack(newKey));
-      dispatch(
-        updateApplicationStatus({
-          appKey: newKey,
-          status: { isOpen: true },
-        })
-      );
+      dispatch(openApplication(newKey));
     }
   };
 

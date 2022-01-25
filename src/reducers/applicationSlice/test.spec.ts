@@ -1,9 +1,12 @@
 import reducer, {
   ApplicationKeys,
+  closeApplication,
   initialState,
+  maximizeApplication,
+  minMaxApplication,
+  openApplication,
   resetApplicationState,
   updateActiveTitle,
-  updateApplicationStatus,
   updateZStack,
 } from ".";
 
@@ -11,6 +14,81 @@ describe("ApplicationSlice", () => {
   it("should return the initial state", () => {
     expect(reducer(undefined, {} as any)).toEqual(initialState);
   });
+
+  it("should open application", () => {
+    const prevState = {
+      ...initialState,
+      safari: { ...initialState.safari, isOpen: false },
+    };
+
+    expect(reducer(prevState, openApplication(ApplicationKeys.SAFARI))).toEqual(
+      {
+        ...initialState,
+        safari: {
+          ...initialState.safari,
+          isOpen: true,
+        },
+      }
+    );
+  });
+
+  it("should close application", () => {
+    const prevState = {
+      ...initialState,
+      safari: { ...initialState.safari, isOpen: true },
+    };
+
+    expect(
+      reducer(prevState, closeApplication(ApplicationKeys.SAFARI))
+    ).toEqual({
+      ...initialState,
+      safari: {
+        ...initialState.safari,
+        isOpen: false,
+      },
+    });
+  });
+
+  it("should maximize application", () => {
+    const prevState = {
+      ...initialState,
+      safari: { ...initialState.safari, windowStatus: "normal" as any },
+    };
+
+    expect(
+      reducer(prevState, maximizeApplication(ApplicationKeys.SAFARI))
+    ).toEqual({
+      ...initialState,
+      safari: {
+        ...initialState.safari,
+        windowStatus: "maximized",
+      },
+    });
+  });
+
+  it.each`
+    prevWindowStatus | expected
+    ${"normal"}      | ${"maximized"}
+    ${"maximized"}   | ${"normal"}
+  `(
+    "should minimize or maximize application",
+    ({ prevWindowStatus, expected }) => {
+      const prevState = {
+        ...initialState,
+        safari: { ...initialState.safari, windowStatus: prevWindowStatus },
+      };
+
+      expect(
+        reducer(prevState, minMaxApplication(ApplicationKeys.SAFARI))
+      ).toEqual({
+        ...initialState,
+        safari: {
+          ...initialState.safari,
+          windowStatus: expected,
+        },
+      });
+    }
+  );
 
   it.each`
     prevActiveTitle | payload                  | expected
@@ -37,26 +115,6 @@ describe("ApplicationSlice", () => {
     expect(reducer(prevState, updateZStack(payload))).toEqual({
       ...prevState,
       zStack: expected,
-    });
-  });
-
-  it("should update application status", () => {
-    const prevState = initialState;
-
-    expect(
-      reducer(
-        prevState,
-        updateApplicationStatus({
-          appKey: ApplicationKeys.SAFARI,
-          status: { windowStatus: "maximized" },
-        })
-      )
-    ).toEqual({
-      ...prevState,
-      [ApplicationKeys.SAFARI]: {
-        ...prevState[ApplicationKeys.SAFARI],
-        windowStatus: "maximized",
-      },
     });
   });
 

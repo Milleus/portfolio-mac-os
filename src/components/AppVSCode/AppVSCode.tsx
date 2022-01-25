@@ -19,9 +19,13 @@ const AppVSCode: FC<Record<string, never>> = () => {
 
   return (
     <Window appKey={ApplicationKeys.VSCODE}>
-      <WindowBar className={classNames(windowBarClasses)}>
+      <WindowBar
+        appKey={ApplicationKeys.VSCODE}
+        className={classNames(windowBarClasses)}
+      >
         <WindowControls
           appKey={ApplicationKeys.VSCODE}
+          isActive={isAppActive}
           inactiveColor="bg-neutral-500"
         />
         <p className="absolute w-full h-full flex justify-center items-center text-xs pointer-events-none">

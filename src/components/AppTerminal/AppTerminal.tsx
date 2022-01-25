@@ -19,8 +19,11 @@ const AppTerminal: FC<Record<string, never>> = () => {
 
   return (
     <Window appKey={ApplicationKeys.ITERM}>
-      <WindowBar className={classNames(windowBarClasses)}>
-        <WindowControls appKey={ApplicationKeys.ITERM} />
+      <WindowBar
+        appKey={ApplicationKeys.ITERM}
+        className={classNames(windowBarClasses)}
+      >
+        <WindowControls appKey={ApplicationKeys.ITERM} isActive={true} />
         <p>milleus &mdash; -zsh</p>
       </WindowBar>
 

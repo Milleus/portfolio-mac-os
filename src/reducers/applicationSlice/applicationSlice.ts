@@ -63,6 +63,53 @@ export const applicationSlice = createSlice({
   name: "application",
   initialState,
   reducers: {
+    openApplication: (state, action: PayloadAction<ApplicationKeys>) => {
+      const appKey = action.payload;
+
+      return {
+        ...state,
+        [appKey]: {
+          ...state[appKey],
+          isOpen: true,
+        },
+      };
+    },
+    closeApplication: (state, action: PayloadAction<ApplicationKeys>) => {
+      const appKey = action.payload;
+
+      return {
+        ...state,
+        [appKey]: {
+          ...state[appKey],
+          isOpen: false,
+          windowStatus: "normal",
+        },
+      };
+    },
+    maximizeApplication: (state, action: PayloadAction<ApplicationKeys>) => {
+      const appKey = action.payload;
+
+      return {
+        ...state,
+        [appKey]: {
+          ...state[appKey],
+          windowStatus: "maximized",
+        },
+      };
+    },
+    minMaxApplication: (state, action: PayloadAction<ApplicationKeys>) => {
+      const appKey = action.payload;
+      const windowStatus =
+        state[appKey].windowStatus === "maximized" ? "normal" : "maximized";
+
+      return {
+        ...state,
+        [appKey]: {
+          ...state[appKey],
+          windowStatus,
+        },
+      };
+    },
     updateActiveTitle: (
       state,
       action: PayloadAction<ApplicationKeys | null>
@@ -77,30 +124,13 @@ export const applicationSlice = createSlice({
     },
     updateZStack: (state, action: PayloadAction<ApplicationKeys>) => {
       const appKey = action.payload;
-      const newZStack = state.zStack.filter((el) => el !== appKey);
+      const zStack = state.zStack.filter((el) => el !== appKey);
 
-      newZStack.push(appKey);
-
-      return {
-        ...state,
-        zStack: newZStack,
-      };
-    },
-    updateApplicationStatus: (
-      state,
-      action: PayloadAction<{
-        appKey: ApplicationKeys;
-        status: Partial<ApplicationStatus>;
-      }>
-    ) => {
-      const { appKey, status } = action.payload;
+      zStack.push(appKey);
 
       return {
         ...state,
-        [appKey]: {
-          ...state[appKey],
-          ...status,
-        },
+        zStack,
       };
     },
     resetApplicationState: () => {
@@ -112,9 +142,12 @@ export const applicationSlice = createSlice({
 });
 
 export const {
+  openApplication,
+  closeApplication,
+  maximizeApplication,
+  minMaxApplication,
   updateActiveTitle,
   updateZStack,
-  updateApplicationStatus,
   resetApplicationState,
 } = applicationSlice.actions;
 

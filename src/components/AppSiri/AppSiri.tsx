@@ -1,12 +1,9 @@
 import { BsX } from "react-icons/bs";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 
-import Button, { ButtonAppearance } from "base-components/Button";
-import {
-  ApplicationKeys,
-  updateApplicationStatus,
-} from "reducers/applicationSlice";
+import { ApplicationKeys, closeApplication } from "reducers/applicationSlice";
 import { useAppDispatch } from "hooks";
+import Button, { ButtonAppearance } from "base-components/Button";
 
 const AppSiri: FC<Record<string, never>> = () => {
   const dispatch = useAppDispatch();
@@ -71,12 +68,7 @@ const AppSiri: FC<Record<string, never>> = () => {
   };
 
   const handleCloseClick = () => {
-    dispatch(
-      updateApplicationStatus({
-        appKey: ApplicationKeys.SIRI,
-        status: { isOpen: false },
-      })
-    );
+    dispatch(closeApplication(ApplicationKeys.SIRI));
   };
 
   const handleActivateClick = () => {

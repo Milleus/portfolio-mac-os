@@ -1,24 +1,18 @@
-import {
-  Children,
-  cloneElement,
-  FC,
-  isValidElement,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import { Rnd, RndResizeCallback, RndDragCallback } from "react-rnd";
+import classNames from "classnames";
 
 import {
   ApplicationKeys,
   updateActiveTitle,
-  updateApplicationStatus,
   updateZStack,
 } from "reducers/applicationSlice";
 import { convertRemToPixels } from "utilities";
 import { DOCK_HEIGHT_REM } from "components/Dock";
 import { MENU_BAR_HEIGHT_REM } from "components/MenuBar";
 import { useAppDispatch, useAppSelector, useWindowSize } from "hooks";
+
+export const DRAG_HANDLE_CLASS = "drag-handle";
 
 type PositionSize = {
   x: number;
@@ -34,6 +28,7 @@ export type WindowProps = {
   defaultHeight?: number;
   minWidth?: number;
   minHeight?: number;
+  className?: string;
   onWidthChange?: (width: number) => void;
 };
 
@@ -44,6 +39,7 @@ const Window: FC<WindowProps> = ({
   defaultHeight,
   minWidth,
   minHeight,
+  className,
   onWidthChange,
 }) => {
   const applicationState = useAppSelector((state) => state.application);
@@ -54,7 +50,6 @@ const Window: FC<WindowProps> = ({
   const menuBarHeightPx = convertRemToPixels(MENU_BAR_HEIGHT_REM);
   const dockHeightPx = convertRemToPixels(DOCK_HEIGHT_REM);
   const isMaximized = applicationState[appKey].windowStatus === "maximized";
-  const dragHandleClass = "drag-handle";
 
   const [positionSize, setPositionSize] = useState<PositionSize>({
     width: initWidth,
@@ -122,12 +117,6 @@ const Window: FC<WindowProps> = ({
     });
   };
 
-  const handleBarDoubleClick = () => {
-    dispatch(
-      updateApplicationStatus({ appKey, status: { windowStatus: "maximized" } })
-    );
-  };
-
   return (
     <Rnd
       bounds="parent"
@@ -141,13 +130,16 @@ const Window: FC<WindowProps> = ({
       }}
       minWidth={minWidth ? minWidth : 320}
       minHeight={minHeight ? minHeight : 200}
-      className="absolute w-full h-full rounded-lg overflow-hidden shadow-md dark:border dark:border-gray-500"
+      className={classNames(
+        "absolute w-full h-full rounded-lg overflow-hidden",
+        className
+      )}
       style={{
         zIndex: isMaximized
           ? 51 // higher than z-50
           : applicationState.zStack.findIndex((el) => el === appKey),
       }}
-      dragHandleClassName={dragHandleClass}
+      dragHandleClassName={DRAG_HANDLE_CLASS}
       disableDragging={isMaximized}
       enableResizing={!isMaximized}
       onClick={handleClick}
@@ -156,18 +148,7 @@ const Window: FC<WindowProps> = ({
       onResize={handleResize}
       onResizeStop={handleResizeStop}
     >
-      {Children.map(children, (child) => {
-        if (!isValidElement(child) || typeof child.type !== "function") {
-          return child;
-        }
-
-        const childProps = {
-          dragHandleClass,
-          onBarDoubleClick: handleBarDoubleClick,
-        };
-
-        return cloneElement(child, childProps);
-      })}
+      {children}
     </Rnd>
   );
 };
