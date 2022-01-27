@@ -56,6 +56,7 @@ Siri app:
 
 FaceTime app:
 
+- [ ] Mimic actual app behaviour/styling when window is resized or inactive (partial completion).
 - [x] Simulate camera streaming of FaceTime app using [MediaDevices API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices), if browser supported.
 
 ITerm app:
