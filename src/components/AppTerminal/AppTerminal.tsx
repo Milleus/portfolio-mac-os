@@ -1,11 +1,11 @@
 import { FC } from "react";
+import classNames from "classnames";
 
 import { ApplicationKeys } from "reducers/applicationSlice";
-import Window from "components/Window";
 import { useAppSelector } from "hooks";
-import classNames from "classnames";
-import WindowControls from "components/WindowControls";
+import Window from "components/Window";
 import WindowBar from "components/WindowBar";
+import WindowControls from "components/WindowControls";
 
 const AppTerminal: FC<Record<string, never>> = () => {
   const { activeTitle, iterm } = useAppSelector((state) => state.application);

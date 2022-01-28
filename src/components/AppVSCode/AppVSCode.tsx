@@ -1,11 +1,11 @@
 import { FC } from "react";
+import classNames from "classnames";
 
 import { ApplicationKeys } from "reducers/applicationSlice";
+import { useAppSelector } from "hooks";
 import Window from "components/Window";
 import WindowBar from "components/WindowBar";
 import WindowControls from "components/WindowControls";
-import { useAppSelector } from "hooks";
-import classNames from "classnames";
 
 const AppVSCode: FC<Record<string, never>> = () => {
   const { activeTitle, vscode } = useAppSelector((state) => state.application);
