@@ -14,13 +14,13 @@ import Button, { ButtonAppearance } from "base-components/Button";
 export type WindowControlsProps = {
   appKey: ApplicationKeys;
   isActive: boolean;
-  inactiveColor?: string;
+  inactiveClassName?: string;
 };
 
 const WindowControls: FC<WindowControlsProps> = ({
   appKey,
   isActive,
-  inactiveColor = "bg-neutral-500",
+  inactiveClassName = "bg-neutral-500",
 }) => {
   const dispatch = useAppDispatch();
 
@@ -39,19 +39,19 @@ const WindowControls: FC<WindowControlsProps> = ({
   const redButtonClasses = {
     "w-3 h-3 rounded-full text-gray-900 group-hover:bg-red-500": true,
     "bg-red-500": isActive,
-    [inactiveColor]: !isActive,
+    [inactiveClassName]: !isActive,
   };
 
   const amberButtonClasses = {
     "w-3 h-3 rounded-full text-gray-900 ml-2 group-hover:bg-amber-500": true,
     "bg-amber-500": isActive,
-    [inactiveColor]: !isActive,
+    [inactiveClassName]: !isActive,
   };
 
   const greenButtonClasses = {
     "w-3 h-3 rounded-full text-gray-900 ml-2 group-hover:bg-green-500": true,
     "bg-green-500": isActive,
-    [inactiveColor]: !isActive,
+    [inactiveClassName]: !isActive,
   };
 
   return (

@@ -61,7 +61,7 @@ const AppFaceTime: FC<Record<string, never>> = () => {
             <WindowControls
               appKey={ApplicationKeys.FACETIME}
               isActive={isAppActive}
-              inactiveColor="bg-neutral-700"
+              inactiveClassName="bg-neutral-700"
             />
           </div>
 

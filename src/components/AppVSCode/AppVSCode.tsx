@@ -26,7 +26,7 @@ const AppVSCode: FC<Record<string, never>> = () => {
         <WindowControls
           appKey={ApplicationKeys.VSCODE}
           isActive={isAppActive}
-          inactiveColor="bg-neutral-500"
+          inactiveClassName="bg-neutral-500"
         />
         <p className="absolute w-full h-full flex justify-center items-center text-xs pointer-events-none">
           Visual Studio Code

@@ -127,7 +127,7 @@ const AppSafari: FC<Record<string, never>> = () => {
             <WindowControls
               appKey={ApplicationKeys.SAFARI}
               isActive={isAppActive}
-              inactiveColor="bg-neutral-200 dark:bg-neutral-600"
+              inactiveClassName="bg-neutral-200 dark:bg-neutral-600"
             />
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}
