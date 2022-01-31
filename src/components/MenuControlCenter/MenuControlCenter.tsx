@@ -28,6 +28,7 @@ import {
 import { toggleFullScreen } from "utilities";
 import { useAppDispatch, useAppSelector } from "hooks";
 import Button, { ButtonAppearance } from "base-components/Button";
+import ImageWithFallback from "base-components/ImageWithFallback";
 import InputRange from "base-components/InputRange";
 
 const MenuControlCenter: FC<Record<string, never>> = () => {
@@ -226,10 +227,11 @@ const MenuControlCenter: FC<Record<string, never>> = () => {
 
         <div className="flex flex-row justify-between bg-gray-200/90 rounded-xl shadow-md col-span-full px-3 py-1.5 dark:bg-gray-700/90">
           <div className="flex items-center min-w-0">
-            <img
-              className="w-10 h-10 rounded"
-              src={audioPlaylist[audioPlaylistIndex].coverSrc}
+            <ImageWithFallback
+              src={audioPlaylist[audioPlaylistIndex].imgSrc}
+              fallbackSrc={audioPlaylist[audioPlaylistIndex].fallbackImgSrc}
               alt="cover art"
+              className="w-10 h-10 rounded"
             />
             <div className="overflow-hidden ml-2">
               <p className="truncate text-xs font-semibold">

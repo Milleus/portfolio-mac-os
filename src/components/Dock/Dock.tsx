@@ -6,70 +6,14 @@ import {
   updateActiveTitle,
   updateZStack,
 } from "reducers/applicationSlice";
+import { dockItems } from "./config";
 import { useAppDispatch, useAppSelector } from "hooks";
-import AppFaceTime from "./images/app-facetime.png";
-import AppGitHub from "./images/app-github.png";
-import AppITerm from "./images/app-iterm.png";
-import AppMail from "./images/app-mail.png";
-import AppNotes from "./images/app-notes.png";
-import AppSafari from "./images/app-safari.png";
-import AppSiri from "./images/app-siri.png";
-import AppVSCode from "./images/app-vscode.png";
 import Button, { ButtonAppearance } from "base-components/Button";
+import ImageWithFallback from "base-components/ImageWithFallback";
 import Link from "base-components/Link";
 import Tooltip from "base-components/Tooltip";
 
 export const DOCK_HEIGHT_REM = 3.5;
-
-type DockItem = {
-  label: string;
-  imgSrc: string;
-  appKey?: ApplicationKeys;
-  link?: string;
-};
-
-const dockItems: Array<DockItem> = [
-  {
-    label: "Notes",
-    imgSrc: AppNotes,
-    appKey: ApplicationKeys.NOTES,
-  },
-  {
-    label: "Visual Studio Code",
-    imgSrc: AppVSCode,
-    appKey: ApplicationKeys.VSCODE,
-  },
-  {
-    label: "iTerm",
-    imgSrc: AppITerm,
-    appKey: ApplicationKeys.ITERM,
-  },
-  {
-    label: "Safari",
-    imgSrc: AppSafari,
-    appKey: ApplicationKeys.SAFARI,
-  },
-  {
-    label: "FaceTime",
-    imgSrc: AppFaceTime,
-    appKey: ApplicationKeys.FACETIME,
-  },
-  {
-    label: "Siri",
-    imgSrc: AppSiri,
-    appKey: ApplicationKeys.SIRI,
-  },
-  {
-    label: "Mail",
-    imgSrc: AppMail,
-    link: "mailto:quahdave@gmail.com",
-  },
-  {
-    label: "GitHub",
-    imgSrc: AppGitHub,
-    link: "https://github.com/Milleus/portfolio-mac-os",
-  },
-];
 
 const Dock: FC<Record<string, never>> = () => {
   const applicationState = useAppSelector((state) => state.application);
@@ -104,8 +48,9 @@ const Dock: FC<Record<string, never>> = () => {
                     dataId={item.appKey}
                     onClick={handleItemClick}
                   >
-                    <img
+                    <ImageWithFallback
                       src={item.imgSrc}
+                      fallbackSrc={item.fallbackImgSrc}
                       alt={`${item.label} app`}
                       className="w-12 h-12"
                     />
@@ -116,8 +61,9 @@ const Dock: FC<Record<string, never>> = () => {
                 </>
               ) : (
                 <Link href={item.link}>
-                  <img
+                  <ImageWithFallback
                     src={item.imgSrc}
+                    fallbackSrc={item.fallbackImgSrc}
                     alt={`${item.label} app`}
                     className="w-12 h-12"
                   />

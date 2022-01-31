@@ -12,7 +12,8 @@ type AudioTrack = {
   title: string;
   artist: string;
   audioSrc: string;
-  coverSrc: string;
+  imgSrc: string;
+  fallbackImgSrc: string;
 };
 
 export const audioPlaylist: Array<AudioTrack> = [
@@ -20,13 +21,15 @@ export const audioPlaylist: Array<AudioTrack> = [
     title: "Wii Shop Channel Trap",
     artist: "OSRSBeatz",
     audioSrc: "music/audio-wii-shop-channel-trap.mp3",
-    coverSrc: "music/cover-wii-shop-channel-trap.jpeg",
+    imgSrc: "music/cover-wii-shop-channel-trap.webp",
+    fallbackImgSrc: "music/cover-wii-shop-channel-trap.jpeg",
   },
   {
     title: "Sea Shanty 2",
     artist: "OSRSBeatz",
     audioSrc: "music/audio-sea-shanty-2.mp3",
-    coverSrc: "music/cover-sea-shanty-2.jpeg",
+    imgSrc: "music/cover-sea-shanty-2.webp",
+    fallbackImgSrc: "music/cover-sea-shanty-2.jpeg",
   },
 ];
 
