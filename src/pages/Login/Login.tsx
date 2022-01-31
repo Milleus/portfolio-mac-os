@@ -9,7 +9,9 @@ import { Page, updateSystem } from "reducers/systemSlice";
 import { useAppDispatch, useAppSelector } from "hooks";
 import BatteryIcon from "components/BatteryIcon";
 import Button, { ButtonAppearance } from "base-components/Button";
-import PhotoProfile from "./images/photo-profile.jpeg";
+import ImageWithFallback from "base-components/ImageWithFallback";
+import PhotoProfileJpeg from "./images/photo-profile.jpeg";
+import PhotoProfileWebp from "./images/photo-profile.webp";
 import WallpaperMontereyDark from "../Desktop/images/wallpaper-monterey-dark.jpeg";
 import WallpaperMontereyLight from "../Desktop/images/wallpaper-monterey-light.jpeg";
 
@@ -89,12 +91,11 @@ const Login: FC<Record<string, never>> = () => {
       </div>
 
       <div className="h-full flex flex-col justify-center items-center mt-12">
-        <img
-          className="w-36 h-36 rounded-full"
-          width="144"
-          height="144"
-          src={PhotoProfile}
+        <ImageWithFallback
+          src={PhotoProfileWebp}
+          fallbackSrc={PhotoProfileJpeg}
           alt="profile"
+          className="w-36 h-36 rounded-full"
         />
         <p className="text-2xl mt-7">Milleus</p>
         <div className="relative mt-3">
