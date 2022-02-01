@@ -13,12 +13,15 @@ import AppSafari from "components/AppSafari";
 import AppVSCode from "components/AppVSCode";
 import Dock from "components/Dock";
 import MenuBar from "components/MenuBar";
-import WallpaperMontereyDark from "./images/wallpaper-monterey-dark.jpeg";
-import WallpaperMontereyLight from "./images/wallpaper-monterey-light.jpeg";
+import WallpaperMontereyDarkJpeg from "./images/wallpaper-monterey-dark.jpeg";
+import WallpaperMontereyDarkWebp from "./images/wallpaper-monterey-dark.webp";
+import WallpaperMontereyLightJpeg from "./images/wallpaper-monterey-light.jpeg";
+import WallpaperMontereyLightWebp from "./images/wallpaper-monterey-light.webp";
 import WindowDragBoundary from "components/WindowDragBoundary";
 
 const Desktop: FC<Record<string, never>> = () => {
   const {
+    isWebpSupported,
     isDarkModeOn,
     brightnessLevel,
     volumeLevel,
@@ -45,13 +48,21 @@ const Desktop: FC<Record<string, never>> = () => {
     onTrackEnded: handleTrackEnded,
   });
 
+  let wallpaperSrc = isDarkModeOn
+    ? WallpaperMontereyDarkWebp
+    : WallpaperMontereyLightWebp;
+
+  if (!isWebpSupported) {
+    wallpaperSrc = isDarkModeOn
+      ? WallpaperMontereyDarkJpeg
+      : WallpaperMontereyLightJpeg;
+  }
+
   return (
     <div
       className="w-full h-full overflow-hidden bg-center bg-cover"
       style={{
-        backgroundImage: `url(${
-          isDarkModeOn ? WallpaperMontereyDark : WallpaperMontereyLight
-        })`,
+        backgroundImage: `url(${wallpaperSrc})`,
         filter: `brightness(${brightnessLevel})`,
       }}
     >

@@ -12,13 +12,14 @@ import Button, { ButtonAppearance } from "base-components/Button";
 import ImageWithFallback from "base-components/ImageWithFallback";
 import PhotoProfileJpeg from "./images/photo-profile.jpeg";
 import PhotoProfileWebp from "./images/photo-profile.webp";
-import WallpaperMontereyDark from "../Desktop/images/wallpaper-monterey-dark.jpeg";
-import WallpaperMontereyLight from "../Desktop/images/wallpaper-monterey-light.jpeg";
+import WallpaperMontereyDarkJpeg from "../Desktop/images/wallpaper-monterey-dark.jpeg";
+import WallpaperMontereyDarkWebp from "../Desktop/images/wallpaper-monterey-dark.webp";
+import WallpaperMontereyLightJpeg from "../Desktop/images/wallpaper-monterey-light.jpeg";
+import WallpaperMontereyLightWebp from "../Desktop/images/wallpaper-monterey-light.webp";
 
 const Login: FC<Record<string, never>> = () => {
-  const { isFirstLogIn, date, isWifiOn, isDarkModeOn } = useAppSelector(
-    (state) => state.system
-  );
+  const { isWebpSupported, isFirstLogIn, date, isWifiOn, isDarkModeOn } =
+    useAppSelector((state) => state.system);
   const dispatch = useAppDispatch();
   const [value, setValue] = useState<string>("");
 
@@ -53,15 +54,21 @@ const Login: FC<Record<string, never>> = () => {
     dispatch(updateSystem({ activePage: Page.SLEEP }));
   };
 
+  let wallpaperSrc = isDarkModeOn
+    ? WallpaperMontereyDarkWebp
+    : WallpaperMontereyLightWebp;
+
+  if (!isWebpSupported) {
+    wallpaperSrc = isDarkModeOn
+      ? WallpaperMontereyDarkJpeg
+      : WallpaperMontereyLightJpeg;
+  }
+
   return (
     <div
       className="w-full h-full overflow-hidden bg-center bg-cover flex flex-col justify-center items-center text-white"
       onClick={handleLoginClick}
-      style={{
-        backgroundImage: `url(${
-          isDarkModeOn ? WallpaperMontereyDark : WallpaperMontereyLight
-        })`,
-      }}
+      style={{ backgroundImage: `url(${wallpaperSrc})` }}
     >
       <div className="w-full flex justify-end mt-px mr-3">
         <Button
