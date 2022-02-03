@@ -9,7 +9,7 @@ import Desktop from "pages/Desktop";
 import Login from "pages/Login";
 import Sleep from "pages/Sleep";
 
-const Router: FC<Record<string, never>> = () => {
+const AppRouter: FC<Record<string, never>> = () => {
   const { activePage } = useAppSelector((state) => state.system);
   const dispatch = useAppDispatch();
 
@@ -50,4 +50,4 @@ const Router: FC<Record<string, never>> = () => {
   }
 };
 
-export default Router;
+export default AppRouter;

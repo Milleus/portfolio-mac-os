@@ -4,13 +4,13 @@ import ReactDOM from "react-dom";
 
 import "./styles/index.css";
 import { store } from "./reducers/store";
-import Router from "./routes/Router";
+import AppRouter from "./routes/AppRouter";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router />
+      <AppRouter />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
