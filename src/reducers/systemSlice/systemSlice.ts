@@ -50,7 +50,7 @@ type SystemState = {
 };
 
 export const initialState: SystemState = {
-  activePage: Page.LOGIN,
+  activePage: Page.DESKTOP,
   date: new Date().toISOString(),
   isWebpSupported: true,
   isFirstLogIn: true,
