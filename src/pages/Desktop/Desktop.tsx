@@ -12,6 +12,7 @@ import AppNotes from "components/AppNotes";
 import AppSafari from "components/AppSafari";
 import AppVSCode from "components/AppVSCode";
 import Dock from "components/Dock";
+import ImageWithFallback from "base-components/ImageWithFallback";
 import MenuBar from "components/MenuBar";
 import WallpaperMontereyDarkJpeg from "./images/wallpaper-monterey-dark.jpeg";
 import WallpaperMontereyDarkWebp from "./images/wallpaper-monterey-dark.webp";
@@ -21,7 +22,6 @@ import WindowDragBoundary from "components/WindowDragBoundary";
 
 const Desktop: FC<Record<string, never>> = () => {
   const {
-    isWebpSupported,
     isDarkModeOn,
     brightnessLevel,
     volumeLevel,
@@ -48,24 +48,28 @@ const Desktop: FC<Record<string, never>> = () => {
     onTrackEnded: handleTrackEnded,
   });
 
-  let wallpaperSrc = isDarkModeOn
-    ? WallpaperMontereyDarkWebp
-    : WallpaperMontereyLightWebp;
-
-  if (!isWebpSupported) {
-    wallpaperSrc = isDarkModeOn
-      ? WallpaperMontereyDarkJpeg
-      : WallpaperMontereyLightJpeg;
-  }
+  const wallpaperSrc = isDarkModeOn
+    ? {
+        webp: WallpaperMontereyDarkWebp,
+        jpeg: WallpaperMontereyDarkJpeg,
+      }
+    : {
+        webp: WallpaperMontereyLightWebp,
+        jpeg: WallpaperMontereyLightJpeg,
+      };
 
   return (
     <div
-      className="w-full h-full overflow-hidden bg-center bg-cover"
-      style={{
-        backgroundImage: `url(${wallpaperSrc})`,
-        filter: `brightness(${brightnessLevel})`,
-      }}
+      className="w-full h-full overflow-hidden"
+      style={{ filter: `brightness(${brightnessLevel})` }}
     >
+      <ImageWithFallback
+        src={wallpaperSrc.webp}
+        fallbackSrc={wallpaperSrc.jpeg}
+        alt="wallpaper"
+        className="fixed w-full h-full object-cover"
+      />
+
       <MenuBar />
 
       <WindowDragBoundary>

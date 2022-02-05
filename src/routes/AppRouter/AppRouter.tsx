@@ -1,6 +1,5 @@
 import { FC, useEffect } from "react";
 
-import { checkWebpFeature } from "utilities";
 import { Page } from "reducers/systemSlice";
 import { updateSystem } from "reducers";
 import { useAppDispatch, useAppSelector, useInterval } from "hooks";
@@ -14,11 +13,6 @@ const AppRouter: FC<Record<string, never>> = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // check and set webp support
-    checkWebpFeature("lossy", (_feature, isWebpSupported) => {
-      dispatch(updateSystem({ isWebpSupported }));
-    });
-
     // check and set dark mode based on system preference
     const isSystemDarkMode = window.matchMedia("(prefers-color-scheme: dark)")
       .matches
