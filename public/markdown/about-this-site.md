@@ -42,7 +42,7 @@ Safari app:
 
 - [x] Mimic actual app behaviour/styling when window is resized or inactive.
 - [x] Display clickable links on 'Start' page.
-- [x] Search user input in address bar (iframe to Bing search results).
+- [x] Search user input in address bar (iframe to search results).
 - [x] Display 'No Internet' page if Wifi is toggled off.
 
 Spotlight app:

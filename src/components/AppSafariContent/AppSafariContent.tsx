@@ -111,7 +111,7 @@ const AppSafariContent: FC<AppSafariContentProps> = ({
         style={style}
         title="Safari Browser"
         frameBorder="0"
-        src={`https://www.bing.com/search?q=${prevSearchValue}`}
+        src={`https://www.google.com/search?igu=1&q=${prevSearchValue}`}
       />
     );
   };
