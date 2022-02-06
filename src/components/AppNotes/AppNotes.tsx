@@ -16,6 +16,7 @@ import classNames from "classnames";
 
 import { ApplicationKeys } from "reducers/applicationSlice";
 import { convertRemToPixels } from "utilities";
+import { useAppSelector } from "hooks";
 import AppNotesContent from "components/AppNotesContent";
 import Button, { ButtonAppearance } from "base-components/Button";
 import Window from "components/Window";
@@ -28,10 +29,12 @@ const NOTES_BREAKPOINT_SM_REM = 49.6875;
 const NOTES_BREAKPOINT_MD_REM = 53.9375;
 
 const AppNotes: FC<Record<string, never>> = () => {
+  const { activeTitle, notes } = useAppSelector((state) => state.application);
   const [width, setWidth] = useState<number>(NOTES_DEFAULT_WIDTH_PX);
   const notesBreakpointXsPx = convertRemToPixels(NOTES_BREAKPOINT_XS_REM);
   const notesBreakpointSmPx = convertRemToPixels(NOTES_BREAKPOINT_SM_REM);
   const notesBreakpointMdPx = convertRemToPixels(NOTES_BREAKPOINT_MD_REM);
+  const isAppActive = activeTitle === notes.shortLabel;
 
   const handleWidthChange = (width: number) => {
     setWidth(width);
@@ -39,20 +42,27 @@ const AppNotes: FC<Record<string, never>> = () => {
 
   const leftBarClasses = {
     "flex px-2 py-3": true,
-    "w-[12.25rem] shrink-0 bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
-      width >= notesBreakpointSmPx,
-    "w-full max-w-[12.25rem] bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
-      width < notesBreakpointSmPx && width >= notesBreakpointXsPx,
-    "border-b border-b-neutral-200 bg-gray-50 dark:bg-stone-800 dark:border-b-black dark:bg-neutral-800":
-      width < notesBreakpointXsPx,
+    "w-[12.25rem] shrink-0": width >= notesBreakpointSmPx,
+    "w-full max-w-[12.25rem]":
+      width >= notesBreakpointXsPx && width < notesBreakpointSmPx,
+    "bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
+      width >= notesBreakpointXsPx && isAppActive,
+    "bg-gray-50 border-b border-b-neutral-200 dark:border-b-black dark:bg-neutral-800":
+      width < notesBreakpointXsPx && isAppActive,
+    "bg-gray-200 border-r border-neutral-200 dark:bg-neutral-800 dark:border-black":
+      width >= notesBreakpointXsPx && !isAppActive,
+    "bg-gray-200 border-b border-b-neutral-200 dark:bg-neutral-800 dark:border-black":
+      width < notesBreakpointXsPx && !isAppActive,
   };
 
   const midAndRightBarClasses = {
-    "w-full flex border-b border-b-transparent text-neutral-500": true,
-    "bg-white hover:transition hover:duration-500 hover:border-b-neutral-200 hover:bg-gray-50 dark:bg-stone-800 dark:hover:border-b-black dark:hover:bg-neutral-800":
-      width >= notesBreakpointMdPx,
-    "border-b-neutral-200 bg-gray-50 dark:bg-stone-800 dark:border-b-black dark:bg-neutral-800":
-      width < notesBreakpointMdPx,
+    "w-full flex border-b text-neutral-500": true,
+    "bg-white border-b-transparent hover:transition hover:duration-500 hover:border-b-neutral-200 hover:bg-gray-50 dark:bg-stone-800 dark:hover:border-b-black dark:hover:bg-neutral-800":
+      width >= notesBreakpointMdPx && isAppActive,
+    "bg-gray-50 border-b-neutral-200 dark:border-b-black dark:bg-neutral-800":
+      width < notesBreakpointMdPx && isAppActive,
+    "bg-gray-200 border-b-neutral-200 dark:border-b-black dark:bg-neutral-800":
+      !isAppActive,
   };
 
   return (
@@ -69,7 +79,11 @@ const AppNotes: FC<Record<string, never>> = () => {
         className="h-[3.25rem] flex bg-white dark:bg-black"
       >
         <div className={classNames(leftBarClasses)}>
-          <WindowControls appKey={ApplicationKeys.NOTES} isActive={true} />
+          <WindowControls
+            appKey={ApplicationKeys.NOTES}
+            isActive={isAppActive}
+            inactiveClassName="bg-neutral-300 dark:bg-neutral-600"
+          />
         </div>
 
         <div className={classNames(midAndRightBarClasses)}>
@@ -78,16 +92,21 @@ const AppNotes: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR_TOGGLE}
                 isToggled={true}
+                isActive={isAppActive}
               >
                 <IoListOutline className="w-5 h-5" />
               </Button>
-              <Button appearance={ButtonAppearance.WINDOW_BAR_TOGGLE}>
+              <Button
+                appearance={ButtonAppearance.WINDOW_BAR_TOGGLE}
+                isActive={isAppActive}
+              >
                 <IoGridOutline className="w-4 h-4 ml-1.5" />
               </Button>
             </div>
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}
               isEnabled={true}
+              isActive={isAppActive}
               className="ml-1.5"
             >
               <IoTrashOutline className="w-5 h-5" />
@@ -98,6 +117,7 @@ const AppNotes: FC<Record<string, never>> = () => {
             <Button
               appearance={ButtonAppearance.WINDOW_BAR}
               isEnabled={true}
+              isActive={isAppActive}
               className="ml-1.5"
             >
               <IoCreateOutline className="w-5 h-5" />
@@ -105,6 +125,7 @@ const AppNotes: FC<Record<string, never>> = () => {
             <div className="flex mx-3">
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
+                isActive={isAppActive}
                 className="ml-1.5 text-lg font-light"
               >
                 Aa
@@ -112,6 +133,7 @@ const AppNotes: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
                 isEnabled={true}
+                isActive={isAppActive}
                 className="ml-1.5"
               >
                 <MdChecklist className="w-6 h-6" />
@@ -119,6 +141,7 @@ const AppNotes: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
                 isEnabled={true}
+                isActive={isAppActive}
                 className="ml-1.5"
               >
                 <MdOutlineTableRows className="w-5 h-5" />
@@ -128,6 +151,7 @@ const AppNotes: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
                 isEnabled={true}
+                isActive={isAppActive}
                 className="ml-1.5"
               >
                 <IoIosLink className="w-5 h-5" />
@@ -135,6 +159,7 @@ const AppNotes: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
                 isEnabled={true}
+                isActive={isAppActive}
                 className="px-2.5 ml-1.5"
               >
                 <IoImagesOutline className="w-5 h-5" />
@@ -143,6 +168,7 @@ const AppNotes: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
                 isEnabled={true}
+                isActive={isAppActive}
                 className="px-2.5 ml-1.5"
               >
                 <IoLockClosedOutline className="w-4 h-4" />
@@ -151,6 +177,7 @@ const AppNotes: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
                 isEnabled={true}
+                isActive={isAppActive}
                 className="ml-1.5"
               >
                 <RiUserAddLine className="w-4.5 h-4.5" />
@@ -158,6 +185,7 @@ const AppNotes: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
                 isEnabled={true}
+                isActive={isAppActive}
                 className="ml-1.5"
               >
                 <IoShareOutline className="w-5 h-5" />
@@ -165,6 +193,7 @@ const AppNotes: FC<Record<string, never>> = () => {
               <Button
                 appearance={ButtonAppearance.WINDOW_BAR}
                 isEnabled={true}
+                isActive={isAppActive}
                 className="ml-1.5"
               >
                 <MdSearch className="w-6 h-6" />
@@ -178,6 +207,7 @@ const AppNotes: FC<Record<string, never>> = () => {
         notesBreakpointXsPx={notesBreakpointXsPx}
         notesBreakpointSmPx={notesBreakpointSmPx}
         width={width}
+        isAppActive={isAppActive}
         style={{ height: "calc(100% - 3.25rem)" }} // offset height of window bar
       />
     </Window>

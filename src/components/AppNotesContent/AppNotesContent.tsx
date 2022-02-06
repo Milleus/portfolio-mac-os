@@ -68,6 +68,7 @@ export type AppNotesContentProps = {
   notesBreakpointXsPx: number;
   notesBreakpointSmPx: number;
   width: number;
+  isAppActive: boolean;
   style: CSSProperties;
 };
 
@@ -75,6 +76,7 @@ const AppNotesContent: FC<AppNotesContentProps> = ({
   notesBreakpointXsPx,
   notesBreakpointSmPx,
   width,
+  isAppActive,
   style,
 }) => {
   const [folderId, setFolderId] = useState<FolderId>(FolderId.PROFILE);
@@ -126,11 +128,14 @@ const AppNotesContent: FC<AppNotesContentProps> = ({
 
   const leftBarClasses = {
     "flex flex-col py-1 px-2": true,
-    "w-[12.25rem] shrink-0 bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
-      width >= notesBreakpointSmPx,
-    "w-full max-w-[12.25rem] bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
-      width < notesBreakpointSmPx && width >= notesBreakpointXsPx,
+    "w-[12.25rem] shrink-0": width >= notesBreakpointSmPx,
+    "w-full max-w-[12.25rem]":
+      width >= notesBreakpointXsPx && width < notesBreakpointSmPx,
+    "bg-gray-300 border-r border-neutral-200 dark:bg-zinc-800 dark:border-black":
+      width >= notesBreakpointXsPx && isAppActive,
     hidden: width < notesBreakpointXsPx,
+    "bg-gray-200 border-r border-neutral-200 dark:bg-neutral-800 dark:border-black":
+      width >= notesBreakpointXsPx && !isAppActive,
   };
 
   return (
@@ -141,21 +146,28 @@ const AppNotesContent: FC<AppNotesContentProps> = ({
           const folderClasses = {
             "flex shrink-0 w-full rounded py-1.5 px-2": true,
             "bg-yellow-500 text-white dark:bg-yellow-500/70 dark:text-neutral-200":
-              id === currentFocus,
+              id === currentFocus && isAppActive,
             "bg-gray-900/10 dark:bg-gray-50/10":
-              id !== currentFocus && id === folderId,
+              (id !== currentFocus && id === folderId) ||
+              (id === currentFocus && !isAppActive),
+            "text-gray-400 dark:text-gray-500": !isAppActive,
           };
 
           const iconClasses = {
             "w-4 h-4": true,
-            "text-yellow-600 dark:text-yellow-500": id !== currentFocus,
-            "text-white dark:text-neutral-200": id === currentFocus,
+            "text-yellow-600 dark:text-yellow-500":
+              id !== currentFocus && isAppActive,
+            "text-white dark:text-neutral-200":
+              id === currentFocus && isAppActive,
+            "text-yellow-500 dark:text-yellow-600": !isAppActive,
           };
 
           const countClasses = {
             "text-xs tracking-wide ml-auto": true,
-            "text-gray-500": id !== currentFocus,
-            "text-white dark:text-neutral-200": id === currentFocus,
+            "text-gray-500": id !== currentFocus && isAppActive,
+            "text-white dark:text-neutral-200":
+              id === currentFocus && isAppActive,
+            "text-gray-400 dark:text-gray-500": !isAppActive,
           };
 
           return (

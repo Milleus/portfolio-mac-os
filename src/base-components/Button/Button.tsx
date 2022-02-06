@@ -81,8 +81,9 @@ const Button: FC<ButtonProps> = ({
 
     case ButtonAppearance.WINDOW_BAR_TOGGLE:
       buttonClasses = {
-        "h-full flex justify-center items-center rounded p-1.5 text-neutral-500 dark:text-neutral-400":
-          true,
+        "h-full flex justify-center items-center rounded p-1.5": true,
+        "text-neutral-500 dark:text-neutral-400": isActive,
+        "text-neutral-400 dark:text-neutral-500": !isActive,
         "bg-gray-900/10 dark:bg-gray-50/10": isToggled,
       };
       // prevent drag and double click on window bar
