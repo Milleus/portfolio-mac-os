@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/portfolio-mac-os/static/css/main.b1ab5b0d.css",
-    "main.js": "/portfolio-mac-os/static/js/main.818224d4.js",
+    "main.js": "/portfolio-mac-os/static/js/main.b39525b3.js",
     "static/js/787.8a50cc52.chunk.js": "/portfolio-mac-os/static/js/787.8a50cc52.chunk.js",
     "static/media/wallpaper-monterey-light.jpeg": "/portfolio-mac-os/static/media/wallpaper-monterey-light.80814d5132928f77a58c.jpeg",
     "static/media/wallpaper-monterey-dark.jpeg": "/portfolio-mac-os/static/media/wallpaper-monterey-dark.79224f8603259479a7fc.jpeg",
@@ -47,11 +47,11 @@
     "static/media/link-mdn-web-docs.webp": "/portfolio-mac-os/static/media/link-mdn-web-docs.6d9907f39f9da9c16761.webp",
     "static/media/link-developer-roadmaps.webp": "/portfolio-mac-os/static/media/link-developer-roadmaps.3f4b293a190fd9b76372.webp",
     "main.b1ab5b0d.css.map": "/portfolio-mac-os/static/css/main.b1ab5b0d.css.map",
-    "main.818224d4.js.map": "/portfolio-mac-os/static/js/main.818224d4.js.map",
+    "main.b39525b3.js.map": "/portfolio-mac-os/static/js/main.b39525b3.js.map",
     "787.8a50cc52.chunk.js.map": "/portfolio-mac-os/static/js/787.8a50cc52.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b1ab5b0d.css",
-    "static/js/main.818224d4.js"
+    "static/js/main.b39525b3.js"
   ]
 }
