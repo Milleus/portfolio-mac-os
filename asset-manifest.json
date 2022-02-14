@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/portfolio-mac-os/static/css/main.b1ab5b0d.css",
-    "main.js": "/portfolio-mac-os/static/js/main.b39525b3.js",
+    "main.js": "/portfolio-mac-os/static/js/main.7948e0b5.js",
     "static/js/787.8a50cc52.chunk.js": "/portfolio-mac-os/static/js/787.8a50cc52.chunk.js",
     "static/media/wallpaper-monterey-light.jpeg": "/portfolio-mac-os/static/media/wallpaper-monterey-light.80814d5132928f77a58c.jpeg",
     "static/media/wallpaper-monterey-dark.jpeg": "/portfolio-mac-os/static/media/wallpaper-monterey-dark.79224f8603259479a7fc.jpeg",
     "static/media/wallpaper-monterey-light.webp": "/portfolio-mac-os/static/media/wallpaper-monterey-light.c5284d3b49da2b008dd1.webp",
     "static/media/wallpaper-monterey-dark.webp": "/portfolio-mac-os/static/media/wallpaper-monterey-dark.8e968fcab655317d6552.webp",
+    "static/media/photo-profile.jpeg": "/portfolio-mac-os/static/media/photo-profile.d77e3f38c55034c17385.jpeg",
     "static/media/app-siri.png": "/portfolio-mac-os/static/media/app-siri.396cc74083e8d29887e3.png",
     "static/media/app-safari.png": "/portfolio-mac-os/static/media/app-safari.e481f511d54707dd7679.png",
     "static/media/link-can-i-use.png": "/portfolio-mac-os/static/media/link-can-i-use.feb5cfcb21409cedf798.png",
     "static/media/app-github.png": "/portfolio-mac-os/static/media/app-github.e7e7affad4e6cd405f38.png",
+    "static/media/photo-profile.webp": "/portfolio-mac-os/static/media/photo-profile.1031a1bbaabead656e37.webp",
     "static/media/app-facetime.png": "/portfolio-mac-os/static/media/app-facetime.1643c6eb2a8b49e4810a.png",
     "static/media/link-github.png": "/portfolio-mac-os/static/media/link-github.45677b748fd23ad03af0.png",
     "static/media/app-mail.png": "/portfolio-mac-os/static/media/app-mail.0de4f815aa28721c6d9a.png",
     "static/media/app-notes.png": "/portfolio-mac-os/static/media/app-notes.480975ca3035b6b8f203.png",
     "static/media/link-project-fugu.png": "/portfolio-mac-os/static/media/link-project-fugu.e9992d9db307406a1f20.png",
-    "static/media/photo-profile.jpeg": "/portfolio-mac-os/static/media/photo-profile.e284bd17e75913bdc26a.jpeg",
     "static/media/link-notpron.png": "/portfolio-mac-os/static/media/link-notpron.74553cc2f515379d95f2.png",
-    "static/media/photo-profile.webp": "/portfolio-mac-os/static/media/photo-profile.5e3c34a08e4b632c760e.webp",
     "static/media/link-notpron.webp": "/portfolio-mac-os/static/media/link-notpron.de742746b82bb5a0a8d1.webp",
     "static/media/app-safari.webp": "/portfolio-mac-os/static/media/app-safari.cc9bf218b1aa969f3a7f.webp",
     "static/media/link-can-i-use.webp": "/portfolio-mac-os/static/media/link-can-i-use.dfa51193ae5754ab0cbd.webp",
@@ -47,11 +47,11 @@
     "static/media/link-mdn-web-docs.webp": "/portfolio-mac-os/static/media/link-mdn-web-docs.6d9907f39f9da9c16761.webp",
     "static/media/link-developer-roadmaps.webp": "/portfolio-mac-os/static/media/link-developer-roadmaps.3f4b293a190fd9b76372.webp",
     "main.b1ab5b0d.css.map": "/portfolio-mac-os/static/css/main.b1ab5b0d.css.map",
-    "main.b39525b3.js.map": "/portfolio-mac-os/static/js/main.b39525b3.js.map",
+    "main.7948e0b5.js.map": "/portfolio-mac-os/static/js/main.7948e0b5.js.map",
     "787.8a50cc52.chunk.js.map": "/portfolio-mac-os/static/js/787.8a50cc52.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b1ab5b0d.css",
-    "static/js/main.b39525b3.js"
+    "static/js/main.7948e0b5.js"
   ]
 }
