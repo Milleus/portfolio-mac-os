@@ -49,7 +49,7 @@ type SystemState = {
 };
 
 export const initialState: SystemState = {
-  activePage: Page.DESKTOP,
+  activePage: Page.LOGIN,
   date: new Date().toISOString(),
   isFirstLogIn: true,
   isWifiOn: true,
