@@ -2,7 +2,7 @@
 
 This website was developed using [React](https://reactjs.org/), [React Redux](https://react-redux.js.org/), [Tailwind CSS](https://tailwindcss.com/) and [TypeScript](https://www.typescriptlang.org/).
 
-It is hosted on [GitHub Pages](https://pages.github.com/) and the source code can be found [here](https://github.com/Milleus/portfolio-mac-os).
+It is hosted on [GitHub Pages](https://pages.github.com/) and the source code can be found at [portfolio-mac-os](https://github.com/Milleus/portfolio-mac-os).
 
 Depending on your browser, certain features may not work as the browser API is either not supported yet or is deprecated. For a better experience, use the latest Google Chrome.
 
@@ -30,7 +30,7 @@ Control Center:
 
 Notes app:
 
-- [ ] Mimic actual app behaviour/styling when window is resized or inactive (partial completion).
+- [x] Mimic actual app behaviour/styling when window is resized or inactive.
 - [x] View different notes (markdown files) in different folders.
 
 VSCode app:
@@ -42,7 +42,7 @@ Safari app:
 
 - [x] Mimic actual app behaviour/styling when window is resized or inactive.
 - [x] Display clickable links on 'Start' page.
-- [x] Search user input in address bar (iframe to Bing search results).
+- [x] Search user input in address bar (iframe to search results).
 - [x] Display 'No Internet' page if Wifi is toggled off.
 
 Spotlight app:
